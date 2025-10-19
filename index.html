@@ -5,22 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Thomas Watson — Mechanical Engineering</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
-<style>
+  <style>
   /* --- Global Styles --- */
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
     font-family: 'Montserrat', sans-serif;
-    /* CHANGED: Switched to a clean white background and dark grey text for readability */
-    background-color: #f8f9fa; /* A slightly off-white is softer than pure white */
+    background-color: #f8f9fa;
     color: #212529;
     line-height: 1.6;
     padding: 40px 20px;
   }
-
-  /* --- Links & Headers --- */
   a {
-    /* CHANGED: Main accent color is now a deep, professional blue */
-    color: #005288;
+    color: #0000FF; /* BRIGHT BLUE */
     text-decoration: none;
     font-weight: 600;
   }
@@ -28,115 +24,105 @@
     text-decoration: underline;
     opacity: 0.8;
   }
-  header, footer {
-    text-align: center;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-  header { margin-bottom: 60px; }
-  h1 { font-weight: 600; font-size: 2.5rem; letter-spacing: 2px; }
-  h2 { font-size: 1.5rem; margin-bottom: 15px; } /* For category cards */
-  h3 { font-weight: 500; margin-bottom: 10px; font-size: 1.3rem; } /* For project cards */
-  p.lead {
-    /* CHANGED: A softer grey for secondary text */
-    color: #6c757d;
-    margin-top: 10px;
-    font-size: 1.1rem;
-  }
 
-  /* --- Main Page: Category Cards --- */
-  .about-me {
-    max-width: 800px;
-    margin: 0 auto 80px auto;
+  /* --- NEW HEADER STYLES --- */
+  header {
     text-align: center;
-    font-size: 1.1rem;
-    color: #495057;
-  }
-  .categories {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 25px;
-    max-width: 1000px;
-    margin: 0 auto;
-  }
-  .category-card {
-    /* CHANGED: White background with a very subtle border */
-    background: #ffffff;
-    border: 1px solid #dee2e6;
-    padding: 25px;
-    border-radius: 14px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    display: flex;
+    max-width: 800px;
+    margin: 0 auto 60px auto;
+    display: flex; /* New layout for headshot */
     flex-direction: column;
+    align-items: center;
   }
-  .category-card:hover {
-    transform: translateY(-6px);
-    /* CHANGED: Shadow color is now based on the blue accent */
-    box-shadow: 0 6px 20px rgba(0, 82, 136, 0.15);
-  }
-  .category-card p {
-    color: #6c757d;
-    flex-grow: 1;
+  .headshot {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%; /* Makes the image a circle */
+    object-fit: cover; /* Prevents image from stretching */
     margin-bottom: 20px;
+    border: 3px solid #dee2e6;
+  }
+  h1 { font-weight: 600; font-size: 2.5rem; letter-spacing: 2px; }
+  p.lead { color: #6c757d; margin-top: 10px; font-size: 1.1rem; }
+  .header-links { /* New class for the links at the top */
+    margin-top: 20px;
+  }
+  .header-links a {
+    margin: 0 15px;
+    font-size: 1.1rem;
   }
 
-  /* --- Project Pages: Project Cards --- */
-  .back-link {
-    font-size: 1rem;
+  /* --- NEW LOGOS SECTION STYLES --- */
+  .logos-section {
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto 80px auto;
+  }
+  .logos-section h3 {
     color: #6c757d;
-    text-decoration: none;
-    display: inline-block;
-    margin-top: 15px;
+    font-weight: 400;
+    margin-bottom: 25px;
   }
-  .back-link:hover { color: #005288; }
-  .projects {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 25px;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  .card {
-    /* CHANGED: White cards with a subtle border */
-    background: #ffffff;
-    border: 1px solid #dee2e6;
-    padding: 20px;
-    border-radius: 14px;
+  .logos-container {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
   }
-  .card:hover { /* Added a hover effect to project cards too */
-    transform: translateY(-6px);
-    box-shadow: 0 6px 20px rgba(0, 82, 136, 0.15);
+  .logos-container img {
+    height: 40px; /* Adjust height as needed */
+    max-width: 150px;
+    filter: grayscale(100%); /* Makes logos black & white */
+    opacity: 0.6;
+    transition: filter 0.3s, opacity 0.3s;
   }
-  .card img { width: 100%; border-radius: 10px; margin-bottom: 15px; }
-  .meta { font-size: 0.9rem; color: #6c757d; margin-bottom: 15px; font-style: italic; }
-  .card p { margin-bottom: 10px; color: #495057; }
-  /* CHANGED: Made the Problem/Solution/Result labels blue to stand out */
-  .card strong { color: #005288; }
-  .links { margin-top: auto; }
+  .logos-container img:hover {
+    filter: grayscale(0%); /* Brings color back on hover */
+    opacity: 1;
+  }
 
-  /* --- Footer --- */
-  footer {
-    margin-top: 80px;
-    color: #6c757d;
-    font-size: 0.9rem;
-  }
+  /* --- OTHER SECTIONS (Unchanged) --- */
+  .about-me { max-width: 800px; margin: 0 auto 80px auto; text-align: center; font-size: 1.1rem; color: #495057; }
+  .categories { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; max-width: 1000px; margin: 0 auto; }
+  .category-card { background: #ffffff; border: 1px solid #dee2e6; padding: 25px; border-radius: 14px; transition: transform 0.2s ease, box-shadow 0.2s ease; display: flex; flex-direction: column; }
+  .category-card:hover { transform: translateY(-6px); box-shadow: 0 6px 20px rgba(0, 0, 255, 0.15); }
+  .category-card h2 { font-size: 1.5rem; margin-bottom: 15px; }
+  .category-card p { color: #6c757d; flex-grow: 1; margin-bottom: 20px; }
+  footer { margin-top: 80px; color: #6c757d; font-size: 0.9rem; text-align: center; }
 </style>
 </head>
 <body>
 
   <header>
+    <img src="images/headshot.jpg" alt="Thomas Watson headshot" class="headshot">
+    
     <h1>Thomas Watson</h1>
     <p class="lead">Mechanical Engineering Student · Dalhousie University</p>
-  </header>
 
+    <div class="header-links">
+      <a href="resume.pdf" target="_blank">Resume</a>
+      <a href="https://linkedin.com/in/thomaswatsonn" target="_blank">LinkedIn</a>
+      <a href="mailto:thomaswatson1188@gmail.com">Email</a>
+    </div>
+  </header>
   <section class="about-me">
     <p>
       I'm a passionate engineering student specializing in simulation and design. Currently on an 8-month work term in Texas, I thrive on solving complex problems, from optimizing vehicle aerodynamics to automating data analysis. Explore my projects below to see how I apply my skills in professional, academic, and personal settings.
     </p>
   </section>
 
+
+  <section class="logos-section">
+    <h3>Featured Experience</h3>
+    <div class="logos-container">
+      <img src="images/logo-tesla.png" alt="Tesla logo">
+      <img src="images/logo-lockheed.png" alt="Lockheed Martin logo">
+      <img src="images/logo-rtx.png" alt="RTX logo">
+      <img src="images/logo-dalhousie.png" alt="Dalhousie University logo">
+      <img src="images/logo-dalis.png" alt="Dalhousie Investment Society logo">
+    </div>
+  </section>
   <section class="categories">
 
     <a href="work.html" class="category-card">
@@ -144,7 +130,6 @@
       <p>Driving impact through internships at companies like Tesla, Lockheed Martin and Pratt & Whitney.</p>
       <div class="link-cta">View Projects &rarr;</div>
     </a>
-
 
     <a href="personal.html" class="category-card">
       <h2>Personal Projects</h2>
@@ -161,14 +146,8 @@
   </section>
 
   <footer>
-    <p>
-      <a href="resume.pdf" target="_blank">Download Resume</a> ·
-      <a href="mailto:thomaswatson1188@gmail.com">Email Me</a> ·
-      <a href="https://linkedin.com/in/thomaswatsonn" target="_blank">LinkedIn</a>
-    </p>
     <p>© 2025 Thomas Watson</p>
   </footer>
 
 </body>
 </html>
-
