@@ -5,87 +5,124 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Thomas Watson — Mechanical Engineering</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
-  <style>
-    /* NOTE: It's best practice to move this CSS to a separate 'style.css' file.
-      For now, we'll keep it here for simplicity.
-    */
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: 'Montserrat', sans-serif;
-      background-color: #0f0f0f;
-      color: #f5f5f5;
-      line-height: 1.6;
-      padding: 40px 20px;
-    }
-    a {
-      color: #e82127; /* Using your original link color */
-      text-decoration: none;
-      font-weight: 600;
-    }
-    a:hover {
-      opacity: 0.7;
-      text-decoration: underline;
-    }
-    header, footer {
-      text-align: center;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    header { margin-bottom: 60px; }
-    h1 {
-      font-weight: 600;
-      font-size: 2.5rem;
-      letter-spacing: 2px;
-    }
-    p.lead {
-      color: #aaa;
-      margin-top: 10px;
-      font-size: 1.1rem;
-    }
-    /* This new section is for your introduction text */
-    .about-me {
-      max-width: 800px;
-      margin: 0 auto 80px auto; /* Adds more space below */
-      text-align: center;
-      font-size: 1.1rem;
-      color: #ccc;
-    }
-    /* This is the grid for your new category cards */
-    .categories {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 25px;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-    /* Styles for the new Work/School/Personal cards */
-    .category-card {
-      background: #1b1b1b;
-      padding: 25px;
-      border-radius: 14px;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      display: flex;
-      flex-direction: column; /* Aligns content vertically */
-    }
-    .category-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
-    }
-    .category-card h2 {
-      font-size: 1.5rem;
-      margin-bottom: 15px;
-    }
-    .category-card p {
-      color: #bbb;
-      flex-grow: 1; /* Pushes the link to the bottom */
-      margin-bottom: 20px;
-    }
-    footer {
-      margin-top: 80px;
-      color: #777;
-      font-size: 0.9rem;
-    }
-  </style>
+<style>
+  /* --- Global Styles --- */
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Montserrat', sans-serif;
+    /* CHANGED: Switched to a clean white background and dark grey text for readability */
+    background-color: #f8f9fa; /* A slightly off-white is softer than pure white */
+    color: #212529;
+    line-height: 1.6;
+    padding: 40px 20px;
+  }
+
+  /* --- Links & Headers --- */
+  a {
+    /* CHANGED: Main accent color is now a deep, professional blue */
+    color: #005288;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  a:hover {
+    text-decoration: underline;
+    opacity: 0.8;
+  }
+  header, footer {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  header { margin-bottom: 60px; }
+  h1 { font-weight: 600; font-size: 2.5rem; letter-spacing: 2px; }
+  h2 { font-size: 1.5rem; margin-bottom: 15px; } /* For category cards */
+  h3 { font-weight: 500; margin-bottom: 10px; font-size: 1.3rem; } /* For project cards */
+  p.lead {
+    /* CHANGED: A softer grey for secondary text */
+    color: #6c757d;
+    margin-top: 10px;
+    font-size: 1.1rem;
+  }
+
+  /* --- Main Page: Category Cards --- */
+  .about-me {
+    max-width: 800px;
+    margin: 0 auto 80px auto;
+    text-align: center;
+    font-size: 1.1rem;
+    color: #495057;
+  }
+  .categories {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .category-card {
+    /* CHANGED: White background with a very subtle border */
+    background: #ffffff;
+    border: 1px solid #dee2e6;
+    padding: 25px;
+    border-radius: 14px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+  }
+  .category-card:hover {
+    transform: translateY(-6px);
+    /* CHANGED: Shadow color is now based on the blue accent */
+    box-shadow: 0 6px 20px rgba(0, 82, 136, 0.15);
+  }
+  .category-card p {
+    color: #6c757d;
+    flex-grow: 1;
+    margin-bottom: 20px;
+  }
+
+  /* --- Project Pages: Project Cards --- */
+  .back-link {
+    font-size: 1rem;
+    color: #6c757d;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 15px;
+  }
+  .back-link:hover { color: #005288; }
+  .projects {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .card {
+    /* CHANGED: White cards with a subtle border */
+    background: #ffffff;
+    border: 1px solid #dee2e6;
+    padding: 20px;
+    border-radius: 14px;
+    display: flex;
+    flex-direction: column;
+  }
+  .card:hover { /* Added a hover effect to project cards too */
+    transform: translateY(-6px);
+    box-shadow: 0 6px 20px rgba(0, 82, 136, 0.15);
+  }
+  .card img { width: 100%; border-radius: 10px; margin-bottom: 15px; }
+  .meta { font-size: 0.9rem; color: #6c757d; margin-bottom: 15px; font-style: italic; }
+  .card p { margin-bottom: 10px; color: #495057; }
+  /* CHANGED: Made the Problem/Solution/Result labels blue to stand out */
+  .card strong { color: #005288; }
+  .links { margin-top: auto; }
+
+  /* --- Footer --- */
+  footer {
+    margin-top: 80px;
+    color: #6c757d;
+    font-size: 0.9rem;
+  }
+</style>
 </head>
 <body>
 
