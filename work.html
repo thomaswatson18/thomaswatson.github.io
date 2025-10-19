@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Work Projects — Thomas Watson</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Montserrat', sans-serif; background-color: #0f0f0f; color: #f5f5f5; line-height: 1.6; padding: 40px 20px; }
+    header { text-align: center; margin-bottom: 60px; }
+    h1 { font-weight: 600; font-size: 2.5rem; letter-spacing: 2px; }
+    /* Style for the "Back to Home" link */
+    .back-link { font-size: 1rem; color: #aaa; text-decoration: none; display: inline-block; margin-top: 15px; }
+    .back-link:hover { color: #e82127; }
+    .projects { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; max-width: 1200px; margin: 0 auto; }
+    .card { background: #1b1b1b; padding: 20px; border-radius: 14px; display: flex; flex-direction: column; }
+    .card img { width: 100%; border-radius: 10px; margin-bottom: 15px; }
+    h3 { font-weight: 500; margin-bottom: 10px; font-size: 1.3rem; }
+    .meta { font-size: 0.9rem; color: #bbb; margin-bottom: 15px; font-style: italic; }
+    .card p { margin-bottom: 10px; color: #ccc; }
+    .card strong { color: #f5f5f5; } /* Makes the PAR labels stand out */
+    .links { margin-top: auto; /* Pushes links to the bottom */ }
+    .links a { text-decoration: none; font-weight: 600; color: #e82127; margin-right: 15px; transition: opacity 0.2s; }
+    .links a:hover { opacity: 0.7; }
+    footer { text-align: center; margin-top: 60px; color: #777; font-size: 0.9rem; }
+    footer a { color: #e82127; text-decoration: none; font-weight: 600; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Work Projects</h1>
+    <a href="index.html" class="back-link">&larr; Back to Home</a>
+  </header>
+
+  <section class="projects">
+    <article class="card">
+      <img src="images/lucid-project.png" alt="Aerodynamic Simulation for an EV">
+      <h3>EV Drag Reduction Analysis @ Lucid Motors</h3>
+      <p class="meta">Role: Mechanical Design Engineering Intern</p>
+      
+      <p>
+        <strong>Problem:</strong> The design team needed to reduce the aerodynamic drag of a new side-mirror housing by 5% to meet energy efficiency targets, but physical prototypes were too costly for initial iteration.
+      </p>
+      <p>
+        <strong>My Solution:</strong> I developed a high-fidelity CFD model in COMSOL to simulate airflow around 10 different housing geometries. I automated the meshing and post-processing scripts in Python, which allowed for rapid evaluation.
+      </p>
+      <p>
+        <strong>Results:</strong> My simulations identified a novel geometry that reduced drag by 8.2%, exceeding the target. This design was adopted for wind-tunnel testing, saving an estimated $20,000 in prototyping costs.
+      </p>
+
+      <div class="links">
+        </div>
+    </article>
+    
+    </section>
+
+  <footer>
+    <p>© 2025 Thomas Watson</p>
+  </footer>
+
+</body>
+</html>
