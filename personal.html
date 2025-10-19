@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Personal Projects — Thomas Watson</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+  
+  <style>
+    /* --- Global Styles --- */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #f8f9fa;
+      color: #212529;
+      line-height: 1.6;
+      padding: 40px 20px;
+    }
+
+    /* --- Links & Headers --- */
+    a {
+      color: #0000FF; /* BRIGHT BLUE */
+      text-decoration: none;
+      font-weight: 600;
+    }
+    a:hover {
+      text-decoration: underline;
+      opacity: 0.8;
+    }
+    header, footer {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    header { margin-bottom: 60px; }
+    h1 { font-weight: 600; font-size: 2.5rem; letter-spacing: 2px; }
+    h3 { font-weight: 500; margin-bottom: 10px; font-size: 1.3rem; }
+
+    /* --- Project Pages: Project Cards --- */
+    .back-link {
+      font-size: 1rem;
+      color: #6c757d;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 15px;
+    }
+    .back-link:hover { color: #0000FF; }
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 25px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .card {
+      background: #ffffff;
+      border: 1px solid #dee2e6;
+      padding: 20px;
+      border-radius: 14px;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 6px 20px rgba(0, 0, 255, 0.15);
+    }
+    .card img { width: 100%; border-radius: 10px; margin-bottom: 15px; }
+    .meta { font-size: 0.9rem; color: #6c757d; margin-bottom: 15px; font-style: italic; }
+    .card p { margin-bottom: 10px; color: #495057; }
+    .card strong { color: #0000FF; }
+    .links { margin-top: auto; /* Pushes links to the bottom */ }
+
+    /* --- Footer --- */
+    footer {
+      margin-top: 80px;
+      color: #6c757d;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Personal Projects</h1>
+    <a href="index.html" class="back-link">&larr; Back to Home</a>
+  </header>
+
+  <section class="projects">
+
+    <article class="card">
+      <img src="images/controller-project.png" alt="Custom 3D-printed video game controller">
+      
+      <h3>Arduino-Matlab Video Game System</h3>
+      <p class="meta">Skills: Mechanical Design, 3D Printing, MATLAB, Arduino, ODEs</p>
+      
+      <p>
+        <strong>Challenge:</strong> To design, manufacture, and program a complete 2D video game system from first principles. The goal was to create a custom-built, ergonomic controller and develop a game where the physics were not pre-canned, but governed by real-time mathematical models.
+      </p>
+      <p>
+        <strong>My Solution:</strong> I engineered a full-stack solution, starting with a 3D-printed, ergonomic controller designed in SolidWorks for an improved user experience over standard models. For the electronics, I used an Arduino to process analog and digital inputs from the joysticks. The core of the project is the software, written in MATLAB, which features a custom "handshaking" protocol to receive data from the Arduino. All in-game movement is governed by a <strong>Runge-Kutta (RK4) differential equation modeler</strong> I implemented to simulate Newtonian physics, creating a realistic mass-and-damper feel.
+      </p>
+      <p>
+        <strong>Results:</strong> The final product is a fully functional gaming system with a custom controller and a physics-driven game. This project demonstrates my ability to manage an end-to-end design lifecycle, combining <strong>ergonomic mechanical design</strong>, hardware integration (Arduino), and complex software development (MATLAB) with advanced mathematical modeling.
+      </p>
+
+      <div class="links">
+        <a href="images/project-videogame-system.pdf" target="_blank">View Full Project PDF</a>
+      </div>
+    </article>
+    
+  </section>
+
+  <footer>
+    <p>
+      <a href="resume.pdf" target="_blank">Download Resume</a> ·
+      <a href="mailto:thomaswatson1188@gmail.com">Email Me</a> ·
+      <a href="https://linkedin.com/in/thomaswatsonn" target="_blank">LinkedIn</a>
+    </p>
+    <p>© 2025 Thomas Watson</p>
+  </footer>
+
+</body>
+</html>
