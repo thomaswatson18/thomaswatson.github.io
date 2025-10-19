@@ -6,78 +6,78 @@
   <title>Work Projects — Thomas Watson</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
   
- <style>
-  /* --- Global Styles --- */
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: 'Montserrat', sans-serif;
-    background-color: #f8f9fa;
-    color: #212529;
-    line-height: 1.6;
-    padding: 40px 20px;
-  }
+  <style>
+    /* --- Global Styles --- */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #f8f9fa;
+      color: #212529;
+      line-height: 1.6;
+      padding: 40px 20px;
+    }
 
-  /* --- Links & Headers --- */
-  a {
-    color: #0000FF; /* BRIGHT BLUE */
-    text-decoration: none;
-    font-weight: 600;
-  }
-  a:hover {
-    text-decoration: underline;
-    opacity: 0.8;
-  }
-  header, footer { text-align: center; max-width: 800px; margin: 0 auto; }
-  header { margin-bottom: 60px; }
-  h1 { font-weight: 600; font-size: 2.5rem; letter-spacing: 2px; }
-  h2 { font-size: 1.5rem; margin-bottom: 15px; }
-  h3 { font-weight: 500; margin-bottom: 10px; font-size: 1.3rem; }
-  p.lead { color: #6c757d; margin-top: 10px; font-size: 1.1rem; }
+    /* --- Links & Headers --- */
+    a {
+      color: #0000FF; /* BRIGHT BLUE */
+      text-decoration: none;
+      font-weight: 600;
+    }
+    a:hover {
+      text-decoration: underline;
+      opacity: 0.8;
+    }
+    header, footer {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    header { margin-bottom: 60px; }
+    h1 { font-weight: 600; font-size: 2.5rem; letter-spacing: 2px; }
+    h3 { font-weight: 500; margin-bottom: 10px; font-size: 1.3rem; }
 
-  /* --- Main Page: Category Cards --- */
-  .about-me { max-width: 800px; margin: 0 auto 80px auto; text-align: center; font-size: 1.1rem; color: #495057; }
-  .categories { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; max-width: 1000px; margin: 0 auto; }
-  .category-card {
-    background: #ffffff;
-    border: 1px solid #dee2e6;
-    padding: 25px;
-    border-radius: 14px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    display: flex;
-    flex-direction: column;
-  }
-  .category-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 6px 20px rgba(0, 0, 255, 0.15); /* BRIGHT BLUE (rgba uses R, G, B, Alpha values) */
-  }
-  .category-card p { color: #6c757d; flex-grow: 1; margin-bottom: 20px; }
+    /* --- Project Pages: Project Cards --- */
+    .back-link {
+      font-size: 1rem;
+      color: #6c757d;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 15px;
+    }
+    .back-link:hover { color: #0000FF; }
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 25px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .card {
+      background: #ffffff;
+      border: 1px solid #dee2e6;
+      padding: 20px;
+      border-radius: 14px;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 6px 20px rgba(0, 0, 255, 0.15);
+    }
+    .card img { width: 100%; border-radius: 10px; margin-bottom: 15px; }
+    .meta { font-size: 0.9rem; color: #6c757d; margin-bottom: 15px; font-style: italic; }
+    .card p { margin-bottom: 10px; color: #495057; }
+    .card strong { color: #0000FF; }
+    .links { margin-top: auto; }
 
-  /* --- Project Pages: Project Cards --- */
-  .back-link { font-size: 1rem; color: #6c757d; text-decoration: none; display: inline-block; margin-top: 15px; }
-  .back-link:hover { color: #0000FF; } /* BRIGHT BLUE */
-  .projects { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; max-width: 1200px; margin: 0 auto; }
-  .card {
-    background: #ffffff;
-    border: 1px solid #dee2e6;
-    padding: 20px;
-    border-radius: 14px;
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-  .card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 6px 20px rgba(0, 0, 255, 0.15); /* BRIGHT BLUE */
-  }
-  .card img { width: 100%; border-radius: 10px; margin-bottom: 15px; }
-  .meta { font-size: 0.9rem; color: #6c757d; margin-bottom: 15px; font-style: italic; }
-  .card p { margin-bottom: 10px; color: #495057; }
-  .card strong { color: #0000FF; } /* BRIGHT BLUE */
-  .links { margin-top: auto; }
-
-  /* --- Footer --- */
-  footer { margin-top: 80px; color: #6c757d; font-size: 0.9rem; }
-</style>
+    /* --- Footer --- */
+    footer {
+      margin-top: 80px;
+      color: #6c757d;
+      font-size: 0.9rem;
+    }
+  </style>
 </head>
 <body>
 
@@ -87,25 +87,39 @@
   </header>
 
   <section class="projects">
+
     <article class="card">
-      <img src="images/lucid-project.png" alt="Aerodynamic Simulation for an EV">
-      <h3>EV Drag Reduction Analysis @ Lucid Motors</h3>
-      <p class="meta">Role: Mechanical Design Engineering Intern</p>
+      <img src="images/tesla-rejection-chute.png" alt="Custom rejection chute for Cybertruck production line">
+      
+      <h3>Cybertruck Robotic Cell Optimization</h3>
+      <p class="meta">Role: Equipment Engineering Intern @ Tesla</p>
       
       <p>
-        <strong>Problem:</strong> The design team needed to reduce the aerodynamic drag of a new side-mirror housing by 5% to meet energy efficiency targets, but physical prototypes were too costly for initial iteration.
+        <strong>Problem:</strong> A key robotic cell on the Cybertruck production line was improperly disposing of rejected seat structures, dropping them on the floor. This resulted in hundreds of thousands of dollars in annual material scrap, frequent production downtime for manual retrieval, and created a safety hazard for associates entering the cell.
       </p>
       <p>
-        <strong>My Solution:</strong> I developed a high-fidelity CFD model in COMSOL to simulate airflow around 10 different housing geometries. I automated the meshing and post-processing scripts in Python, which allowed for rapid evaluation.
+        <strong>My Solution:</strong> As the sole owner of this project, I engineered a complete mechanical and robotics solution. I designed a custom, non-intrusive rejection chute from the ground up using Siemens NX, ensuring it integrated seamlessly into the existing cell's tight footprint. I then single-handedly reprogrammed the entire Fanuc robotic logic, rewriting the pathing to flawlessly deposit rejected parts into the new assembly.
       </p>
       <p>
-        <strong>Results:</strong> My simulations identified a novel geometry that reduced drag by 8.2%, exceeding the target. This design was adopted for wind-tunnel testing, saving an estimated $20,000 in prototyping costs.
+        <strong>Results:</strong> I drove the project through the full lifecycle, leading a cross-functional team of stakeholders from manufacturing, compliance, and testing to successfully implement my design. The solution completely eliminated the scrap issue and associated downtime, **delivering an annual savings of hundreds of thousands of dollars** while improving cell safety and maintaining the original workflow for production associates.
       </p>
-
-      <div class="links">
-        </div>
     </article>
-    
+    <article class="card">
+      <img src="images/lockheed-los-analysis.png" alt="Line-of-sight analysis diagram for naval ship">
+
+      <h3>Company-Wide Line-of-Sight (LOS) Process Overhaul</h3>
+      <p class="meta">Role: Mechanical Design Engineering Intern @ Lockheed Martin</p>
+
+      <p>
+        <strong>Problem:</strong> The existing company procedure for conducting line-of-sight analysis for critical topside equipment on the Canadian Surface Combatant (CSC) program contained significant discrepancies, leading to inaccurate results and potential rework.
+      </p>
+      <p>
+        <strong>My Solution:</strong> After identifying the root cause of the errors, I led the complete redevelopment of a new, more accurate LOS analysis procedure using SolidWorks. I created all documentation for the new standard and personally trained other engineers on its proper implementation to ensure company-wide adoption.
+      </p>
+      <p>
+        <strong>Results:</strong> The new procedure I developed was formally adopted and **improved process accuracy by over 8%**. This enhancement reduced the risk of costly design flaws and is now the standard method used for the multi-billion dollar CSC program.
+      </p>
+    </article>
     </section>
 
   <footer>
