@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Academic Projects — Thomas Watson</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+  
+  <style>
+    /* --- Global Styles --- */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #f8f9fa;
+      color: #212529;
+      line-height: 1.6;
+      padding: 40px 20px;
+    }
+
+    /* --- Links & Headers --- */
+    a {
+      color: #0000FF; /* BRIGHT BLUE */
+      text-decoration: none;
+      font-weight: 600;
+    }
+    a:hover {
+      text-decoration: underline;
+      opacity: 0.8;
+    }
+    header, footer {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    header { margin-bottom: 60px; }
+    h1 { font-weight: 600; font-size: 2.5rem; letter-spacing: 2px; }
+    h3 { font-weight: 500; margin-bottom: 10px; font-size: 1.3rem; }
+
+    /* --- Project Pages: Project Cards --- */
+    .back-link {
+      font-size: 1rem;
+      color: #6c757d;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 15px;
+    }
+    .back-link:hover { color: #0000FF; }
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 25px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .card {
+      background: #ffffff;
+      border: 1px solid #dee2e6;
+      padding: 20px;
+      border-radius: 14px;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 6px 20px rgba(0, 0, 255, 0.15);
+    }
+    .card img { width: 100%; border-radius: 10px; margin-bottom: 15px; }
+    .meta { font-size: 0.9rem; color: #6c757d; margin-bottom: 15px; font-style: italic; }
+    .card p { margin-bottom: 10px; color: #495057; }
+    .card strong { color: #0000FF; }
+    .links { margin-top: auto; /* Pushes links to the bottom */ }
+
+    /* --- Footer --- */
+    footer {
+      margin-top: 80px;
+      color: #6c757d;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Academic Clubs & Projects</h1>
+    <a href="index.html" class="back-link">&larr; Back to Home</a>
+  </header>
+
+  <section class="projects">
+
+    <article class="card">
+      <img src="images/dalis-quant-app.png" alt="Quantitative risk management application for an investment society">
+      
+      <h3>Quantitative Risk Management App</h3>
+      <p class="meta">Role: Quantitative Analyst @ Dalhousie Investment Society (DALIS)</p>
+      
+      <p>
+        <strong>Challenge:</strong> The Dalhousie Investment Society, managing a multi-asset portfolio, had a significant operational blind spot: they had no viable or easily accessible way to track their Profit and Loss (PNL). This prevented the teams from accurately measuring performance, managing risk, and making data-driven strategic decisions.
+      </p>
+      <p>
+        <strong>My Solution:</strong> I built a quantitative analysis application from the ground up in Python. The app features a Tkinter GUI for user interaction and leverages the Bloomberg Python API to pull raw trade ticket data. Using Pandas and NumPy, it processes this data to calculate and track daily PNL for each of the four investment teams and the society's total portfolio. I also integrated advanced risk management tools, including Monte Carlo simulations and stock correlation matrices, which are visualized with Matplotlib.
+      </p>
+      <p>
+        <strong>Results:</strong> The application I developed became the central tool for performance tracking within the society, providing critical, on-demand PNL data for the first time. By introducing quantitative tools like hedging analysis and Monte Carlo simulations, I elevated the society's analytical capabilities, enabling more sophisticated risk management and data-informed investment strategies.
+      </p>
+
+    </article>
+    </section>
+
+  <footer>
+    <p>
+      <a href="resume.pdf" target="_blank">Download Resume</a> ·
+      <a href="mailto:thomaswatson1188@gmail.com">Email Me</a> ·
+      <a href="https://linkedin.com/in/thomaswatsonn" target="_blank">LinkedIn</a>
+    </p>
+    <p>© 2025 Thomas Watson</p>
+  </footer>
+
+</body>
+</html>
