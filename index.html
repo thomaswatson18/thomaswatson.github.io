@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Thomas Watson — Projects</title>
+  <style>
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;max-width:900px;margin:30px auto;padding:0 20px;color:#222;}
+    header{margin-bottom:24px}
+    h1{margin:0;font-size:28px}
+    p.lead{color:#444;margin-top:6px}
+    .projects{display:grid;grid-template-columns:1fr;gap:14px;margin-top:18px}
+    .card{border:1px solid #e6e6e6;padding:12px;border-radius:8px}
+    .card img{max-width:100%;height:auto;border-radius:6px}
+    .meta{margin-top:8px;font-size:14px;color:#555}
+    .links a{margin-right:10px;text-decoration:none;font-weight:600;color:#0366d6}
+    footer{margin-top:30px;font-size:14px;color:#666}
+    @media(min-width:720px){ .projects{grid-template-columns:1fr 1fr} }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Thomas Watson</h1>
+    <p class="lead">Mechanical engineer & student. Here are a few projects — click to view code or details.</p>
+  </header>
+
+  <section class="projects">
+    <!-- Project 1 -->
+    <article class="card">
+      <h3>Project Title 1</h3>
+      <img src="images/project1.png" alt="Project 1 screenshot">
+      <p class="meta">Short one-line description. Tech: COMSOL, Python, HTML</p>
+      <div class="links">
+        <a href="https://github.com/yourusername/project1" target="_blank">Code</a>
+        <a href="https://yourusername.github.io/project1" target="_blank">Live demo</a>
+      </div>
+    </article>
+
+    <!-- Project 2 -->
+    <article class="card">
+      <h3>Project Title 2</h3>
+      <img src="images/project2.png" alt="Project 2 screenshot">
+      <p class="meta">Short description. Tech: CFD, MATLAB</p>
+      <div class="links">
+        <a href="https://github.com/yourusername/project2" target="_blank">Code</a>
+      </div>
+    </article>
+  </section>
+
+  <footer>
+    <p>Resume: <a href="resume.pdf" target="_blank">Download PDF</a> · Email: thomas@example.com</p>
+  </footer>
+</body>
+</html>
