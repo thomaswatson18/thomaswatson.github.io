@@ -4,26 +4,83 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Work Projects — Thomas Watson</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+  
   <style>
+    /* --- Global Styles --- */
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Montserrat', sans-serif; background-color: #0f0f0f; color: #f5f5f5; line-height: 1.6; padding: 40px 20px; }
-    header { text-align: center; margin-bottom: 60px; }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      /* CHANGED: Switched to a clean white background and dark grey text for readability */
+      background-color: #f8f9fa; /* A slightly off-white is softer than pure white */
+      color: #212529;
+      line-height: 1.6;
+      padding: 40px 20px;
+    }
+
+    /* --- Links & Headers --- */
+    a {
+      /* CHANGED: Main accent color is now a deep, professional blue */
+      color: #005288;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    a:hover {
+      text-decoration: underline;
+      opacity: 0.8;
+    }
+    header, footer {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    header { margin-bottom: 60px; }
     h1 { font-weight: 600; font-size: 2.5rem; letter-spacing: 2px; }
-    /* Style for the "Back to Home" link */
-    .back-link { font-size: 1rem; color: #aaa; text-decoration: none; display: inline-block; margin-top: 15px; }
-    .back-link:hover { color: #e82127; }
-    .projects { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; max-width: 1200px; margin: 0 auto; }
-    .card { background: #1b1b1b; padding: 20px; border-radius: 14px; display: flex; flex-direction: column; }
+    h3 { font-weight: 500; margin-bottom: 10px; font-size: 1.3rem; } /* For project cards */
+    
+    /* --- Project Pages: Project Cards --- */
+    .back-link {
+      font-size: 1rem;
+      color: #6c757d;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 15px;
+    }
+    .back-link:hover { color: #005288; }
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 25px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .card {
+      /* CHANGED: White cards with a subtle border */
+      background: #ffffff;
+      border: 1px solid #dee2e6;
+      padding: 20px;
+      border-radius: 14px;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .card:hover { /* Added a hover effect to project cards */
+      transform: translateY(-6px);
+      box-shadow: 0 6px 20px rgba(0, 82, 136, 0.15);
+    }
     .card img { width: 100%; border-radius: 10px; margin-bottom: 15px; }
-    h3 { font-weight: 500; margin-bottom: 10px; font-size: 1.3rem; }
-    .meta { font-size: 0.9rem; color: #bbb; margin-bottom: 15px; font-style: italic; }
-    .card p { margin-bottom: 10px; color: #ccc; }
-    .card strong { color: #f5f5f5; } /* Makes the PAR labels stand out */
-    .links { margin-top: auto; /* Pushes links to the bottom */ }
-    .links a { text-decoration: none; font-weight: 600; color: #e82127; margin-right: 15px; transition: opacity 0.2s; }
-    .links a:hover { opacity: 0.7; }
-    footer { text-align: center; margin-top: 60px; color: #777; font-size: 0.9rem; }
-    footer a { color: #e82127; text-decoration: none; font-weight: 600; }
+    .meta { font-size: 0.9rem; color: #6c757d; margin-bottom: 15px; font-style: italic; }
+    .card p { margin-bottom: 10px; color: #495057; }
+    /* CHANGED: Made the Problem/Solution/Result labels blue to stand out */
+    .card strong { color: #005288; }
+    .links { margin-top: auto; /* Pushes links to the bottom of the card */ }
+
+    /* --- Footer --- */
+    footer {
+      margin-top: 80px;
+      color: #6c757d;
+      font-size: 0.9rem;
+    }
   </style>
 </head>
 <body>
@@ -56,6 +113,11 @@
     </section>
 
   <footer>
+    <p>
+      <a href="resume.pdf" target="_blank">Download Resume</a> ·
+      <a href="mailto:thomaswatson1188@gmail.com">Email Me</a> ·
+      <a href="https://linkedin.com/in/thomaswatsonn" target="_blank">LinkedIn</a>
+    </p>
     <p>© 2025 Thomas Watson</p>
   </footer>
 
