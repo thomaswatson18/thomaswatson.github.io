@@ -3,9 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Thomas Watson — Projects</title>
+  <title>Thomas Watson — Mechanical Engineering</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
+    /* NOTE: It's best practice to move this CSS to a separate 'style.css' file.
+      For now, we'll keep it here for simplicity.
+    */
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: 'Montserrat', sans-serif;
@@ -14,10 +17,21 @@
       line-height: 1.6;
       padding: 40px 20px;
     }
-    header {
-      text-align: center;
-      margin-bottom: 60px;
+    a {
+      color: #e82127; /* Using your original link color */
+      text-decoration: none;
+      font-weight: 600;
     }
+    a:hover {
+      opacity: 0.7;
+      text-decoration: underline;
+    }
+    header, footer {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    header { margin-bottom: 60px; }
     h1 {
       font-weight: 600;
       font-size: 2.5rem;
@@ -28,101 +42,84 @@
       margin-top: 10px;
       font-size: 1.1rem;
     }
-    .projects {
+    /* This new section is for your introduction text */
+    .about-me {
+      max-width: 800px;
+      margin: 0 auto 80px auto; /* Adds more space below */
+      text-align: center;
+      font-size: 1.1rem;
+      color: #ccc;
+    }
+    /* This is the grid for your new category cards */
+    .categories {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 25px;
       max-width: 1000px;
       margin: 0 auto;
     }
-    .card {
+    /* Styles for the new Work/School/Personal cards */
+    .category-card {
       background: #1b1b1b;
-      padding: 20px;
+      padding: 25px;
       border-radius: 14px;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
+      display: flex;
+      flex-direction: column; /* Aligns content vertically */
     }
-    .card:hover {
+    .category-card:hover {
       transform: translateY(-6px);
       box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
     }
-    .card img {
-      width: 100%;
-      border-radius: 10px;
+    .category-card h2 {
+      font-size: 1.5rem;
       margin-bottom: 15px;
     }
-    h3 {
-      font-weight: 500;
-      margin-bottom: 10px;
-      font-size: 1.3rem;
-    }
-    .meta {
-      font-size: 0.9rem;
+    .category-card p {
       color: #bbb;
-      margin-bottom: 8px;
-    }
-    .links a {
-      text-decoration: none;
-      font-weight: 600;
-      color: #e82127;
-      margin-right: 15px;
-      transition: opacity 0.2s;
-    }
-    .links a:hover {
-      opacity: 0.7;
+      flex-grow: 1; /* Pushes the link to the bottom */
+      margin-bottom: 20px;
     }
     footer {
-      text-align: center;
-      margin-top: 60px;
+      margin-top: 80px;
       color: #777;
       font-size: 0.9rem;
-    }
-    footer a {
-      color: #e82127;
-      text-decoration: none;
-      font-weight: 600;
     }
   </style>
 </head>
 <body>
+
   <header>
     <h1>Thomas Watson</h1>
     <p class="lead">Mechanical Engineering Student · Dalhousie University</p>
-    <p class="lead">A showcase of projects from my engineering and software journey.</p>
   </header>
 
-  <section class="projects">
-    <!-- Project 1 -->
-    <article class="card">
-      <img src="images/project1.png" alt="Project 1">
-      <h3>Ahmed Body Aerodynamics Optimization</h3>
-      <p class="meta">COMSOL · CFD · Aerodynamics</p>
-      <p>Designed and simulated modifications to an Ahmed body to improve drag reduction using COMSOL Multiphysics.</p>
-      <div class="links">
-        <a href="https://github.com/thomaswatson18/ahmed-body-cfd" target="_blank">Code</a>
-      </div>
-    </article>
+  <section class="about-me">
+    <p>
+      I'm a passionate engineering student specializing in simulation and design. Currently on an 8-month work term in Texas, I thrive on solving complex problems, from optimizing vehicle aerodynamics to automating data analysis. Explore my projects below to see how I apply my skills in professional, academic, and personal settings.
+    </p>
+  </section>
 
-    <!-- Project 2 -->
-    <article class="card">
-      <img src="images/project2.png" alt="Project 2">
-      <h3>Heat Transfer Analysis of Pop Can Cooling</h3>
-      <p class="meta">COMSOL · Heat Transfer</p>
-      <p>Modeled natural convection around a 2D-axisymmetric pop can in COMSOL to analyze cooling behavior in ice water.</p>
-      <div class="links">
-        <a href="https://github.com/thomaswatson18/popcan-convection" target="_blank">Code</a>
-      </div>
-    </article>
+  <section class="categories">
 
-    <!-- Project 3 -->
-    <article class="card">
-      <img src="images/project3.png" alt="Project 3">
-      <h3>Python Data Visualization Toolkit</h3>
-      <p class="meta">Python · Pandas · Matplotlib</p>
-      <p>Built an automated Excel data processor for risk analysis and visualization used by the Dalhousie Investment Society.</p>
-      <div class="links">
-        <a href="https://github.com/thomaswatson18/data-visualization" target="_blank">Code</a>
-      </div>
-    </article>
+    <a href="work.html" class="category-card">
+      <h2>Work Experience</h2>
+      <p>Driving impact through internships and co-op placements at leading engineering firms.</p>
+      <div class="link-cta">View Projects &rarr;</div>
+    </a>
+
+    <a href="school.html" class="category-card">
+      <h2>Academic Projects</h2>
+      <p>Applying fundamental engineering principles to complex challenges in CFD and thermodynamics.</p>
+      <div class="link-cta">View Projects &rarr;</div>
+    </a>
+
+    <a href="personal.html" class="category-card">
+      <h2>Personal Projects</h2>
+      <p>Exploring my curiosity in software development, data visualization, and design.</p>
+      <div class="link-cta">View Projects &rarr;</div>
+    </a>
+
   </section>
 
   <footer>
@@ -133,6 +130,7 @@
     </p>
     <p>© 2025 Thomas Watson</p>
   </footer>
+
 </body>
 </html>
 
