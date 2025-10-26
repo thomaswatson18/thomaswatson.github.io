@@ -15,11 +15,12 @@
             line-height: 1.6;
             /* REMOVED horizontal padding, kept vertical */
             padding: 40px 0;
+            overflow-x: hidden; /* Prevent horizontal scrollbar caused by banner */
         }
         /* NEW: Container for main content with padding */
         .main-content {
             padding: 0 20px; /* Apply horizontal padding here */
-            max-width: 1200px; /* Optional: Constrain max width of content */
+            max-width: 1200px; /* Constrain max width of content */
             margin: 0 auto; /* Center the content */
         }
         a {
@@ -36,8 +37,8 @@
         .top-left-nav {
             position: absolute;
             top: 40px;
-            /* Adjust left padding to align with .main-content padding */
-            left: calc(max(20px, (100% - 1200px)/2 + 20px)); /* Align with main content padding */
+             /* Align with main content padding */
+            left: calc(max(20px, (100% - 1200px)/2 + 20px));
             z-index: 10;
         }
         .top-left-nav a {
@@ -48,7 +49,7 @@
         /* --- HEADER STYLES --- */
         header {
             text-align: center;
-            max-width: 800px;
+            max-width: 800px; /* Kept narrower than main-content */
             margin: 80px auto 60px auto;
             display: flex;
             flex-direction: column;
@@ -68,7 +69,7 @@
 
         /* --- ABOUT ME SECTION --- */
         .about-me {
-            max-width: 750px;
+            max-width: 750px; /* Kept narrower */
             margin: 0 auto 80px auto;
             text-align: center;
             font-size: 1.1rem;
@@ -88,7 +89,8 @@
         .logos-scroller {
             display: flex;
             width: fit-content;
-            animation: scroll-left 30s linear infinite;
+            /* Make animation longer for slower scroll */
+            animation: scroll-left 40s linear infinite;
         }
         .logos-scroller a {
             display: flex;
@@ -120,7 +122,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 25px;
-            max-width: 1100px; /* Contained within main-content */
+            max-width: 1100px; /* Use full width within main-content */
             margin: 0 auto 80px auto;
         }
         .category-card {
@@ -163,7 +165,7 @@
 
         /* --- PROJECT HIGHLIGHTS --- */
         .project-highlights {
-            max-width: 1100px; /* Contained within main-content */
+            max-width: 1100px; /* Use full width within main-content */
             margin: 0 auto 100px auto;
             text-align: center;
         }
@@ -222,7 +224,6 @@
 
         /* --- FOOTER --- */
         footer {
-            /* Now also inside main-content, so it gets padding */
             margin-top: 80px;
             padding-top: 30px;
             border-top: 1px solid #e0e0e0;
@@ -232,23 +233,22 @@
         }
 
          /* --- Responsive Adjustments --- */
-        @media (max-width: 1200px) {
-            .top-left-nav { /* Adjust nav left position if max-width isn't met */
-                 left: 40px;
+         @media (max-width: 1200px) {
+            .top-left-nav { /* Adjust nav left position */
+                 left: 20px; /* Align with mobile padding */
             }
         }
         @media (max-width: 768px) {
-            body { padding-top: 30px; padding-bottom: 30px; } /* Adjust body padding */
-            .main-content { padding: 0 15px; } /* Reduce padding on mobile */
+            body { padding-top: 30px; padding-bottom: 30px; }
+            .main-content { padding: 0 15px; } /* Reduce padding */
             .top-left-nav {
                 position: static;
                 text-align: center;
                 margin-bottom: 40px;
-                 left: auto; /* Reset absolute positioning */
+                 left: auto;
             }
             .top-left-nav a { margin: 0 10px; }
             header { margin-top: 0; }
-             /* Consistent spacing */
              .about-me, .scrolling-logos, .categories, .project-highlights { margin-bottom: 60px; }
             h1 { font-size: 2.2rem; }
             p.lead { font-size: 1.1rem; }
