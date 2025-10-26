@@ -13,9 +13,16 @@
             background-color: #f8f9fa;
             color: #212529;
             line-height: 1.6;
-            /* Reverted to original padding */
-            padding: 40px 20px;
-             overflow-x: hidden; /* Prevent horizontal scroll just in case */
+            /* REMOVED horizontal padding, kept vertical */
+            padding-top: 40px;
+            padding-bottom: 40px;
+            overflow-x: hidden; /* Prevent horizontal scrollbar */
+        }
+        /* NEW: Container for main content with padding */
+        .main-content {
+            padding: 0 20px; /* Apply horizontal padding here */
+            max-width: 1200px; /* Constrain max width of content */
+            margin: 0 auto; /* Center the content */
         }
         a {
             color: #0000FF; /* BRIGHT BLUE */
@@ -30,8 +37,11 @@
         /* --- NAVIGATION STYLES --- */
         .top-left-nav {
             position: absolute;
+            /* Align with body top padding */
             top: 40px;
-            left: 40px;
+             /* Align with main content padding using calc */
+             /* Calculates space outside max-width, divides by 2, adds padding */
+            left: calc(max(20px, (100% - 1200px)/2 + 20px));
             z-index: 10;
         }
         .top-left-nav a {
@@ -42,8 +52,8 @@
         /* --- HEADER STYLES --- */
         header {
             text-align: center;
-            max-width: 800px;
-             /* Adjusted top margin */
+            max-width: 800px; /* Narrower than main-content */
+            /* Adjusted top margin to account for body padding change */
             margin: 80px auto 60px auto;
             display: flex;
             flex-direction: column;
@@ -55,42 +65,44 @@
             border-radius: 50%;
             object-fit: cover;
             margin-bottom: 20px;
-            border: 3px solid #fff; /* White border */
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* Subtle shadow */
+            border: 3px solid #fff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
         h1 { font-weight: 600; font-size: 2.5rem; letter-spacing: 2px; }
         p.lead { color: #6c757d; margin-top: 10px; font-size: 1.1rem; }
 
         /* --- ABOUT ME SECTION --- */
         .about-me {
-            max-width: 750px; /* Consistent width */
+            max-width: 750px; /* Narrower */
             margin: 0 auto 80px auto;
             text-align: center;
             font-size: 1.1rem;
             color: #495057;
         }
 
-        /* --- SCROLLING LOGOS --- */
+        /* --- SCROLLING LOGOS (OUTSIDE .main-content) --- */
         .scrolling-logos {
-             /* Takes width available within body padding */
-            width: 100%;
+            width: 100vw; /* Force full viewport width */
+            position: relative; /* Needed for left positioning */
+            left: 50%; /* Center the element */
+            transform: translateX(-50%); /* Pull back by half its width */
             overflow: hidden;
             padding: 40px 0;
-            margin-bottom: 80px;
+            margin-bottom: 80px; /* Space below the banner */
             background-color: #fff;
             border-top: 1px solid #e9ecef;
             border-bottom: 1px solid #e9ecef;
         }
         .logos-scroller {
             display: flex;
-            width: fit-content; /* Critical for calculating width based on content */
-             /* Slowed down animation slightly */
+            width: fit-content; /* Critical */
+            /* Animation applied */
             animation: scroll-left 45s linear infinite;
         }
         .logos-scroller a {
             display: flex;
             align-items: center;
-            padding: 0 40px;
+            padding: 0 40px; /* Space between logos */
             text-decoration: none;
         }
         .logos-scroller img {
@@ -107,7 +119,7 @@
         .scrolling-logos:hover .logos-scroller {
             animation-play-state: paused;
         }
-        /* Standard keyframes - relies on duplication for infinite effect */
+        /* Keyframes remain the same */
         @keyframes scroll-left {
             0% { transform: translateX(0%); }
             100% { transform: translateX(-50%); }
@@ -119,10 +131,10 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 25px;
-            max-width: 1100px;
+            max-width: 1100px; /* Contained */
             margin: 0 auto 80px auto;
         }
-        .category-card {
+         .category-card {
             background: #ffffff;
             border: 1px solid #dee2e6;
             padding: 25px;
@@ -162,8 +174,8 @@
 
         /* --- PROJECT HIGHLIGHTS --- */
         .project-highlights {
-            max-width: 1100px;
-            margin: 0 auto 100px auto; /* Space below highlights */
+            max-width: 1100px; /* Contained */
+            margin: 0 auto 100px auto;
             text-align: center;
         }
         .project-highlights h2 {
@@ -230,13 +242,19 @@
         }
 
          /* --- Responsive Adjustments --- */
+         @media (max-width: 1200px) {
+            .top-left-nav { /* Align nav with padding on smaller screens */
+                 left: 20px;
+            }
+        }
         @media (max-width: 768px) {
-            body { padding: 30px 15px; } /* Keep padding */
+            body { padding-top: 30px; padding-bottom: 30px; }
+            .main-content { padding: 0 15px; } /* Reduce padding */
             .top-left-nav {
                 position: static;
                 text-align: center;
                 margin-bottom: 40px;
-                 left: auto; /* Reset for static */
+                 left: auto;
             }
             .top-left-nav a { margin: 0 10px; }
             header { margin-top: 0; }
@@ -258,18 +276,6 @@
         <a href="mailto:thomaswatson1188@gmail.com">Email</a>
     </nav>
 
-    <header>
-        <img src="images/headshot.jpg" alt="Thomas Watson headshot" class="headshot">
-        <h1>Thomas Watson</h1>
-        <p class="lead">Bachelor of Mechanical Engineering, Minor in Computer Science · Dalhousie University</p>
-    </header>
-
-    <section class="about-me">
-        <p>
-          Driven by a first-principles approach, I tackle complex engineering challenges at the intersection of hardware and software. Currently honing my skills at Tesla, I specialize in mechanical design, automation, and simulation to deliver robust, efficient solutions. Explore my projects to see how I translate ideas into impactful results.
-        </p>
-    </section>
-
     <section class="scrolling-logos" aria-label="Featured Companies and Organizations">
         <div class="logos-scroller">
             <a href="https://www.tesla.com/cybertruck" target="_blank" title="Tesla Cybertruck"><img src="images/logo-tesla.png" alt="Tesla logo"></a>
@@ -285,49 +291,63 @@
         </div>
     </section>
 
-    <section class="categories">
-        <a href="work.html" class="category-card">
-            <h2>Work Experience</h2>
-            <p>Driving impact through internships at companies like Tesla, Lockheed Martin and Pratt & Whitney.</p>
-            <span class="link-cta">View Projects &rarr;</span>
-        </a>
-        <a href="personal.html" class="category-card">
-            <h2>Personal Projects</h2>
-            <p>Exploring my curiosity in hardware design, software development, or an intersection of the two.</p>
-            <span class="link-cta">View Projects &rarr;</span>
-        </a>
-        <a href="school.html" class="category-card">
-            <h2>Academic Clubs/Projects</h2>
-            <p>Applying fundamental mechanical and software engineering principles to complex challenges within design, CFD, FEA, Blockchain and Quantitative Finance.</p>
-            <span class="link-cta">View Projects &rarr;</span>
-        </a>
-    </section>
+    <div class="main-content">
 
-    <section class="project-highlights">
-        <h2>Project Highlights</h2>
-        <div class="highlights-grid">
-            <a href="work.html" class="highlight-item">
-                <img src="images/tesla-cybertruck-seats.png" alt="Tesla Cybertruck Seat Assembly Cell">
-                <div class="highlight-overlay"><span>Cybertruck Robotic Cell Re-Design @ Tesla</span></div>
-            </a>
-            <a href="personal.html" class="highlight-item">
-                <img src="images/controller-project.png" alt="Custom Arduino/Matlab Controller">
-                 <div class="highlight-overlay"><span>Custom Arduino/MATLAB Video Game System</span></div>
-            </a>
-            <a href="school.html" class="highlight-item">
-                <img src="images/dalis-quant-app.png" alt="DALIS Quant App Interface">
-                 <div class="highlight-overlay"><span>Quantitative Risk Management App @ DALIS</span></div>
-            </a>
-            <a href="work.html" class="highlight-item">
-                <img src="images/lockheed-system-integration.png" alt="Lockheed Martin System Integration">
-                 <div class="highlight-overlay"><span>Advanced System Integration Lead @ Lockheed Martin</span></div>
-            </a>
-        </div>
-    </section>
+        <header>
+            <img src="images/headshot.jpg" alt="Thomas Watson headshot" class="headshot">
+            <h1>Thomas Watson</h1>
+            <p class="lead">Bachelor of Mechanical Engineering, Minor in Computer Science · Dalhousie University</p>
+        </header>
 
-    <footer>
-        <p>© 2025 Thomas Watson</p>
-    </footer>
+        <section class="about-me">
+            <p>
+              Driven by a first-principles approach, I tackle complex engineering challenges at the intersection of hardware and software. Currently honing my skills at Tesla, I specialize in mechanical design, automation, and simulation to deliver robust, efficient solutions. Explore my projects to see how I translate ideas into impactful results.
+            </p>
+        </section>
 
-</body>
+        <section class="categories">
+            <a href="work.html" class="category-card">
+                <h2>Work Experience</h2>
+                <p>Driving impact through internships at companies like Tesla, Lockheed Martin and Pratt & Whitney.</p>
+                <span class="link-cta">View Projects &rarr;</span>
+            </a>
+            <a href="personal.html" class="category-card">
+                <h2>Personal Projects</h2>
+                <p>Exploring my curiosity in hardware design, software development, or an intersection of the two.</p>
+                <span class="link-cta">View Projects &rarr;</span>
+            </a>
+            <a href="school.html" class="category-card">
+                <h2>Academic Clubs/Projects</h2>
+                <p>Applying fundamental mechanical and software engineering principles to complex challenges within design, CFD, FEA, Blockchain and Quantitative Finance.</p>
+                <span class="link-cta">View Projects &rarr;</span>
+            </a>
+        </section>
+
+        <section class="project-highlights">
+            <h2>Project Highlights</h2>
+            <div class="highlights-grid">
+                <a href="work.html" class="highlight-item">
+                    <img src="images/tesla-cybertruck-seats.png" alt="Tesla Cybertruck Seat Assembly Cell">
+                    <div class="highlight-overlay"><span>Cybertruck Robotic Cell Re-Design @ Tesla</span></div>
+                </a>
+                <a href="personal.html" class="highlight-item">
+                    <img src="images/controller-project.png" alt="Custom Arduino/Matlab Controller">
+                     <div class="highlight-overlay"><span>Custom Arduino/MATLAB Video Game System</span></div>
+                </a>
+                <a href="school.html" class="highlight-item">
+                    <img src="images/dalis-quant-app.png" alt="DALIS Quant App Interface">
+                     <div class="highlight-overlay"><span>Quantitative Risk Management App @ DALIS</span></div>
+                </a>
+                <a href="work.html" class="highlight-item">
+                    <img src="images/lockheed-system-integration.png" alt="Lockheed Martin System Integration">
+                     <div class="highlight-overlay"><span>Advanced System Integration Lead @ Lockheed Martin</span></div>
+                </a>
+            </div>
+        </section>
+
+        <footer>
+            <p>© 2025 Thomas Watson</p>
+        </footer>
+
+    </div> </body>
 </html>
