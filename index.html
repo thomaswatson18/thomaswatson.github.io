@@ -40,8 +40,7 @@
     header {
       text-align: center;
       max-width: 800px;
-      /* Slightly less space below header to tighten it up */
-      margin: 0 auto 50px auto; 
+      margin: 0 auto 60px auto; 
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -58,24 +57,10 @@
     p.lead { color: #6c757d; margin-top: 10px; font-size: 1.1rem; }
     
     /* --- LOGOS SECTION STYLES --- */
-    .logos-section { 
-      text-align: center; 
-      max-width: 900px; 
-      /* Added more space above, slightly less below */
-      margin: 100px auto 70px auto; 
-    }
-    .logos-section h3 { 
-      color: #6c757d; 
-      font-weight: 400; 
-      margin-bottom: 30px; /* More space below title */ 
-    } 
-    .logos-container { 
-      display: flex; 
-      flex-wrap: wrap; 
-      justify-content: center; 
-      align-items: center; 
-      gap: 40px; 
-    }
+    .logos-section { text-align: center; max-width: 900px; margin: 0 auto 80px auto; }
+    .logos-section h3 { color: #6c757d; font-weight: 400; margin-bottom: 25px; }
+    .logos-container { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 40px; }
+    /* Updated styles for logo links */
     .logos-container a { display: inline-block; /* Helps with alignment */ }
     .logos-container img { 
       height: 40px; 
@@ -87,65 +72,14 @@
     }
     .logos-container img:hover { filter: grayscale(0%); opacity: 1; }
 
-    /* --- ABOUT ME SECTION --- */
-    .about-me { 
-      max-width: 800px; 
-      margin: 0 auto 80px auto; 
-      text-align: center; 
-      font-size: 1.1rem; 
-      color: #495057; 
-    }
-
-    /* --- CATEGORIES SECTION --- */
-    .categories { 
-      display: grid; 
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-      gap: 25px; 
-      max-width: 1000px; 
-      margin: 0 auto; 
-    }
-    .category-card { 
-      background: #ffffff; 
-      border: 1px solid #dee2e6; 
-      padding: 25px; 
-      border-radius: 14px; 
-      /* Smoother transition */
-      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; 
-      display: flex; 
-      flex-direction: column; 
-    }
-    .category-card:hover { 
-      transform: translateY(-6px); 
-      box-shadow: 0 8px 25px rgba(0, 0, 255, 0.15); /* Slightly larger shadow on hover */
-      border-color: #bfbfbf; /* Subtle border change */
-    }
+    /* --- OTHER SECTIONS --- */
+    .about-me { max-width: 800px; margin: 0 auto 80px auto; text-align: center; font-size: 1.1rem; color: #495057; }
+    .categories { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; max-width: 1000px; margin: 0 auto; }
+    .category-card { background: #ffffff; border: 1px solid #dee2e6; padding: 25px; border-radius: 14px; transition: transform 0.2s ease, box-shadow 0.2s ease; display: flex; flex-direction: column; }
+    .category-card:hover { transform: translateY(-6px); box-shadow: 0 6px 20px rgba(0, 0, 255, 0.15); }
     .category-card h2 { font-size: 1.5rem; margin-bottom: 15px; }
-    /* Slightly smaller text in cards */
-    .category-card p { 
-      color: #6c757d; 
-      flex-grow: 1; 
-      margin-bottom: 20px; 
-      font-size: 0.95rem; 
-    } 
-
-    /* --- NEW STYLE FOR CARD CALL TO ACTION --- */
-    .link-cta {
-      font-weight: 600;
-      color: #0000FF; /* Match your link color */
-      margin-top: auto; /* Pushes it to the bottom */
-      transition: opacity 0.3s ease;
-    }
-    .category-card:hover .link-cta {
-      opacity: 0.7; /* Fade slightly on card hover */
-    }
-
-    /* --- FOOTER --- */
-    footer { 
-      margin-top: 80px; 
-      color: #6c757d; 
-      font-size: 0.9rem; 
-      text-align: center; 
-    }
+    .category-card p { color: #6c757d; flex-grow: 1; margin-bottom: 20px; }
+    footer { margin-top: 80px; color: #6c757d; font-size: 0.9rem; text-align: center; }
   </style>
 </head>
 <body>
@@ -186,7 +120,8 @@
       </a>
       
       <a href="https://linktr.ee/dalbcs" target="_blank" title="Dalhousie Blockchain Society"> 
-        <img src="images/logo-dalhousie.png" alt="Dalhousie Blockchain logo"> </a>
+        <img src="images/logo-dalhousie.png" alt="Dalhousie Blockchain logo">
+      </a>
       
       <a href="https://www.dalis.ca/" target="_blank" title="Dalhousie Investment Society">
         <img src="images/logo-dalis.png" alt="Dalhousie Investment Society logo">
@@ -194,20 +129,22 @@
       
       </div>
   </section>
-  
   <section class="categories">
     <a href="work.html" class="category-card">
       <h2>Work Experience</h2>
       <p>Driving impact through internships at companies like Tesla, Lockheed Martin and Pratt & Whitney.</p>
-      <span class="link-cta">View Projects &rarr;</span> </a>
+      <div class="link-cta">View Projects &rarr;</div>
+    </a>
     <a href="personal.html" class="category-card">
       <h2>Personal Projects</h2>
       <p>Exploring my curiosity in hardware design, software development, or an intersection of the two.</p>
-      <span class="link-cta">View Projects &rarr;</span> </a>
+      <div class="link-cta">View Projects &rarr;</div>
+    </a>
     <a href="school.html" class="category-card">
       <h2>Academic Clubs/Projects</h2>
       <p>Applying fundamental mechanical and software engineering principles to complex challenges within design, CFD, FEA, Blockchain and Quantitative Finance.</p>
-      <span class="link-cta">View Projects &rarr;</span> </a>
+      <div class="link-cta">View Projects &rarr;</div>
+    </a>
   </section>
 
   
