@@ -1,339 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Thomas Watson — Mechanical Engineering</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        /* --- Global Styles --- */
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; } /* Smooth scroll for any potential anchor links */
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: #f8f9fa;
-            color: #212529;
-            line-height: 1.6;
-            padding: 40px 20px;
-        }
-        a {
-            color: #0000FF; /* BRIGHT BLUE */
-            text-decoration: none;
-            font-weight: 600;
-            transition: opacity 0.3s ease; /* Smooth transition for links */
-        }
-        a:hover {
-            text-decoration: none; /* Remove underline on hover for cleaner look */
-            opacity: 0.7;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thomas Watson — Mechanical Engineering</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    /* --- Global Styles --- */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #f8f9fa;
+      color: #212529;
+      line-height: 1.6;
+      padding: 40px 20px;
+    }
+    a {
+      color: #0000FF; /* BRIGHT BLUE */
+      text-decoration: none;
+      font-weight: 600;
+    }
+    a:hover {
+      text-decoration: underline;
+      opacity: 0.8;
+    }
 
-        /* --- Navigation Styles --- */
-        .top-left-nav {
-            position: absolute;
-            top: 40px;
-            left: 40px;
-            z-index: 10; /* Ensure it stays on top */
-        }
-        .top-left-nav a {
-            margin-right: 30px; /* Increased spacing */
-            font-size: 1rem;
-            font-weight: 500; /* Slightly lighter weight */
-        }
+    /* --- NAVIGATION STYLES  --- */
+    .top-left-nav {
+      position: absolute;
+      top: 40px;
+      left: 40px;
+    }
+    .top-left-nav a {
+      margin-right: 25px;
+      font-size: 1rem;
+    }
 
-        /* --- Header Styles --- */
-        header {
-            text-align: center;
-            max-width: 800px;
-            margin: 80px auto 70px auto; /* Increased top margin for nav space */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .headshot {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 25px; /* Increased space */
-            border: 4px solid #fff; /* White border */
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-        }
-        h1 { font-weight: 600; font-size: 2.7rem; letter-spacing: 1px; margin-bottom: 5px;}
-        p.lead { color: #5a646e; margin-top: 10px; font-size: 1.15rem; font-weight: 300; } /* Adjusted color/weight */
+    /* --- HEADER STYLES --- */
+    header {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 60px auto; 
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .headshot {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 20px;
+      border: 3px solid #dee2e6;
+    }
+    h1 { font-weight: 600; font-size: 2.5rem; letter-spacing: 2px; }
+    p.lead { color: #6c757d; margin-top: 10px; font-size: 1.1rem; }
+    
+    /* --- LOGOS SECTION STYLES --- */
+    .logos-section { text-align: center; max-width: 900px; margin: 0 auto 80px auto; }
+    .logos-section h3 { color: #6c757d; font-weight: 400; margin-bottom: 25px; }
+    .logos-container { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 40px; }
+    /* Updated styles for logo links */
+    .logos-container a { display: inline-block; /* Helps with alignment */ }
+    .logos-container img { 
+      height: 40px; 
+      max-width: 150px; 
+      filter: grayscale(100%); 
+      opacity: 0.6; 
+      transition: filter 0.3s, opacity 0.3s; 
+      vertical-align: middle; /* Aligns images better if heights vary slightly */
+    }
+    .logos-container img:hover { filter: grayscale(0%); opacity: 1; }
 
-        /* --- About Me Section --- */
-        .about-me {
-            max-width: 700px; /* Slightly narrower */
-            margin: 0 auto 100px auto; /* Increased bottom margin */
-            text-align: center;
-            font-size: 1.15rem;
-            font-weight: 300; /* Lighter weight for body text */
-            color: #343a40;
-        }
-
-        /* --- Logos Section Styles --- */
-        .logos-section {
-            text-align: center;
-            max-width: 900px;
-            margin: 0 auto 100px auto; /* Consistent bottom margin */
-        }
-        .logos-section h3 {
-            color: #6c757d;
-            font-weight: 400;
-            margin-bottom: 35px; /* Increased space */
-            font-size: 1rem;
-            text-transform: uppercase; /* Uppercase title */
-            letter-spacing: 1px;
-        }
-        .logos-container { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 45px; } /* Increased gap */
-        .logos-container a { display: inline-block; }
-        .logos-container img {
-            height: 35px; /* Slightly smaller logos */
-            max-width: 140px;
-            filter: grayscale(100%) brightness(100%); /* Adjusted filter */
-            opacity: 0.5; /* Slightly more subtle */
-            transition: filter 0.3s ease, opacity 0.3s ease;
-            vertical-align: middle;
-        }
-        .logos-container img:hover { filter: grayscale(0%) brightness(100%); opacity: 1; }
-
-        /* --- Categories Section --- */
-        .categories {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px; /* Increased gap */
-            max-width: 1100px; /* Wider section */
-            margin: 0 auto 120px auto; /* Increased bottom margin */
-        }
-        .category-card {
-            background: #ffffff;
-            border: 1px solid #e9ecef; /* Lighter border */
-            padding: 30px; /* Increased padding */
-            border-radius: 16px; /* Slightly larger radius */
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            text-decoration: none; /* Ensure link doesn't underline content */
-        }
-        .category-card:hover {
-            transform: translateY(-8px); /* More lift */
-            box-shadow: 0 10px 30px rgba(0, 82, 136, 0.1); /* Softer, blue-tinted shadow */
-            border-color: #dee2e6;
-        }
-        .category-card h2 {
-             font-size: 1.4rem;
-             margin-bottom: 15px;
-             color: #212529; /* Ensure heading color is dark */
-             font-weight: 500;
-        }
-        .category-card p {
-            color: #6c757d;
-            flex-grow: 1;
-            margin-bottom: 25px; /* More space before link */
-            font-size: 0.95rem;
-            font-weight: 300;
-        }
-        .link-cta {
-            font-weight: 500; /* Adjusted weight */
-            color: #0000FF;
-            margin-top: auto;
-            transition: transform 0.3s ease; /* Add transition for arrow */
-            display: inline-block; /* Needed for transform */
-        }
-         .category-card:hover .link-cta {
-             transform: translateX(5px); /* Move arrow slightly on hover */
-        }
-
-        /* ============================ */
-        /* START: NEW SKILLS SECTION    */
-        /* ============================ */
-        .skills-focus {
-            max-width: 1100px;
-            margin: 0 auto 120px auto;
-            padding-top: 60px; /* Space above */
-        }
-        .skills-focus h2 {
-            text-align: center;
-            font-weight: 500;
-            font-size: 1.8rem;
-            margin-bottom: 50px;
-            color: #343a40;
-        }
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-        }
-        .skill-card {
-            background-color: #fff;
-            border: 1px solid #e9ecef;
-            padding: 30px;
-            border-radius: 16px;
-            /* --- Animation Initial State --- */
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-        .skill-card h3 {
-            font-size: 1.2rem;
-            font-weight: 500;
-            margin-bottom: 15px;
-            color: #212529;
-        }
-        .skill-card p {
-            font-size: 0.95rem;
-            color: #6c757d;
-            font-weight: 300;
-        }
-        /* --- Animation Visible State --- */
-        .skill-card.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        /* Stagger the animation */
-        .skill-card:nth-child(2).is-visible {
-            transition-delay: 0.1s;
-        }
-        .skill-card:nth-child(3).is-visible {
-            transition-delay: 0.2s;
-        }
-        /* ============================ */
-        /* END: NEW SKILLS SECTION      */
-        /* ============================ */
-
-        /* --- Footer --- */
-        footer {
-            margin-top: 100px;
-            padding-top: 40px; /* Add space above footer */
-            border-top: 1px solid #dee2e6; /* Separator line */
-            color: #6c757d;
-            font-size: 0.9rem;
-            text-align: center;
-        }
-
-        /* --- Responsive Adjustments --- */
-        @media (max-width: 768px) {
-            body { padding: 30px 15px; }
-            .top-left-nav {
-                position: static; /* Stack nav on top */
-                text-align: center;
-                margin-bottom: 40px;
-            }
-            .top-left-nav a { margin: 0 10px; }
-            header { margin-top: 0; }
-            .about-me, .logos-section, .categories, .skills-focus { margin-bottom: 80px; }
-            h1 { font-size: 2.2rem; }
-            p.lead { font-size: 1.1rem; }
-            .headshot { width: 120px; height: 120px; }
-        }
-
-    </style>
+    /* --- OTHER SECTIONS --- */
+    .about-me { max-width: 800px; margin: 0 auto 80px auto; text-align: center; font-size: 1.1rem; color: #495057; }
+    .categories { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; max-width: 1000px; margin: 0 auto; }
+    .category-card { background: #ffffff; border: 1px solid #dee2e6; padding: 25px; border-radius: 14px; transition: transform 0.2s ease, box-shadow 0.2s ease; display: flex; flex-direction: column; }
+    .category-card:hover { transform: translateY(-6px); box-shadow: 0 6px 20px rgba(0, 0, 255, 0.15); }
+    .category-card h2 { font-size: 1.5rem; margin-bottom: 15px; }
+    .category-card p { color: #6c757d; flex-grow: 1; margin-bottom: 20px; }
+    footer { margin-top: 80px; color: #6c757d; font-size: 0.9rem; text-align: center; }
+  </style>
 </head>
 <body>
 
-    <nav class="top-left-nav">
-        <a href="images/resume.pdf" target="_blank">Resume</a>
-        <a href="https://linkedin.com/in/thomaswatsonn" target="_blank">LinkedIn</a>
-        <a href="mailto:thomaswatson1188@gmail.com">Email</a>
-    </nav>
-
-    <header>
-        <img src="images/headshot.jpg" alt="Thomas Watson headshot" class="headshot">
-        <h1>Thomas Watson</h1>
-        <p class="lead">Bachelor of Mechanical Engineering, Minor in Computer Science · Dalhousie University</p>
+  <nav class="top-left-nav">
+    <a href="images/resume.pdf" target="_blank">Resume</a>
+    <a href="https://linkedin.com/in/thomaswatsonn" target="_blank">LinkedIn</a>
+    <a href="mailto:thomaswatson1188@gmail.com">Email</a>
+  </nav>
+  <header>
+    <img src="images/headshot.jpg" alt="Thomas Watson headshot" class="headshot">
+    <h1>Thomas Watson</h1>
+    <p class="lead">Bachelor of Mechanical Engineering, Minor in Computer Science · Dalhousie University</p>
     </header>
 
-    <section class="about-me">
-        <p>
-          Driven by a first-principles approach, I tackle complex engineering challenges at the intersection of hardware and software. Currently honing my skills at Tesla, I specialize in mechanical design, automation, and simulation to deliver robust, efficient solutions. Explore my projects to see how I translate ideas into impactful results.
-        </p> </section>
 
-    <section class="logos-section">
-        <h3>Featured Experience</h3>
-        <div class="logos-container">
-            <a href="https://www.tesla.com/cybertruck" target="_blank" title="Tesla Cybertruck">
-                <img src="images/logo-tesla.png" alt="Tesla logo">
-            </a>
-            <a href="https://www.lockheedmartin.com/en-ca/csc.html" target="_blank" title="Lockheed Martin CSC">
-                <img src="images/logo-lockheed.png" alt="Lockheed Martin logo">
-            </a>
-            <a href="https://www.prattwhitney.com/en/products/business-aviation-engines/pw800" target="_blank" title="Pratt & Whitney Engines">
-                <img src="images/logo-rtx.png" alt="RTX logo">
-            </a>
-            <a href="https://linktr.ee/dalbcs" target="_blank" title="Dalhousie Blockchain Society">
-                <img src="images/logo-dalhousie.png" alt="Dalhousie Blockchain logo"> </a>
-            <a href="https://www.dalis.ca/" target="_blank" title="Dalhousie Investment Society">
-                <img src="images/logo-dalis.png" alt="Dalhousie Investment Society logo">
-            </a>
-        </div>
-    </section>
+  <section class="about-me">
+    <p>
+      I'm a passionate engineering student specializing in pure mechanical design, automation and simulation. Currently prusuing an internship at Tesla, I thrive on solving complex problems, from pure mechanical design to quantitative data analyses. Explore my projects below to see how I have managed to apply my skills within professional and academic settings alongside some of my personal fun projects.
+    </p>
+  </section>
 
-    <section class="categories">
-        <a href="work.html" class="category-card">
-            <h2>Work Experience</h2>
-            <p>Driving impact through internships at companies like Tesla, Lockheed Martin and Pratt & Whitney.</p>
-            <span class="link-cta">View Projects &rarr;</span>
-        </a>
-        <a href="personal.html" class="category-card">
-            <h2>Personal Projects</h2>
-            <p>Exploring my curiosity in hardware design, software development, or an intersection of the two.</p>
-            <span class="link-cta">View Projects &rarr;</span>
-        </a>
-        <a href="school.html" class="category-card">
-            <h2>Academic Clubs/Projects</h2>
-            <p>Applying fundamental mechanical and software engineering principles to complex challenges within design, CFD, FEA, Blockchain and Quantitative Finance.</p>
-            <span class="link-cta">View Projects &rarr;</span>
-        </a>
-    </section>
 
-    <section class="skills-focus">
-        <h2>Core Competencies</h2>
-        <div class="skills-grid">
-            <div class="skill-card">
-                <h3>Mechanical Design & Manufacturing</h3>
-                <p>Designing complex assemblies, optimizing for performance and manufacturability using tools like SolidWorks, NX, and Catia. Experience with 3D printing and integrating designs into production environments.</p>
-            </div>
-            <div class="skill-card">
-                <h3>Automation & Robotics</h3>
-                <p>Developing automated systems from concept to implementation, including PLC logic, robotic programming (Fanuc), and scripting (VBA, Python) to eliminate inefficiencies and improve reliability.</p>
-            </div>
-            <div class="skill-card">
-                <h3>Simulation & Analysis</h3>
-                <p>Leveraging CFD and FEA tools (ANSYS, COMSOL) to model complex physical phenomena, validate designs, predict performance, and drive data-informed engineering decisions.</p>
-            </div>
-        </div>
-    </section>
-    <footer>
-        <p>© 2025 Thomas Watson</p>
-    </footer>
+  <section class="logos-section">
+    <h3>Featured Experience</h3>
+    <div class="logos-container">
+      
+      <a href="https://www.tesla.com/cybertruck" target="_blank" title="Tesla Cybertruck">
+        <img src="images/logo-tesla.png" alt="Tesla logo">
+      </a>
+      
+      <a href="https://www.lockheedmartin.com/en-ca/csc.html" target="_blank" title="Lockheed Martin CSC">
+        <img src="images/logo-lockheed.png" alt="Lockheed Martin logo">
+      </a>
+      
+      <a href="https://www.prattwhitney.com/en/products/business-aviation-engines/pw800" target="_blank" title="Pratt & Whitney Engines">
+        <img src="images/logo-rtx.png" alt="RTX logo">
+      </a>
+      
+      <a href="https://linktr.ee/dalbcs" target="_blank" title="Dalhousie Blockchain Society"> 
+        <img src="images/logo-dalhousie.png" alt="Dalhousie Blockchain logo">
+      </a>
+      
+      <a href="https://www.dalis.ca/" target="_blank" title="Dalhousie Investment Society">
+        <img src="images/logo-dalis.png" alt="Dalhousie Investment Society logo">
+      </a>
+      
+      </div>
+  </section>
+  <section class="categories">
+    <a href="work.html" class="category-card">
+      <h2>Work Experience</h2>
+      <p>Driving impact through internships at companies like Tesla, Lockheed Martin and Pratt & Whitney.</p>
+      <div class="link-cta">View Projects &rarr;</div>
+    </a>
+    <a href="personal.html" class="category-card">
+      <h2>Personal Projects</h2>
+      <p>Exploring my curiosity in hardware design, software development, or an intersection of the two.</p>
+      <div class="link-cta">View Projects &rarr;</div>
+    </a>
+    <a href="school.html" class="category-card">
+      <h2>Academic Clubs/Projects</h2>
+      <p>Applying fundamental mechanical and software engineering principles to complex challenges within design, CFD, FEA, Blockchain and Quantitative Finance.</p>
+      <div class="link-cta">View Projects &rarr;</div>
+    </a>
+  </section>
 
-    <script>
-        // Select all the skill cards
-        const skillCards = document.querySelectorAll('.skill-card');
+  
+  <footer>
+    <p>© 2025 Thomas Watson</p>
+  </footer>
 
-        // Set up the Intersection Observer
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                // If the card is intersecting (visible)
-                if (entry.isIntersecting) {
-                    // Add the 'is-visible' class to trigger the animation
-                    entry.target.classList.add('is-visible');
-                    // Optional: Stop observing once it's visible to prevent re-animation
-                    // observer.unobserve(entry.target); 
-                }
-                // Optional: Remove class if it scrolls out of view (for re-animation)
-                // else {
-                //    entry.target.classList.remove('is-visible');
-                // }
-            });
-        }, {
-            threshold: 0.1 // Trigger when 10% of the element is visible
-        });
-
-        // Observe each skill card
-        skillCards.forEach(card => {
-            observer.observe(card);
-        });
-    </script>
-    </body>
+</body>
 </html>
