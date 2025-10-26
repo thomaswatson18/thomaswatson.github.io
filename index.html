@@ -41,7 +41,7 @@
         header {
             text-align: center;
             max-width: 800px;
-            margin: 80px auto 60px auto;
+            margin: 80px auto 60px auto; /* Added top margin for nav */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -52,8 +52,8 @@
             border-radius: 50%;
             object-fit: cover;
             margin-bottom: 20px;
-            border: 3px solid #fff;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border: 3px solid #fff; /* White border */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* Subtle shadow */
         }
         h1 { font-weight: 600; font-size: 2.5rem; letter-spacing: 2px; }
         p.lead { color: #6c757d; margin-top: 10px; font-size: 1.1rem; }
@@ -61,16 +61,102 @@
         /* --- ABOUT ME SECTION --- */
         .about-me {
             max-width: 750px;
-            margin: 0 auto 80px auto;
+            margin: 0 auto 80px auto; /* Standard bottom margin */
             text-align: center;
             font-size: 1.1rem;
             color: #495057;
         }
 
+        /* --- SCROLLING LOGOS --- */
+        .scrolling-logos {
+            width: 100%;
+            overflow: hidden;
+            padding: 40px 0;
+            margin-bottom: 80px; /* Standard bottom margin */
+            background-color: #fff;
+            border-top: 1px solid #e9ecef;
+            border-bottom: 1px solid #e9ecef;
+        }
+        .logos-scroller {
+            display: flex;
+            width: fit-content;
+            animation: scroll-left 30s linear infinite;
+        }
+        .logos-scroller a {
+            display: flex;
+            align-items: center;
+            padding: 0 40px;
+            text-decoration: none;
+        }
+        .logos-scroller img {
+            height: 35px;
+            max-width: 140px;
+            filter: grayscale(100%);
+            opacity: 0.6;
+            transition: filter 0.3s, opacity 0.3s;
+        }
+        .logos-scroller a:hover img {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+        .scrolling-logos:hover .logos-scroller {
+            animation-play-state: paused;
+        }
+        @keyframes scroll-left {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* --- CATEGORIES SECTION --- */
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            max-width: 1100px;
+            margin: 0 auto 80px auto; /* Standard bottom margin */
+        }
+        .category-card {
+            background: #ffffff;
+            border: 1px solid #dee2e6;
+            padding: 25px;
+            border-radius: 12px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+        }
+        .category-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 8px 25px rgba(0, 0, 255, 0.1);
+            border-color: #ced4da;
+        }
+        .category-card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #212529;
+            font-weight: 500;
+        }
+        .category-card p {
+            color: #6c757d;
+            flex-grow: 1;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+        .link-cta {
+          font-weight: 500;
+          color: #0000FF;
+          margin-top: auto;
+          transition: transform 0.3s ease;
+          display: inline-block;
+        }
+        .category-card:hover .link-cta {
+             transform: translateX(5px);
+        }
+
         /* --- PROJECT HIGHLIGHTS --- */
         .project-highlights {
             max-width: 1100px;
-            margin: 0 auto 100px auto;
+            margin: 0 auto 100px auto; /* Space below highlights */
             text-align: center;
         }
         .project-highlights h2 {
@@ -126,106 +212,6 @@
             line-height: 1.3;
         }
 
-        /* ============================ */
-        /* START: SCROLLING LOGOS       */
-        /* ============================ */
-        .scrolling-logos {
-            width: 100%;
-            overflow: hidden; /* Hide the logos outside the viewport */
-            padding: 40px 0; /* Add some vertical space */
-            margin-bottom: 80px; /* Space below the scroller */
-            background-color: #fff; /* Optional: background color */
-            border-top: 1px solid #e9ecef;
-            border-bottom: 1px solid #e9ecef;
-        }
-        .logos-scroller {
-            display: flex;
-            width: fit-content; /* Container width based on content */
-            /* Animation definition */
-            animation: scroll-left 30s linear infinite;
-        }
-        .logos-scroller a {
-            display: flex; /* Align items vertically */
-            align-items: center;
-            padding: 0 40px; /* Space around each logo */
-            text-decoration: none; /* No underline on logos */
-        }
-        .logos-scroller img {
-            height: 35px; /* Same height as before */
-            max-width: 140px;
-            filter: grayscale(100%);
-            opacity: 0.6;
-            transition: filter 0.3s, opacity 0.3s;
-        }
-        .logos-scroller a:hover img { /* Hover effect on the link */
-            filter: grayscale(0%);
-            opacity: 1;
-        }
-        /* Pause animation on hover */
-        .scrolling-logos:hover .logos-scroller {
-            animation-play-state: paused;
-        }
-
-        /* Keyframes for the scrolling animation */
-        @keyframes scroll-left {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                /* Move left by half the width (since logos are duplicated) */
-                transform: translateX(-50%);
-            }
-        }
-        /* ============================ */
-        /* END: SCROLLING LOGOS         */
-        /* ============================ */
-
-        /* --- CATEGORIES SECTION --- */
-        .categories {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            max-width: 1100px;
-            margin: 0 auto 80px auto;
-        }
-        .category-card {
-            background: #ffffff;
-            border: 1px solid #dee2e6;
-            padding: 25px;
-            border-radius: 12px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            text-decoration: none;
-        }
-        .category-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 8px 25px rgba(0, 0, 255, 0.1);
-            border-color: #ced4da;
-        }
-        .category-card h2 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: #212529;
-            font-weight: 500;
-        }
-        .category-card p {
-            color: #6c757d;
-            flex-grow: 1;
-            margin-bottom: 20px;
-            font-size: 0.95rem;
-        }
-        .link-cta {
-          font-weight: 500;
-          color: #0000FF;
-          margin-top: auto;
-          transition: transform 0.3s ease;
-          display: inline-block;
-        }
-        .category-card:hover .link-cta {
-             transform: translateX(5px);
-        }
-
         /* --- FOOTER --- */
         footer {
             margin-top: 80px;
@@ -246,13 +232,14 @@
             }
             .top-left-nav a { margin: 0 10px; }
             header { margin-top: 0; }
-             .about-me, .project-highlights, .scrolling-logos, .categories { margin-bottom: 60px; }
+             /* Consistent spacing */
+             .about-me, .scrolling-logos, .categories, .project-highlights { margin-bottom: 60px; }
             h1 { font-size: 2.2rem; }
             p.lead { font-size: 1.1rem; }
             .headshot { width: 120px; height: 120px; }
              .highlights-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
              .highlight-item img { height: 150px; }
-             .logos-scroller a { padding: 0 25px; } /* Less space on mobile */
+             .logos-scroller a { padding: 0 25px; }
         }
     </style>
 </head>
@@ -276,36 +263,6 @@
         </p>
     </section>
 
-    <section class="project-highlights">
-        <h2>Project Highlights</h2>
-        <div class="highlights-grid">
-            <a href="work.html" class="highlight-item">
-                <img src="images/tesla-cybertruck-seats.png" alt="Tesla Cybertruck Seat Assembly Cell">
-                <div class="highlight-overlay">
-                    <span>Cybertruck Robotic Cell Re-Design @ Tesla</span>
-                </div>
-            </a>
-             <a href="personal.html" class="highlight-item">
-                <img src="images/controller-project.png" alt="Custom Arduino/Matlab Controller">
-                 <div class="highlight-overlay">
-                    <span>Custom Arduino/MATLAB Video Game System</span>
-                </div>
-            </a>
-             <a href="school.html" class="highlight-item">
-                <img src="images/dalis-quant-app.png" alt="DALIS Quant App Interface">
-                 <div class="highlight-overlay">
-                    <span>Quantitative Risk Management App @ DALIS</span>
-                </div>
-            </a>
-             <a href="work.html" class="highlight-item">
-                <img src="images/lockheed-system-integration.png" alt="Lockheed Martin System Integration">
-                 <div class="highlight-overlay">
-                    <span>Advanced System Integration Lead @ Lockheed Martin</span>
-                </div>
-            </a>
-        </div>
-    </section>
-
     <section class="scrolling-logos" aria-label="Featured Companies and Organizations">
         <div class="logos-scroller">
             <a href="https://www.tesla.com/cybertruck" target="_blank" title="Tesla Cybertruck">
@@ -323,7 +280,6 @@
             <a href="https://www.dalis.ca/" target="_blank" title="Dalhousie Investment Society">
                 <img src="images/logo-dalis.png" alt="Dalhousie Investment Society logo">
             </a>
-
             <a href="https://www.tesla.com/cybertruck" target="_blank" title="Tesla Cybertruck">
                 <img src="images/logo-tesla.png" alt="Tesla logo">
             </a>
@@ -341,6 +297,7 @@
             </a>
         </div>
     </section>
+
     <section class="categories">
         <a href="work.html" class="category-card">
             <h2>Work Experience</h2>
@@ -357,6 +314,36 @@
             <p>Applying fundamental mechanical and software engineering principles to complex challenges within design, CFD, FEA, Blockchain and Quantitative Finance.</p>
             <span class="link-cta">View Projects &rarr;</span>
         </a>
+    </section>
+
+    <section class="project-highlights">
+        <h2>Project Highlights</h2>
+        <div class="highlights-grid">
+            <a href="work.html" class="highlight-item">
+                <img src="images/tesla-cybertruck-seats.png" alt="Tesla Cybertruck Seat Assembly Cell">
+                <div class="highlight-overlay">
+                    <span>Cybertruck Robotic Cell Re-Design @ Tesla</span>
+                </div>
+            </a>
+            <a href="personal.html" class="highlight-item">
+                <img src="images/controller-project.png" alt="Custom Arduino/Matlab Controller">
+                 <div class="highlight-overlay">
+                    <span>Custom Arduino/MATLAB Video Game System</span>
+                </div>
+            </a>
+            <a href="school.html" class="highlight-item">
+                <img src="images/dalis-quant-app.png" alt="DALIS Quant App Interface">
+                 <div class="highlight-overlay">
+                    <span>Quantitative Risk Management App @ DALIS</span>
+                </div>
+            </a>
+            <a href="work.html" class="highlight-item">
+                <img src="images/lockheed-system-integration.png" alt="Lockheed Martin System Integration">
+                 <div class="highlight-overlay">
+                    <span>Advanced System Integration Lead @ Lockheed Martin</span>
+                </div>
+            </a>
+        </div>
     </section>
 
     <footer>
