@@ -13,8 +13,8 @@
             background-color: #f8f9fa;
             color: #212529;
             line-height: 1.6;
-            padding: 40px 20px;
-            overflow-x: hidden;
+            padding: 40px 20px; /* Original padding */
+            overflow-x: hidden; /* Prevent potential horizontal scrollbar */
         }
         a {
             color: #0000FF; /* BRIGHT BLUE */
@@ -42,7 +42,7 @@
         header {
             text-align: center;
             max-width: 800px;
-            margin: 80px auto 60px auto;
+            margin: 80px auto 60px auto; /* Adjusted top margin */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -77,19 +77,23 @@
             background-color: #fff;
             border-top: 1px solid #e9ecef;
             border-bottom: 1px solid #e9ecef;
+            /* Added for smoother perceived start */
+            position: relative; 
         }
         .logos-scroller {
             display: flex;
-            width: fit-content;
-            /* Increased duration for 10 sets */
-            animation: scroll-left 150s linear infinite;
+            /* Width must be explicitly calculated or large enough for fit-content */
+            width: fit-content; 
+            /* Double the content requires double the width */
+            /* Animation for 2 sets */
+            animation: scroll-left 40s linear infinite; /* Adjusted duration back */
         }
         .logos-scroller a {
             display: flex;
             align-items: center;
             padding: 0 40px;
             text-decoration: none;
-            flex-shrink: 0;
+            flex-shrink: 0; /* Prevent logos from shrinking */
         }
         .logos-scroller img {
             height: 35px;
@@ -105,13 +109,12 @@
         .scrolling-logos:hover .logos-scroller {
             animation-play-state: paused;
         }
-        /* Adjusted keyframes for 10 sets */
+        /* Keyframes for exactly 2 sets of logos */
         @keyframes scroll-left {
             0% { transform: translateX(0%); }
-            /* Scroll by 1/10th of the total width */
-            100% { transform: translateX(-10%); }
+            /* Translate by exactly half the total width */
+            100% { transform: translateX(-50%); } 
         }
-
 
         /* --- CATEGORIES SECTION --- */
         .categories {
@@ -276,46 +279,7 @@
             <a href="https://www.prattwhitney.com/en/products/business-aviation-engines/pw800" target="_blank" title="Pratt & Whitney Engines"><img src="images/logo-rtx.png" alt="RTX logo"></a>
             <a href="https://linktr.ee/dalbcs" target="_blank" title="Dalhousie Blockchain Society"><img src="images/logo-dalhousie.png" alt="Dalhousie Blockchain logo"></a>
             <a href="https://www.dalis.ca/" target="_blank" title="Dalhousie Investment Society"><img src="images/logo-dalis.png" alt="Dalhousie Investment Society logo"></a>
-            <a href="https://www.tesla.com/cybertruck" target="_blank" title="Tesla Cybertruck"><img src="images/logo-tesla.png" alt="Tesla logo"></a>
-            <a href="https://www.lockheedmartin.com/en-ca/csc.html" target="_blank" title="Lockheed Martin CSC"><img src="images/logo-lockheed.png" alt="Lockheed Martin logo"></a>
-            <a href="https://www.prattwhitney.com/en/products/business-aviation-engines/pw800" target="_blank" title="Pratt & Whitney Engines"><img src="images/logo-rtx.png" alt="RTX logo"></a>
-            <a href="https://linktr.ee/dalbcs" target="_blank" title="Dalhousie Blockchain Society"><img src="images/logo-dalhousie.png" alt="Dalhousie Blockchain logo"></a>
-            <a href="https://www.dalis.ca/" target="_blank" title="Dalhousie Investment Society"><img src="images/logo-dalis.png" alt="Dalhousie Investment Society logo"></a>
-            <a href="https://www.tesla.com/cybertruck" target="_blank" title="Tesla Cybertruck"><img src="images/logo-tesla.png" alt="Tesla logo"></a>
-            <a href="https://www.lockheedmartin.com/en-ca/csc.html" target="_blank" title="Lockheed Martin CSC"><img src="images/logo-lockheed.png" alt="Lockheed Martin logo"></a>
-            <a href="https://www.prattwhitney.com/en/products/business-aviation-engines/pw800" target="_blank" title="Pratt & Whitney Engines"><img src="images/logo-rtx.png" alt="RTX logo"></a>
-            <a href="https://linktr.ee/dalbcs" target="_blank" title="Dalhousie Blockchain Society"><img src="images/logo-dalhousie.png" alt="Dalhousie Blockchain logo"></a>
-            <a href="https://www.dalis.ca/" target="_blank" title="Dalhousie Investment Society"><img src="images/logo-dalis.png" alt="Dalhousie Investment Society logo"></a>
-            <a href="https://www.tesla.com/cybertruck" target="_blank" title="Tesla Cybertruck"><img src="images/logo-tesla.png" alt="Tesla logo"></a>
-            <a href="https://www.lockheedmartin.com/en-ca/csc.html" target="_blank" title="Lockheed Martin CSC"><img src="images/logo-lockheed.png" alt="Lockheed Martin logo"></a>
-            <a href="https://www.prattwhitney.com/en/products/business-aviation-engines/pw800" target="_blank" title="Pratt & Whitney Engines"><img src="images/logo-rtx.png" alt="RTX logo"></a>
-            <a href="https://linktr.ee/dalbcs" target="_blank" title="Dalhousie Blockchain Society"><img src="images/logo-dalhousie.png" alt="Dalhousie Blockchain logo"></a>
-            <a href="https://www.dalis.ca/" target="_blank" title="Dalhousie Investment Society"><img src="images/logo-dalis.png" alt="Dalhousie Investment Society logo"></a>
-            <a href="https://www.tesla.com/cybertruck" target="_blank" title="Tesla Cybertruck"><img src="images/logo-tesla.png" alt="Tesla logo"></a>
-            <a href="https://www.lockheedmartin.com/en-ca/csc.html" target="_blank" title="Lockheed Martin CSC"><img src="images/logo-lockheed.png" alt="Lockheed Martin logo"></a>
-            <a href="https://www.prattwhitney.com/en/products/business-aviation-engines/pw800" target="_blank" title="Pratt & Whitney Engines"><img src="images/logo-rtx.png" alt="RTX logo"></a>
-            <a href="https://linktr.ee/dalbcs" target="_blank" title="Dalhousie Blockchain Society"><img src="images/logo-dalhousie.png" alt="Dalhousie Blockchain logo"></a>
-            <a href="https://www.dalis.ca/" target="_blank" title="Dalhousie Investment Society"><img src="images/logo-dalis.png" alt="Dalhousie Investment Society logo"></a>
-            <a href="https://www.tesla.com/cybertruck" target="_blank" title="Tesla Cybertruck"><img src="images/logo-tesla.png" alt="Tesla logo"></a>
-            <a href="https://www.lockheedmartin.com/en-ca/csc.html" target="_blank" title="Lockheed Martin CSC"><img src="images/logo-lockheed.png" alt="Lockheed Martin logo"></a>
-            <a href="https://www.prattwhitney.com/en/products/business-aviation-engines/pw800" target="_blank" title="Pratt & Whitney Engines"><img src="images/logo-rtx.png" alt="RTX logo"></a>
-            <a href="https://linktr.ee/dalbcs" target="_blank" title="Dalhousie Blockchain Society"><img src="images/logo-dalhousie.png" alt="Dalhousie Blockchain logo"></a>
-            <a href="https://www.dalis.ca/" target="_blank" title="Dalhousie Investment Society"><img src="images/logo-dalis.png" alt="Dalhousie Investment Society logo"></a>
-            <a href="https://www.tesla.com/cybertruck" target="_blank" title="Tesla Cybertruck"><img src="images/logo-tesla.png" alt="Tesla logo"></a>
-            <a href="https://www.lockheedmartin.com/en-ca/csc.html" target="_blank" title="Lockheed Martin CSC"><img src="images/logo-lockheed.png" alt="Lockheed Martin logo"></a>
-            <a href="https://www.prattwhitney.com/en/products/business-aviation-engines/pw800" target="_blank" title="Pratt & Whitney Engines"><img src="images/logo-rtx.png" alt="RTX logo"></a>
-            <a href="https://linktr.ee/dalbcs" target="_blank" title="Dalhousie Blockchain Society"><img src="images/logo-dalhousie.png" alt="Dalhousie Blockchain logo"></a>
-            <a href="https://www.dalis.ca/" target="_blank" title="Dalhousie Investment Society"><img src="images/logo-dalis.png" alt="Dalhousie Investment Society logo"></a>
-            <a href="https://www.tesla.com/cybertruck" target="_blank" title="Tesla Cybertruck"><img src="images/logo-tesla.png" alt="Tesla logo"></a>
-            <a href="https://www.lockheedmartin.com/en-ca/csc.html" target="_blank" title="Lockheed Martin CSC"><img src="images/logo-lockheed.png" alt="Lockheed Martin logo"></a>
-            <a href="https://www.prattwhitney.com/en/products/business-aviation-engines/pw800" target="_blank" title="Pratt & Whitney Engines"><img src="images/logo-rtx.png" alt="RTX logo"></a>
-            <a href="https://linktr.ee/dalbcs" target="_blank" title="Dalhousie Blockchain Society"><img src="images/logo-dalhousie.png" alt="Dalhousie Blockchain logo"></a>
-            <a href="https://www.dalis.ca/" target="_blank" title="Dalhousie Investment Society"><img src="images/logo-dalis.png" alt="Dalhousie Investment Society logo"></a>
-            <a href="https://www.tesla.com/cybertruck" target="_blank" title="Tesla Cybertruck"><img src="images/logo-tesla.png" alt="Tesla logo"></a>
-            <a href="https://www.lockheedmartin.com/en-ca/csc.html" target="_blank" title="Lockheed Martin CSC"><img src="images/logo-lockheed.png" alt="Lockheed Martin logo"></a>
-            <a href="https://www.prattwhitney.com/en/products/business-aviation-engines/pw800" target="_blank" title="Pratt & Whitney Engines"><img src="images/logo-rtx.png" alt="RTX logo"></a>
-            <a href="https://linktr.ee/dalbcs" target="_blank" title="Dalhousie Blockchain Society"><img src="images/logo-dalhousie.png" alt="Dalhousie Blockchain logo"></a>
-            <a href="https://www.dalis.ca/" target="_blank" title="Dalhousie Investment Society"><img src="images/logo-dalis.png" alt="Dalhousie Investment Society logo"></a>
+            
             <a href="https://www.tesla.com/cybertruck" target="_blank" title="Tesla Cybertruck"><img src="images/logo-tesla.png" alt="Tesla logo"></a>
             <a href="https://www.lockheedmartin.com/en-ca/csc.html" target="_blank" title="Lockheed Martin CSC"><img src="images/logo-lockheed.png" alt="Lockheed Martin logo"></a>
             <a href="https://www.prattwhitney.com/en/products/business-aviation-engines/pw800" target="_blank" title="Pratt & Whitney Engines"><img src="images/logo-rtx.png" alt="RTX logo"></a>
