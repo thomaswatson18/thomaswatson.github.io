@@ -1,204 +1,520 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Work Projects — Thomas Watson</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
-  
-  <style>
-    /* --- Global Styles --- */
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: 'Montserrat', sans-serif;
-      background-color: #f8f9fa;
-      color: #212529;
-      line-height: 1.6;
-      padding: 40px 20px;
-    }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Work Projects — Thomas Watson</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* --- Global Styles --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        :root { /* Define color variables */
+            --primary-blue: #0000FF;
+            --text-primary: #212529;
+            --text-secondary: #6c757d;
+            --background: #f8f9fa;
+            --card-background: #ffffff;
+            --border-color: #dee2e6;
+            --border-light: #e9ecef;
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--background);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 40px 20px;
+            font-weight: 300; /* Lighter base font weight */
+        }
+        a {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 500; /* Slightly bolder links */
+            transition: opacity 0.2s ease;
+        }
+        a:hover {
+            text-decoration: none; /* Cleaner look */
+            opacity: 0.7;
+        }
+        /* --- Header & Footer --- */
+        header, footer {
+            text-align: center;
+            max-width: 900px; /* Slightly wider */
+            margin: 0 auto;
+        }
+        header { margin-bottom: 70px; }
+        h1 { font-weight: 600; font-size: 2.5rem; letter-spacing: 1px; margin-bottom: 10px; }
+        footer {
+             margin-top: 100px;
+             padding-top: 40px;
+             border-top: 1px solid var(--border-color);
+             color: var(--text-secondary);
+             font-size: 0.9rem;
+        }
+        footer p:first-child a {
+            margin: 0 10px;
+        }
+        .back-link {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            display: inline-block;
+            margin-top: 10px;
+            transition: color 0.2s ease;
+        }
+        .back-link:hover { color: var(--primary-blue); opacity: 1; }
 
-    /* --- Links & Headers --- */
-    a {
-      color: #0000FF; /* BRIGHT BLUE */
-      text-decoration: none;
-      font-weight: 600;
-    }
-    a:hover {
-      text-decoration: underline;
-      opacity: 0.8;
-    }
-    header, footer {
-      text-align: center;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    header { margin-bottom: 60px; }
-    h1 { font-weight: 600; font-size: 2.5rem; letter-spacing: 2px; }
-    h3 { font-weight: 500; margin-bottom: 10px; font-size: 1.3rem; }
+        /* --- Project Accordion List --- */
+        .project-list {
+            max-width: 900px; /* Consistent width */
+            margin: 0 auto;
+            list-style: none;
+        }
+        .project-item {
+            background-color: var(--card-background);
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            margin-bottom: 25px;
+            overflow: hidden; /* Important for accordion transition */
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: box-shadow 0.3s ease;
+        }
+        .project-item:hover {
+             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
 
-    /* --- Project Pages: Project Cards --- */
-    .back-link {
-      font-size: 1rem;
-      color: #6c757d;
-      text-decoration: none;
-      display: inline-block;
-      margin-top: 15px;
-    }
-    .back-link:hover { color: #0000FF; }
-    .projects {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 25px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .card {
-      background: #ffffff;
-      border: 1px solid #dee2e6;
-      padding: 20px;
-      border-radius: 14px;
-      display: flex;
-      flex-direction: column;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    .card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 6px 20px rgba(0, 0, 255, 0.15);
-    }
-    .card img { width: 100%; border-radius: 10px; margin-bottom: 15px; }
-    .meta { font-size: 0.9rem; color: #6c757d; margin-bottom: 15px; font-style: italic; }
-    .card p { margin-bottom: 10px; color: #495057; }
-    .card strong { color: #0000FF; }
-    .links { margin-top: auto; }
+        /* --- Project Summary (Clickable Header) --- */
+        .project-summary {
+            padding: 25px 30px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.2s ease;
+        }
+        .project-summary:hover {
+             background-color: #fdfdfd; /* Very subtle hover */
+        }
+        .project-summary h3 {
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 5px;
+            color: var(--text-primary);
+        }
+        .project-summary .meta {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+        .expand-icon {
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: var(--text-secondary);
+            transition: transform 0.3s ease;
+        }
+        /* Rotate icon when active */
+        .project-item.active .expand-icon {
+            transform: rotate(45deg);
+        }
 
-    /* --- Footer --- */
-    footer {
-      margin-top: 80px;
-      color: #6c757d;
-      font-size: 0.9rem;
-    }
-  </style>
+        /* --- Project Details (Hidden Content) --- */
+        .project-details {
+            max-height: 0; /* Initially hidden */
+            overflow: hidden;
+            transition: max-height 0.5s ease-out, padding 0.5s ease-out; /* Smooth transition */
+            border-top: 1px solid var(--border-light);
+            padding: 0 30px; /* Add padding when open */
+        }
+        /* Style for when accordion item is active */
+        .project-item.active .project-details {
+             /* Estimate max height, adjust if needed */
+            max-height: 2000px; /* Adjust this value if content is taller */
+            padding: 30px; /* Add padding when open */
+            transition: max-height 0.7s ease-in-out, padding 0.7s ease-in-out;
+        }
+        .project-description {
+            margin-top: 30px; /* Space between slideshow and text */
+        }
+        .project-description p {
+            margin-bottom: 15px;
+            color: #495057;
+            font-weight: 300;
+        }
+        .project-description strong {
+            font-weight: 600; /* Make labels bolder */
+            color: var(--primary-blue);
+            display: block; /* Put label on its own line */
+            margin-bottom: 5px;
+        }
+
+        /* --- Slideshow Styles --- */
+        .slideshow-container {
+            position: relative;
+            max-width: 100%; /* Take full width of details */
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 12px; /* Rounded corners for slideshow */
+            background-color: #eee; /* Placeholder bg */
+        }
+        .slide {
+            display: none; /* Hide slides by default */
+            width: 100%;
+            animation: fadeEffect 1s ease-in-out; /* Fade effect */
+        }
+        .slide img {
+            display: block;
+            width: 100%;
+            height: auto; /* Maintain aspect ratio */
+            max-height: 500px; /* Limit image height */
+            object-fit: cover; /* Cover the area */
+        }
+        .slide.active {
+            display: block; /* Show active slide */
+        }
+        /* Fade animation */
+        @keyframes fadeEffect {
+            from { opacity: 0.6; }
+            to { opacity: 1; }
+        }
+        /* Prev/Next Arrows */
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: auto;
+            padding: 16px;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            transition: background-color 0.3s ease;
+        }
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+        .prev:hover, .next:hover {
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        /* --- Caption Styles --- */
+        .caption-container {
+            text-align: center;
+            padding: 10px 0 5px 0; /* Space above/below caption */
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            min-height: 1.5em; /* Reserve space even if empty */
+            font-style: italic;
+        }
+
+        /* --- Responsive Adjustments --- */
+        @media (max-width: 768px) {
+             body { padding: 30px 15px; }
+             header { margin-top: 60px; } /* Adjust for nav stacking */
+            .project-summary { padding: 20px; }
+            .project-item.active .project-details { padding: 20px; }
+            .project-summary h3 { font-size: 1.15rem; }
+            .prev, .next { font-size: 16px; padding: 12px; }
+        }
+
+    </style>
 </head>
 <body>
 
-  <header>
-    <h1>Work Projects</h1>
-    <a href="index.html" class="back-link">&larr; Back to Home</a>
-  </header>
+    <header>
+        <h1>Work Projects</h1>
+        <a href="index.html" class="back-link">&larr; Back to Home</a>
+    </header>
 
-  <section class="projects">
+    <ul class="project-list">
+        <li class="project-item" data-project-id="tesla-cell">
+            <div class="project-summary">
+                <div>
+                    <h3>Cybertruck Robotic Cell Re-Design</h3>
+                    <p class="meta">Role: Equipment Engineering Intern @ Tesla</p>
+                </div>
+                <span class="expand-icon">+</span>
+            </div>
+            <div class="project-details">
+                <div class="slideshow-container">
+                    <div class="slide active">
+                        <img src="images/tesla-cybertruck-seats.png" alt="Custom rejection chute CAD model">
+                    </div>
+                    <div class="slide">
+                        <img src="images/tesla-robot-arm.jpg" alt="Fanuc robot arm in assembly cell"> </div>
+                    <div class="slide">
+                        <img src="images/tesla-cell-layout.png" alt="Assembly cell layout diagram"> </div>
+                    <a class="prev" onclick="manualSlideChange('tesla-cell', -1)">&#10094;</a>
+                    <a class="next" onclick="manualSlideChange('tesla-cell', 1)">&#10095;</a>
+                </div>
+                <div class="caption-container">
+                    </div>
+                <div class="project-description">
+                    <p><strong>Problem:</strong> A key robotic cell on the Cybertruck production line was improperly disposing of rejected seat structures, dropping them on the floor. This resulted in hundreds of thousands of dollars in annual material scrap, frequent production downtime for manual retrieval, and created a safety hazard for associates entering the cell.</p>
+                    <p><strong>My Solution:</strong> As the sole owner of this project, I engineered a complete mechanical and robotics solution. I designed a custom, non-intrusive rejection chute from the ground up using Solidworks and Siemens NX, ensuring it integrated seamlessly into the existing cell's tight footprint. I then single-handedly reprogrammed the entire Fanuc robotic logic, rewriting the pathing to flawlessly deposit rejected parts into the new assembly.</p>
+                    <p><strong>Results:</strong> I drove the project through the full lifecycle, leading a cross-functional team of stakeholders from manufacturing, compliance, and testing to successfully implement my design. The solution completely eliminated the scrap issue and associated downtime, **delivering an annual savings of over $175,000** while improving cell safety and maintaining the original workflow for production associates.</p>
+                </div>
+            </div>
+        </li>
 
-    <article class="card">
-      <img src="images/tesla-cybertruck-seats.png" alt="Custom rejection chute for Cybertruck Seats production line">
-      
-      <h3>Cybertruck Robotic Cell Re-Design</h3>
-      <p class="meta">Role: Equipment Engineering Intern @ Tesla</p>
-      
-      <p>
-        <strong>Problem:</strong> A key robotic cell on the Cybertruck production line was improperly disposing of rejected seat structures, dropping them on the floor. This resulted in hundreds of thousands of dollars in annual material scrap, frequent production downtime for manual retrieval, and created a safety hazard for associates entering the cell.
-      </p>
-      <p>
-        <strong>My Solution:</strong> As the sole owner of this project, I engineered a complete mechanical and robotics solution. I designed a custom, non-intrusive rejection chute from the ground up using Solidworks and Siemens NX, ensuring it integrated seamlessly into the existing cell's tight footprint. I then single-handedly reprogrammed the entire Fanuc robotic logic, rewriting the pathing to flawlessly deposit rejected parts into the new assembly.
-      </T>
-      <p>
-        <strong>Results:</strong> I drove the project through the full lifecycle, leading a cross-functional team of stakeholders from manufacturing, compliance, and testing to successfully implement my design. [cite_start]The solution completely eliminated the scrap issue and associated downtime, **delivering an annual savings of over $175,000** while improving cell safety and maintaining the original workflow for production associates[cite: 346].
-      </p>
-    </article>
+        <li class="project-item" data-project-id="lm-integration">
+            <div class="project-summary">
+                <div>
+                    <h3>Advanced Classified System Integration Lead</h3>
+                    <p class="meta">Role: Mechanical Design TPM Intern @ Lockheed Martin</p>
+                </div>
+                <span class="expand-icon">+</span>
+            </div>
+            <div class="project-details">
+                 <div class="slideshow-container">
+                     <div class="slide active">
+                        <img src="images/lockheed-system-integration.png" alt="Cross-functional system integration diagram">
+                    </div>
+                    <div class="slide">
+                        <img src="images/csc-ship-model.jpg" alt="CAD Model of CSC Ship"> </div>
+                    <a class="prev" onclick="manualSlideChange('lm-integration', -1)">&#10094;</a>
+                    <a class="next" onclick="manualSlideChange('lm-integration', 1)">&#10095;</a>
+                </div>
+                 <div class="caption-container"></div>
+                 <div class="project-description">
+                    <p><strong>Problem:</strong> Tasked as the integration lead for a proprietary, mission-critical system on the CSC, I was responsible for navigating conflicting constraints from three external vendors and internal RF, electrical, and mechanical design teams. The challenge was to find a viable integration path that did not compromise system performance, ship layout, or classified design integrity.</p>
+                    <p><strong>My Solution:</strong> I took extreme ownership of the project, serving as the single point of contact for all 4 vendors and our internal cross-functional teams. I personally drove the technical design, using my mechanical background to model and propose design changes in SolidWorks to resolve physical, thermal, and RF constraints. My key responsibility was to distill highly technical, classified system requirements from a secure lab into actionable, unclassified design and manufacturing tasks for vendors, ensuring they could execute their scope without compromising project security.</p>
+                    <p><strong>Results:</strong> By proactively managing scope, schedule, and complex technical trades, I successfully aligned all stakeholders on a final, approved integration path. This cleared a major bottleneck for a critical program milestone, and my role as the bridge between technical engineering, vendor management, and program leadership ensured the project remained on schedule and met all system requirements.</p>
+                </div>
+            </div>
+        </li>
 
-    <article class="card">
-      <img src="images/lockheed-system-integration.png" alt="Cross-functional system integration diagram">
-      
-      <h3>Advanced Classified Laser System Integration Lead</h3>
-      <p class="meta">Role: Mechanical Design TPM Intern @ Lockheed Martin</p>
-      
-      <p>
-        <strong>Problem:</strong> Tasked as the integration lead for a proprietary, mission-critical system on the CSC, I was responsible for navigating conflicting constraints from three external vendors and internal RF, electrical, and mechanical design teams. The challenge was to find a viable integration path that did not compromise system performance, ship layout, or classified design integrity.
-      </p>
-      <p>
-        [cite_start]<strong>My Solution:</strong> I took extreme ownership of the project, serving as the single point of contact for all 4 vendors and our internal cross-functional teams[cite: 351]. I personally drove the technical design, using my mechanical background to model and propose design changes in SolidWorks to resolve physical, thermal, and RF constraints. My key responsibility was to distill highly technical, classified system requirements from a secure lab into actionable, unclassified design and manufacturing tasks for vendors, ensuring they could execute their scope without compromising project security.
-      </p>
-      <p>
-        [cite_start]<strong>Results:</strong> By proactively managing scope, schedule, and complex technical trades, I successfully aligned all stakeholders on a final, approved integration path[cite: 351]. This cleared a major bottleneck for a critical program milestone, and my role as the bridge between technical engineering, vendor management, and program leadership ensured the project remained on schedule and met all system requirements.
-      </T>
-    </article>
+         <li class="project-item" data-project-id="lm-topside">
+            <div class="project-summary">
+                <div>
+                     <h3>CSC Topside Mechanical Design & Integration</h3>
+                    <p class="meta">Role: Mechanical Design TPM Intern @ Lockheed Martin</p>
+                </div>
+                 <span class="expand-icon">+</span>
+            </div>
+            <div class="project-details">
+                <div class="slideshow-container">
+                     <div class="slide active">
+                         <img src="images/lockheed-topside-design.png" alt="CAD rendering of naval ship topside equipment layout">
+                    </div>
+                    <div class="slide">
+                        <img src="images/feasibility-study-example.png" alt="Example Feasibility Study Diagram"> </div>
+                    <a class="prev" onclick="manualSlideChange('lm-topside', -1)">&#10094;</a>
+                    <a class="next" onclick="manualSlideChange('lm-topside', 1)">&#10095;</a>
+                </div>
+                <div class="caption-container"></div>
+                <div class="project-description">
+                    <p><strong>Problem:</strong> Relocating critical topside equipment on the CSC required complex mechanical integration solutions to satisfy competing constraints from RF performance, thermal loads, structural integrity, aerodynamic factors, and vendor specifications. Failure to find mechanically sound placements would impact system functionality and project timelines.</p>
+                    <p><strong>My Solution:</strong> I led the mechanical design effort for several key equipment placements. This involved creating detailed feasibility studies and 3D models in SolidWorks to evaluate various integration options against all constraints. I collaborated closely with internal RF, Thermal, and Aero analysis teams to incorporate their findings into the mechanical designs, and worked directly with equipment vendors to ensure mechanical compatibility and address integration challenges. I then presented the technical trade-offs and proposed mechanically viable design solutions to management.</p>
+                    <p><strong>Results:</strong> My mechanical design analyses and cross-functional leadership resulted in the successful approval and implementation path for **9 critical equipment placements** within 4 months. This work ensured the mechanical integrity and functional performance of the topside systems while balancing complex interdisciplinary requirements.</p>
+                </div>
+            </div>
+        </li>
 
-    <article class="card">
-        <img src="images/lockheed-topside-design.png" alt="CAD rendering of naval ship topside equipment layout">
-        
-        <h3>CSC Topside Mechanical Design & Integration</h3>
-        <p class="meta">Role: Mechanical Design TPM Intern @ Lockheed Martin</p>
-        
+        <li class="project-item" data-project-id="lm-cfd">
+            <div class="project-summary">
+                 <div>
+                    <h3>Helicopter Landing Thermal Analysis (CFD)</h3>
+                    <p class="meta">Role: Aerodynamics/RF Engineering Intern @ Lockheed Martin</p>
+                 </div>
+                <span class="expand-icon">+</span>
+            </div>
+            <div class="project-details">
+                <div class="slideshow-container">
+                    <div class="slide active">
+                        <img src="images/lockheed-cfd.png" alt="CFD thermal analysis of helicopter landing deck">
+                    </div>
+                    <div class="slide">
+                        <img src="images/cfd-mesh-example.png" alt="Example CFD Mesh"> </div>
+                    <div class="slide">
+                        <img src="images/thermal-logic-board.jpg" alt="Thermal Logic Board Diagram"> </div>
+                     <a class="prev" onclick="manualSlideChange('lm-cfd', -1)">&#10094;</a>
+                    <a class="next" onclick="manualSlideChange('lm-cfd', 1)">&#10095;</a>
+                </div>
+                <div class="caption-container"></div>
+                <div class="project-description">
+                    <p><strong>Problem:</strong> The Canadian Surface Combatant (CSC) program needed to validate safe helicopter landing conditions, but it was unknown how hot turbine exhaust would affect the flight deck under dozens of different headwind angles, engine throttles, and outtake arrangements. The team lacked the critical thermal data required for RANS/LES simulations.</p>
+                    <p><strong>My Solution:</strong> I developed the foundational thermodynamic model to solve this problem. I first calculated the previously unknown engine exhaust mass flow rates and temperatures for all required scenarios, working with vendors to establish proper power distribution. Using this data, I developed, meshed, and analyzed over 20 CSC ship model iterations in ANSYS Fluent to model all combinations of headwind angles and engine uptake conditions. I also collaborated with the RF team on antenna coupling analyses.</p>
+                    <p><strong>Results:</strong> My simulations generated thermal contour maps showing the maximum temperature over the flight deck for every possible condition. I consolidated this complex data into a single, concise 'logic board' that was delivered to vendors, enabling them to validate safe helicopter landing envelopes for the multi-billion dollar program.</p>
+                </div>
+            </div>
+        </li>
+
+         <li class="project-item" data-project-id="lm-los">
+            <div class="project-summary">
+                <div>
+                     <h3>Company-Wide Line-of-Sight (LOS) Process Overhaul</h3>
+                     <p class="meta">Role: Mechanical Design TPM Intern @ Lockheed Martin</p>
+                </div>
+                 <span class="expand-icon">+</span>
+             </div>
+             <div class="project-details">
+                <div class="slideshow-container">
+                    <div class="slide active">
+                        <img src="images/lockheed-los-analysis.png" alt="Line-of-sight analysis diagram for naval ship">
+                     </div>
+                     <div class="slide">
+                        <img src="images/los-discrepancy-example.png" alt="Diagram showing LOS analysis discrepancy"> </div>
+                      <a class="prev" onclick="manualSlideChange('lm-los', -1)">&#10094;</a>
+                     <a class="next" onclick="manualSlideChange('lm-los', 1)">&#10095;</a>
+                 </div>
+                 <div class="caption-container"></div>
+                 <div class="project-description">
+                     <p><strong>Problem:</strong> The existing company procedure for conducting line-of-sight (LOS) analysis for critical topside equipment on the Canadian Surface Combatant (CSC) program contained significant discrepancies, leading to inaccurate results and potential rework.</p>
+                     <p><strong>My Solution:</strong> After identifying the root cause of the errors, I led the complete redevelopment of a new, more accurate LOS analysis procedure using SolidWorks. I created all documentation for the new standard and personally trained other engineers on its proper implementation to ensure company-wide adoption.</p>
+                     <p><strong>Results:</strong> The new procedure I developed was formally adopted and **improved process accuracy by over 8%**. This enhancement reduced the risk of costly design flaws and is now the standard method used for the multi-billion dollar CSC program.</p>
+                </div>
+            </div>
+        </li>
+
+        <li class="project-item" data-project-id="rtx-auto">
+             <div class="project-summary">
+                <div>
+                    <h3>Production Line Data Automation</h3>
+                    <p class="meta">Role: Aerospace Engineering and Logistics Intern @ RTX (Pratt & Whitney)</p>
+                </div>
+                 <span class="expand-icon">+</span>
+             </div>
+            <div class="project-details">
+                 <div class="slideshow-container">
+                    <div class="slide active">
+                        <img src="images/rtx-automation.png" alt="Process automation flowchart for SAP data extraction">
+                    </div>
+                     <div class="slide">
+                         <img src="images/vba-macro-example.png" alt="Example VBA code snippet"> </div>
+                     <div class="slide">
+                        <img src="images/sap-screenshot.png" alt="Example SAP Interface"> </div>
+                     <a class="prev" onclick="manualSlideChange('rtx-auto', -1)">&#10094;</a>
+                    <a class="next" onclick="manualSlideChange('rtx-auto', 1)">&#10095;</a>
+                </div>
+                 <div class="caption-container"></div>
+                 <div class="project-description">
+                    <p><strong>Problem:</strong> Strategic decisions for optimizing the PW800 production line were dependent on a highly inefficient, manual data-pulling process from SAP. This process was slow, prone to human error, and consumed significant engineering time.</p>
+                    <p><strong>My Solution:</strong> I took the initiative to single-handedly engineer a permanent automated solution. I developed 13 complex Visual Basic macros from scratch that interfaced directly with SAP, looped through hundreds of processes, and automatically transformed the raw data. The script features robust error handling and outputs a concise, executive-ready spreadsheet for immediate analysis.</p>
+                    <p><strong>Results:</strong> My script completely eliminated the manual process, **cutting company data refresh time by 8 hours per week** and significantly increasing data accuracy. The solution was resiliency-tested and implemented as the new company standard, with clear documentation for maintenance and future use.</p>
+                </div>
+            </div>
+        </li>
+    </ul>
+
+    <footer>
         <p>
-            <strong>Problem:</strong> Relocating critical topside equipment on the CSC required complex mechanical integration solutions to satisfy competing constraints from RF performance, thermal loads, structural integrity, aerodynamic factors, and vendor specifications. Failure to find mechanically sound placements would impact system functionality and project timelines.
+            <a href="images/resume.pdf" target="_blank"> Download Resume</a> ·
+            <a href="mailto:thomaswatson1188@gmail.com">Email Me</a> ·
+            <a href="https://linkedin.com/in/thomaswatsonn" target="_blank">LinkedIn</a>
         </p>
-        <p>
-            [cite_start]<strong>My Solution:</strong> I led the mechanical design effort for several key equipment placements[cite: 350]. This involved creating detailed feasibility studies and 3D models in SolidWorks to evaluate various integration options against all constraints. I collaborated closely with internal RF, Thermal, and Aero analysis teams to incorporate their findings into the mechanical designs, and worked directly with equipment vendors to ensure mechanical compatibility and address integration challenges. I then presented the technical trade-offs and proposed mechanically viable design solutions to management.
-        </p>
-        <p>
-            [cite_start]<strong>Results:</strong> My mechanical design analyses and cross-functional leadership resulted in the successful approval and implementation path for **9 critical equipment placements** within 4 months[cite: 350]. This work ensured the mechanical integrity and functional performance of the topside systems while balancing complex interdisciplinary requirements.
-        </p>
-    </article>
-    <article class="card">
-      <img src="images/lockheed-cfd.png" alt="CFD thermal analysis of helicopter landing deck">
+        <p>© 2025 Thomas Watson</p>
+    </footer>
 
-      <h3>Helicopter Landing Thermal Analysis (CFD)</h3>
-      <p class="meta">Role: Aerodynamics/RF Engineering Intern @ Lockheed Martin</p> {/* Updated role title based on resume */}
+    <script>
+        // --- Accordion Logic ---
+        const projectItems = document.querySelectorAll('.project-item');
 
-      <p>
-        <strong>Problem:</strong> The Canadian Surface Combatant (CSC) program needed to validate safe helicopter landing conditions, but it was unknown how hot turbine exhaust would affect the flight deck under dozens of different headwind angles, engine throttles, and outtake arrangements. [cite_start]The team lacked the critical thermal data required for RANS/LES simulations[cite: 356].
-      </p>
-      <p>
-        <strong>My Solution:</strong> I developed the foundational thermodynamic model to solve this problem. [cite_start]I first calculated the previously unknown engine exhaust mass flow rates and temperatures for all required scenarios, working with vendors to establish proper power distribution[cite: 356]. [cite_start]Using this data, I developed, meshed, and analyzed over 20 CSC ship model iterations in ANSYS Fluent to model all combinations of headwind angles and engine uptake conditions[cite: 358]. [cite_start]I also collaborated with the RF team on antenna coupling analyses[cite: 357].
-      </p>
-      <p>
-        <strong>Results:</strong> My simulations generated thermal contour maps showing the maximum temperature over the flight deck for every possible condition. I consolidated this complex data into a single, concise 'logic board' that was delivered to vendors, enabling them to validate safe helicopter landing envelopes for the multi-billion dollar program.
-      </p>
-    </article>
+        projectItems.forEach(item => {
+            const summary = item.querySelector('.project-summary');
+            summary.addEventListener('click', () => {
+                // Close other open items
+                projectItems.forEach(otherItem => {
+                    if (otherItem !== item && otherItem.classList.contains('active')) {
+                        otherItem.classList.remove('active');
+                         // If closing, stop its slideshow timer
+                        const otherProjectId = otherItem.getAttribute('data-project-id');
+                        stopAutoSlide(otherProjectId);
+                    }
+                });
+                // Toggle the clicked item
+                item.classList.toggle('active');
 
-    <article class="card">
-      <img src="images/lockheed-los-analysis.png" alt="Line-of-sight analysis diagram for naval ship">
+                // Start or stop slideshow timer for the clicked item
+                 const projectId = item.getAttribute('data-project-id');
+                if (item.classList.contains('active')) {
+                    startAutoSlide(projectId);
+                     // Show the first slide and caption immediately on open
+                    showSlide(projectId, 0);
+                } else {
+                    stopAutoSlide(projectId);
+                }
+            });
+        });
 
-      <h3>Company-Wide Line-of-Sight (LOS) Process Overhaul</h3>
-      <p class="meta">Role: Mechanical Design TPM Intern @ Lockheed Martin</p> {/* Role assumed based on other LM entry */}
+        // --- Slideshow Logic ---
+        const slideshowData = {}; // Store slide indices and timers
 
-      <p>
-        [cite_start]<strong>Problem:</strong> The existing company procedure for conducting line-of-sight (LOS) analysis for critical topside equipment on the Canadian Surface Combatant (CSC) program contained significant discrepancies, leading to inaccurate results and potential rework[cite: 352].
-      </p>
-      <p>
-        [cite_start]<strong>My Solution:</strong> After identifying the root cause of the errors, I led the complete redevelopment of a new, more accurate LOS analysis procedure using SolidWorks[cite: 352]. [cite_start]I created all documentation for the new standard and personally trained other engineers on its proper implementation to ensure company-wide adoption[cite: 352].
-      </p>
-      <p>
-        [cite_start]<strong>Results:</strong> The new procedure I developed was formally adopted and **improved process accuracy by over 8%**[cite: 352]. This enhancement reduced the risk of costly design flaws and is now the standard method used for the multi-billion dollar CSC program.
-      </p>
-    </article>
+        // Function to initialize slideshow data for a project
+        function initializeSlideshow(projectId) {
+            if (!slideshowData[projectId]) {
+                 const projectItem = document.querySelector(`.project-item[data-project-id="${projectId}"]`);
+                 const slides = projectItem.querySelectorAll('.project-details .slide');
+                 const captions = Array.from(slides).map(slide => slide.querySelector('img').alt || ''); // Use alt text as caption
 
-    <article class="card">
-      <img src="images/rtx-automation.png" alt="Process automation flowchart for SAP data extraction">
-    
-      <h3>Production Line Data Automation</h3>
-      <p class="meta">Role: Aerospace Engineering and Logistics Intern @ RTX (Pratt & Whitney)</p>
-    
-      <p>
-        [cite_start]<strong>Problem:</strong> Strategic decisions for optimizing the PW800 production line were dependent on a highly inefficient, manual data-pulling process from SAP[cite: 362]. This process was slow, prone to human error, and consumed significant engineering time.
-      </p>
-      <p>
-        <strong>My Solution:</strong> I took the initiative to single-handedly engineer a permanent automated solution. [cite_start]I developed 13 complex Visual Basic macros from scratch that interfaced directly with SAP, looped through hundreds of processes, and automatically transformed the raw data[cite: 363]. The script features robust error handling and outputs a concise, executive-ready spreadsheet for immediate analysis.
-      </p>
-      <p>
-        [cite_start]<strong>Results:</strong> My script completely eliminated the manual process, **cutting company data refresh time by 8 hours per week** [cite: 363] and significantly increasing data accuracy. The solution was resiliency-tested and implemented as the new company standard, with clear documentation for maintenance and future use.
-      </p>
-    </article>
-      
-  </section>
+                slideshowData[projectId] = {
+                    slideIndex: 0,
+                    slides: slides,
+                    captions: captions,
+                    timer: null,
+                    captionElement: projectItem.querySelector('.project-details .caption-container')
+                };
+            }
+        }
 
-  <footer>
-    <p>
-      <a href="images/resume.pdf" target="_blank"> Download Resume</a> ·
-      <a href="mailto:thomaswatson1188@gmail.com">Email Me</a> ·
-      <a href="https://linkedin.com/in/thomaswatsonn" target="_blank">LinkedIn</a>
-    </p>
-    <p>© 2025 Thomas Watson</p>
-  </footer>
+        // Function to show a specific slide
+        function showSlide(projectId, index) {
+            initializeSlideshow(projectId); // Ensure data is ready
+            const data = slideshowData[projectId];
+            if (!data || !data.slides || data.slides.length === 0) return; // Exit if no slides
+
+            // Wrap index around
+            if (index >= data.slides.length) { index = 0; }
+            if (index < 0) { index = data.slides.length - 1; }
+
+            // Hide all slides
+            data.slides.forEach(slide => slide.classList.remove('active'));
+
+            // Show the target slide
+            data.slides[index].classList.add('active');
+            data.slideIndex = index;
+
+            // Update caption
+             if (data.captionElement) {
+                data.captionElement.textContent = data.captions[index] || ''; // Show caption or empty string
+            }
+        }
+
+        // Function to change slide manually (next/prev)
+        function manualSlideChange(projectId, n) {
+             initializeSlideshow(projectId);
+            const data = slideshowData[projectId];
+             stopAutoSlide(projectId); // Stop auto slide on manual interaction
+            showSlide(projectId, data.slideIndex + n);
+            // Optionally restart timer after a delay, or require opening again
+            // startAutoSlide(projectId); // Or keep it stopped
+        }
+
+        // Function to start automatic sliding
+        function startAutoSlide(projectId) {
+            initializeSlideshow(projectId);
+            const data = slideshowData[projectId];
+            if (!data || data.slides.length <= 1) return; // Don't auto-slide if 1 or 0 slides
+
+            stopAutoSlide(projectId); // Clear any existing timer first
+             data.timer = setInterval(() => {
+                showSlide(projectId, data.slideIndex + 1);
+            }, 5000); // 5 seconds
+        }
+
+        // Function to stop automatic sliding
+        function stopAutoSlide(projectId) {
+            if (slideshowData[projectId] && slideshowData[projectId].timer) {
+                clearInterval(slideshowData[projectId].timer);
+                slideshowData[projectId].timer = null;
+            }
+        }
+
+         // Initialize first slide caption on page load (optional, useful if one is open by default)
+         // showSlide('tesla-cell', 0); // Example: if you want the first one open
+    </script>
 
 </body>
 </html>
