@@ -36,81 +36,48 @@
             background-color: var(--card-background); border: 1px solid var(--border-light);
             border-radius: 18px; margin-bottom: 30px; overflow: hidden;
             box-shadow: 0 4px 15px rgba(0,0,0,0.06);
-            transition: box-shadow 0.3s ease, margin-bottom 0.3s ease;
+            transition: box-shadow 0.3s ease, margin-bottom 0.4s ease, border-color 0.4s ease, background-color 0.4s ease; /* Added more transitions */
         }
+
         /* --- Project Preview (Clickable Header) --- */
         .project-preview {
             padding: 20px; cursor: pointer; display: flex; align-items: center; gap: 20px;
-            transition: background-color 0.2s ease; position: relative;
-            /* Transition for hiding/showing */
-            transition: opacity 0.4s ease, max-height 0.4s ease, padding 0.4s ease;
-            max-height: 200px; /* Or enough height for preview */
-            opacity: 1;
+            transition: background-color 0.2s ease, opacity 0.4s ease, max-height 0.4s ease, padding 0.4s ease; /* Added opacity/height/padding */
+            position: relative;
+            max-height: 200px; opacity: 1;
         }
         .project-preview:hover { background-color: #fcfcfc; }
 
         /* Style to hide preview when another item is active */
         .project-list.item-active .project-item:not(.active) .project-preview {
-            opacity: 0;
-            max-height: 0;
-            padding-top: 0;
-            padding-bottom: 0;
-            pointer-events: none; /* Prevent clicking hidden items */
-             border-width: 0; /* Optional: hide border too */
-             margin-bottom: 0; /* Collapse margin */
+            opacity: 0; max-height: 0; padding-top: 0; padding-bottom: 0;
+            pointer-events: none; border-width: 0; margin-bottom: 0;
         }
-         /* Smooth margin collapse for non-active items */
         .project-list.item-active .project-item:not(.active) {
-             margin-bottom: 0;
-             box-shadow: none;
-             border-color: transparent;
-             background-color: transparent;
+             margin-bottom: 0; box-shadow: none; border-color: transparent; background-color: transparent;
          }
 
-
-        .preview-image-container { /* NEW container for mini-slideshow */
+        .preview-image-container {
             width: 100px; height: 100px; border-radius: 12px; overflow: hidden;
-            flex-shrink: 0; position: relative; /* For absolute positioned images */
-            background-color: #eee; /* BG while images load */
+            flex-shrink: 0; position: relative; background-color: #eee;
         }
         .preview-image-container img {
             display: block; width: 100%; height: 100%; object-fit: cover;
-            position: absolute; top: 0; left: 0;
-            opacity: 0; /* Hidden by default */
-            transition: opacity 0.8s ease-in-out; /* Fade transition */
+            position: absolute; top: 0; left: 0; opacity: 0;
+            transition: opacity 0.8s ease-in-out;
         }
-        .preview-image-container img.active {
-            opacity: 1; /* Show active image */
-        }
+        .preview-image-container img.active { opacity: 1; }
 
-        .preview-text { flex-grow: 1; position: relative; /* For logo positioning */ }
-        .project-preview h3 {
-            font-size: 1.25rem; font-weight: 500; margin-bottom: 5px; color: var(--text-primary);
-            padding-right: 40px; /* Space for the absolute logo */
-        }
+        .preview-text { flex-grow: 1; position: relative; }
+        .project-preview h3 { font-size: 1.25rem; font-weight: 500; margin-bottom: 5px; color: var(--text-primary); padding-right: 40px; }
         .project-preview .meta { font-size: 0.9rem; color: var(--text-secondary); font-style: italic; font-weight: 300; }
-
-        .preview-company-logo { /* NEW Logo style */
-            position: absolute;
-            top: 0; /* Align with top of text */
-            right: 0; /* Align to right of text block */
-            height: 20px; /* Small logo */
-            max-width: 80px;
-            opacity: 0.4;
-             filter: grayscale(100%);
-        }
-
-        .preview-icon { /* Using a chevron */
-             display: inline-block; /* Allows transform */
-             font-size: 1.5rem; /* Make slightly larger */
-             color: var(--text-secondary);
+        .preview-company-logo { position: absolute; top: 0; right: 0; height: 20px; max-width: 80px; opacity: 0.4; filter: grayscale(100%); }
+        .preview-icon {
+             display: inline-block; font-size: 1.5rem; color: var(--text-secondary);
              transition: transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
-             margin-left: 15px; flex-shrink: 0; line-height: 1; /* Better vertical alignment */
-             transform: rotate(0deg); /* Start pointing down */
+             margin-left: 15px; flex-shrink: 0; line-height: 1; transform: rotate(0deg);
         }
-        .project-item.active .preview-icon {
-            transform: rotate(-180deg); /* Rotate up */
-        }
+        .project-item.active .preview-icon { transform: rotate(-180deg); }
 
         /* --- Project Details (Hidden Content) --- */
         .project-details {
@@ -128,17 +95,34 @@
         .project-description p b { font-weight: 500; color: var(--text-primary); }
 
         /* --- Slideshow Styles --- */
-        .slideshow-container { /* ... existing styles ... */ }
-        .slide { /* ... existing styles ... */ }
-        .slide img { /* ... existing styles ... */ }
-        .slide.active { /* ... existing styles ... */ }
-        @keyframes fadeEffect { /* ... existing styles ... */ }
-        .prev, .next { /* ... existing styles ... */ }
-        .next { /* ... existing styles ... */ }
-        .prev:hover, .next:hover { /* ... existing styles ... */ }
+        .slideshow-container {
+             position: relative; max-width: 100%; margin: 0 auto; overflow: hidden;
+             border-radius: 12px; background-color: #eee;
+        }
+        .slide { display: none; width: 100%; animation: fadeEffect 0.8s ease; }
+        .slide img {
+            display: block; width: 100%; height: auto; /* Allow natural height */
+            max-height: 550px; /* Increased max-height */
+            object-fit: cover; /* Still crops if too tall */
+        }
+        .slide.active { display: block; }
+        @keyframes fadeEffect { from { opacity: 0.4; } to { opacity: 1; } }
+        .prev, .next {
+             cursor: pointer; position: absolute; top: 50%; transform: translateY(-50%); width: auto;
+             padding: 16px; color: white; font-weight: bold; font-size: 20px;
+             background-color: rgba(0, 0, 0, 0.3); border-radius: 0 3px 3px 0; user-select: none;
+             transition: background-color 0.3s ease;
+         }
+        .next { right: 0; border-radius: 3px 0 0 3px; }
+        .prev:hover, .next:hover { background-color: rgba(0, 0, 0, 0.6); }
 
         /* --- Caption Styles --- */
-        .caption-container { /* ... existing styles ... */ }
+        .caption-container {
+             text-align: center; /* Centered text */
+             padding: 10px 0 5px 0; color: var(--text-secondary);
+             font-size: 0.9rem; min-height: 1.5em; font-style: italic;
+             transition: opacity 0.15s ease-in-out;
+        }
 
         /* --- Responsive Adjustments --- */
         @media (max-width: 768px) {
@@ -147,12 +131,14 @@
             .project-preview { padding: 15px; gap: 15px; }
             .project-item.active .project-details { padding: 20px; }
              .preview-image-container { width: 70px; height: 70px; border-radius: 8px;}
-            .project-preview h3 { font-size: 1.1rem; padding-right: 30px; } /* Adjust padding for smaller logo */
+            .project-preview h3 { font-size: 1.1rem; padding-right: 30px; }
             .project-preview .meta { font-size: 0.85rem;}
              .preview-company-logo { height: 16px; }
              .preview-icon { margin-left: 10px; font-size: 1.2rem; }
             .prev, .next { font-size: 16px; padding: 12px; }
+            .slide img { max-height: 400px; } /* Adjust max height for mobile */
         }
+
     </style>
 </head>
 <body>
@@ -165,16 +151,17 @@
     <ul class="project-list">
         <li class="project-item" data-project-id="tesla-cell">
             <div class="project-preview">
-                <div class="preview-image-container"> <img src="images/tesla-cybertruck-seats.png" alt="Custom rejection chute CAD model" class="active">
+                <div class="preview-image-container">
+                    <img src="images/tesla-cybertruck-seats.png" alt="Custom rejection chute CAD model" class="active">
                     <img src="images/tesla-robot-arm.jpg" alt="Fanuc robot arm in assembly cell">
                     <img src="images/tesla-cell-layout.png" alt="Assembly cell layout diagram">
                 </div>
                 <div class="preview-text">
                     <h3>Cybertruck Robotic Cell Re-Design</h3>
                     <p class="meta">Role: Equipment Engineering Intern @ Tesla</p>
-                     <img src="images/logo-tesla.png" alt="Tesla Logo" class="preview-company-logo">
-                </div>
-                <span class="preview-icon">›</span> </div>
+                     <img src="images/logo-tesla.png" alt="" class="preview-company-logo"> </div>
+                <span class="preview-icon">›</span>
+            </div>
             <div class="project-details">
                 <div class="slideshow-container">
                     <div class="slide active"><img src="images/tesla-cybertruck-seats.png" alt="Custom rejection chute CAD model"></div>
@@ -183,7 +170,8 @@
                     <a class="prev" onclick="manualSlideChange('tesla-cell', -1)">&#10094;</a>
                     <a class="next" onclick="manualSlideChange('tesla-cell', 1)">&#10095;</a>
                 </div>
-                <div class="caption-container"></div>
+                <div class="caption-container">
+                    </div>
                 <div class="project-description">
                     <p><strong>Problem:</strong> A key robotic cell on the Cybertruck production line was improperly disposing of rejected seat structures, dropping them on the floor. This resulted in hundreds of thousands of dollars in annual material scrap, frequent production downtime for manual retrieval, and created a safety hazard for associates entering the cell.</p>
                     <p><strong>My Solution:</strong> As the sole owner of this project, I engineered a complete mechanical and robotics solution. I designed a custom, non-intrusive rejection chute from the ground up using Solidworks and Siemens NX, ensuring it integrated seamlessly into the existing cell's tight footprint. I then single-handedly reprogrammed the entire Fanuc robotic logic, rewriting the pathing to flawlessly deposit rejected parts into the new assembly.</p>
@@ -197,11 +185,11 @@
                  <div class="preview-image-container">
                     <img src="images/lockheed-system-integration.png" alt="Cross-functional system integration diagram" class="active">
                     <img src="images/csc-ship-model.jpg" alt="CAD Model of CSC Ship">
-                    </div>
+                 </div>
                 <div class="preview-text">
                     <h3>Advanced Classified System Integration Lead</h3>
                     <p class="meta">Role: Mechanical Design TPM Intern @ Lockheed Martin</p>
-                    <img src="images/logo-lockheed.png" alt="Lockheed Martin Logo" class="preview-company-logo">
+                    <img src="images/logo-lockheed.png" alt="" class="preview-company-logo">
                 </div>
                 <span class="preview-icon">›</span>
             </div>
@@ -226,11 +214,11 @@
                  <div class="preview-image-container">
                      <img src="images/lockheed-topside-design.png" alt="CAD rendering of naval ship topside equipment layout" class="active">
                      <img src="images/feasibility-study-example.png" alt="Example Feasibility Study Diagram">
-                     </div>
+                 </div>
                 <div class="preview-text">
                      <h3>CSC Topside Mechanical Design & Integration</h3>
                     <p class="meta">Role: Mechanical Design TPM Intern @ Lockheed Martin</p>
-                    <img src="images/logo-lockheed.png" alt="Lockheed Martin Logo" class="preview-company-logo">
+                    <img src="images/logo-lockheed.png" alt="" class="preview-company-logo">
                 </div>
                  <span class="preview-icon">›</span>
             </div>
@@ -260,7 +248,7 @@
                  <div class="preview-text">
                     <h3>Helicopter Landing Thermal Analysis (CFD)</h3>
                     <p class="meta">Role: Aerodynamics/RF Engineering Intern @ Lockheed Martin</p>
-                    <img src="images/logo-lockheed.png" alt="Lockheed Martin Logo" class="preview-company-logo">
+                    <img src="images/logo-lockheed.png" alt="" class="preview-company-logo">
                  </div>
                 <span class="preview-icon">›</span>
             </div>
@@ -286,11 +274,11 @@
                  <div class="preview-image-container">
                     <img src="images/lockheed-los-analysis.png" alt="Line-of-sight analysis diagram for naval ship" class="active">
                      <img src="images/los-discrepancy-example.png" alt="Diagram showing LOS analysis discrepancy">
-                     </div>
+                 </div>
                 <div class="preview-text">
                      <h3>Company-Wide Line-of-Sight (LOS) Process Overhaul</h3>
                      <p class="meta">Role: Mechanical Design TPM Intern @ Lockheed Martin</p>
-                     <img src="images/logo-lockheed.png" alt="Lockheed Martin Logo" class="preview-company-logo">
+                     <img src="images/logo-lockheed.png" alt="" class="preview-company-logo">
                 </div>
                  <span class="preview-icon">›</span>
              </div>
@@ -320,7 +308,7 @@
                 <div class="preview-text">
                     <h3>Production Line Data Automation</h3>
                     <p class="meta">Role: Aerospace Engineering and Logistics Intern @ RTX (Pratt & Whitney)</p>
-                     <img src="images/logo-rtx.png" alt="RTX Logo" class="preview-company-logo">
+                     <img src="images/logo-rtx.png" alt="" class="preview-company-logo">
                 </div>
                  <span class="preview-icon">›</span>
              </div>
@@ -352,93 +340,95 @@
     </footer>
 
     <script>
+        // --- Accordion Logic & Slideshow Data ---
         const projectItems = document.querySelectorAll('.project-item');
         const slideshowData = {};
-        const previewSlideshowData = {}; // Separate data for preview slideshows
+        const previewSlideshowData = {};
 
-        // --- Initialize Data for Both Slideshows ---
-        function initializeSlideshow(projectId) { /* ... (Same as before) ... */ }
+        // --- Initialize Data ---
+        function initializeSlideshow(projectId) {
+            if (!slideshowData[projectId]) {
+                 const projectItem = document.querySelector(`.project-item[data-project-id="${projectId}"]`);
+                 const slides = projectItem.querySelectorAll('.project-details .slide');
+                 const captions = Array.from(slides).map(slide => slide.querySelector('img').alt || ''); // Use alt text
+                slideshowData[projectId] = {
+                    slideIndex: 0, slides: slides, captions: captions, timer: null,
+                    captionElement: projectItem.querySelector('.project-details .caption-container')
+                };
+            }
+        }
         function initializePreviewSlideshow(projectId) {
             if (!previewSlideshowData[projectId]) {
                  const projectItem = document.querySelector(`.project-item[data-project-id="${projectId}"]`);
                  const previewContainer = projectItem.querySelector('.preview-image-container');
                  const previewImages = previewContainer.querySelectorAll('img');
                 previewSlideshowData[projectId] = {
-                    previewIndex: 0,
-                    previewImages: previewImages,
-                    previewTimer: null
+                    previewIndex: 0, previewImages: previewImages, previewTimer: null
                 };
             }
         }
 
         // --- Show Specific Preview Image ---
-        function showPreviewImage(projectId, index) {
-            initializePreviewSlideshow(projectId);
-            const data = previewSlideshowData[projectId];
-            if (!data || !data.previewImages || data.previewImages.length === 0) return;
-
-            if (index >= data.previewImages.length) { index = 0; }
-            if (index < 0) { index = data.previewImages.length - 1; }
-
-            data.previewImages.forEach(img => img.classList.remove('active'));
-            data.previewImages[index].classList.add('active');
-            data.previewIndex = index;
+        function showPreviewImage(projectId, index) { /* ... (Same as before) ... */
+             initializePreviewSlideshow(projectId);
+             const data = previewSlideshowData[projectId];
+             if (!data || !data.previewImages || data.previewImages.length === 0) return;
+             if (index >= data.previewImages.length) { index = 0; }
+             if (index < 0) { index = data.previewImages.length - 1; }
+             data.previewImages.forEach(img => img.classList.remove('active'));
+             data.previewImages[index].classList.add('active');
+             data.previewIndex = index;
         }
 
         // --- Start/Stop Preview Auto Slide ---
-        function startPreviewAutoSlide(projectId) {
+        function startPreviewAutoSlide(projectId) { /* ... (Same as before) ... */
              initializePreviewSlideshow(projectId);
              const data = previewSlideshowData[projectId];
-             if (!data || data.previewImages.length <= 1) return; // Only slide if multiple images
-
-             stopPreviewAutoSlide(projectId); // Clear existing timer
-             // Show first image immediately
-             showPreviewImage(projectId, 0);
-             data.previewTimer = setInterval(() => {
-                 showPreviewImage(projectId, data.previewIndex + 1);
-             }, 3000); // Change preview image every 3 seconds
+             if (!data || data.previewImages.length <= 1) return;
+             stopPreviewAutoSlide(projectId);
+             showPreviewImage(projectId, 0); // Start immediately
+             data.previewTimer = setInterval(() => { showPreviewImage(projectId, data.previewIndex + 1); }, 3000);
         }
-
-        function stopPreviewAutoSlide(projectId) {
+        function stopPreviewAutoSlide(projectId) { /* ... (Same as before) ... */
              if (previewSlideshowData[projectId] && previewSlideshowData[projectId].previewTimer) {
                  clearInterval(previewSlideshowData[projectId].previewTimer);
                  previewSlideshowData[projectId].previewTimer = null;
              }
         }
 
-
-        // --- Full Slideshow Logic (Unchanged) ---
+        // --- Full Slideshow Logic ---
         function showSlide(projectId, index) { /* ... (Same as before) ... */ }
-        function manualSlideChange(projectId, n) { /* ... (Same as before, BUT also stops preview timer) ... */
-             initializeSlideshow(projectId);
+        function manualSlideChange(projectId, n) { /* ... (Same as before) ... */ }
+        function startAutoSlide(projectId) { /* ... (Now Corrected) ... */
+             initializeSlideshow(projectId); // Ensure initialized
             const data = slideshowData[projectId];
-             stopAutoSlide(projectId); // Stop main timer
-             stopPreviewAutoSlide(projectId); // Stop preview timer too
-            showSlide(projectId, data.slideIndex + n);
-             setTimeout(() => startAutoSlide(projectId), 8000);
-         }
-        function startAutoSlide(projectId) { /* ... (Same as before) ... */ }
+            if (!data || data.slides.length <= 1) return; // Only slide if multiple images
+            stopAutoSlide(projectId); // Clear existing timer first
+            // Start the interval
+             data.timer = setInterval(() => {
+                showSlide(projectId, data.slideIndex + 1); // Increment index here
+            }, 5000); // Change every 5 seconds
+        }
         function stopAutoSlide(projectId) { /* ... (Same as before) ... */ }
 
-        // --- Accordion Click Handler (Modified) ---
+        // --- Accordion Click Handler ---
         projectItems.forEach(item => {
             const summary = item.querySelector('.project-preview');
-             const projectId = item.getAttribute('data-project-id');
+            const projectId = item.getAttribute('data-project-id');
 
-             // Start preview slideshows on load
-             startPreviewAutoSlide(projectId);
+            startPreviewAutoSlide(projectId); // Start all previews initially
 
             summary.addEventListener('click', () => {
                 const wasActive = item.classList.contains('active');
-                const list = item.closest('.project-list'); // Get the parent list
+                const list = item.closest('.project-list');
 
                 // Close others first
                 projectItems.forEach(otherItem => {
                     if (otherItem !== item && otherItem.classList.contains('active')) {
                         otherItem.classList.remove('active');
                         const otherProjectId = otherItem.getAttribute('data-project-id');
-                        stopAutoSlide(otherProjectId);
-                        startPreviewAutoSlide(otherProjectId); // Restart preview slide for closed item
+                        stopAutoSlide(otherProjectId); // Stop main slideshow
+                        startPreviewAutoSlide(otherProjectId); // Restart preview
                     }
                 });
 
@@ -446,15 +436,15 @@
                 item.classList.toggle('active');
 
                 if (!wasActive) { // Item is NOW active/open
-                    list.classList.add('item-active'); // Add class to list to hide others
-                    stopPreviewAutoSlide(projectId); // Stop preview slide
+                    list.classList.add('item-active');
+                    stopPreviewAutoSlide(projectId); // Stop THIS preview slide
                     initializeSlideshow(projectId);
-                    showSlide(projectId, 0);
-                    startAutoSlide(projectId); // Start main slide
+                    showSlide(projectId, 0); // Show first slide immediately
+                    startAutoSlide(projectId); // Start main slide timer
                 } else { // Item is NOW inactive/closed
-                    list.classList.remove('item-active'); // Remove class from list
-                    stopAutoSlide(projectId); // Stop main slide
-                    startPreviewAutoSlide(projectId); // Restart preview slide
+                    list.classList.remove('item-active');
+                    stopAutoSlide(projectId); // Stop main slide timer
+                    startPreviewAutoSlide(projectId); // Restart preview slide timer
                 }
             });
         });
@@ -463,7 +453,6 @@
          const styleSheet = document.styleSheets[0];
          try {
              styleSheet.insertRule('.caption-container { transition: opacity 0.15s ease-in-out; }', styleSheet.cssRules.length);
-             // Add rule for hiding preview transition
              styleSheet.insertRule('.project-list.item-active .project-item:not(.active) { transition: opacity 0.4s ease, max-height 0.4s ease, margin-bottom 0.4s ease, border-color 0.4s ease, background-color 0.4s ease, box-shadow 0.4s ease; }', styleSheet.cssRules.length);
          } catch (e) { console.error("Could not insert CSS rule: ", e); }
 
