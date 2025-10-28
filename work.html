@@ -70,9 +70,7 @@
         .project-item.active .project-details { max-height: 2500px; padding-top: 30px; padding-bottom: 30px; border-top-color: var(--border-light); }
         .project-description { margin-top: 30px; }
         .project-description p { margin-bottom: 15px; color: #495057; font-weight: 300; }
-        /* Style for blue labels */
         .project-description strong { font-weight: 600; color: var(--primary-blue); display: block; margin-bottom: 5px; }
-        /* Style for bold text within paragraphs (not blue) */
         .project-description p b { font-weight: 500; color: var(--text-primary); }
          .details-links { margin-top: 25px; }
 
@@ -173,7 +171,7 @@
             <div class="project-preview">
                  <div class="preview-image-container">
                      <img src="images/lockheed-topside-design.png" alt="CAD rendering of naval ship topside equipment layout" class="active">
-                     <img src="images/LOS.png" alt="SolidWorks Line-of-Sight (LOS) dome analysis tool">
+                     <img src="images/los.png" alt="SolidWorks Line-of-Sight (LOS) dome analysis tool">
                      <img src="images/rf_pattern.png" alt="Example RF antenna pattern analysis consideration">
                  </div>
                 <div class="preview-text">
@@ -186,7 +184,7 @@
             <div class="project-details">
                 <div class="slideshow-container">
                     <div class="slide active"><img src="images/lockheed-topside-design.png" alt="CAD rendering of naval ship topside equipment layout"></div>
-                    <div class="slide"><img src="images/LOS.png" alt="SolidWorks Line-of-Sight (LOS) dome analysis tool"></div>
+                    <div class="slide"><img src="images/los.png" alt="SolidWorks Line-of-Sight (LOS) dome analysis tool"></div>
                      <div class="slide"><img src="images/rf_pattern.png" alt="Example RF antenna pattern analysis consideration"></div>
                     <a class="prev" onclick="manualSlideChange('lm-topside', -1)">&#10094;</a>
                     <a class="next" onclick="manualSlideChange('lm-topside', 1)">&#10095;</a>
@@ -269,12 +267,12 @@
         <li class="project-item" data-project-id="rtx-auto">
              <div class="project-preview">
                   <div class="preview-image-container">
-                     <img src="images/rtx-automation.png" alt="Process automation flowchart for SAP data extraction" class="active">
+                     <img src="images/powerbi.png" alt="Data flow: Python to VBA to Power BI" class="active">
+                     <img src="images/rtx-automation.png" alt="Process automation flowchart for SAP data extraction">
                      <img src="images/vba-macro-example.png" alt="Example VBA code snippet">
-                     <img src="images/sap-screenshot.png" alt="Example SAP Interface">
                   </div>
                 <div class="preview-text">
-                    <h3>PW800 Turbine Blade Manufacturing Automation</h3>
+                    <h3>PW800 Manufacturing Automation Dashboard</h3>
                     <p class="meta">Role: Aerospace Engineering and Logistics Intern @ RTX (Pratt & Whitney)</p>
                      <img src="images/logo-rtx.png" alt="" class="preview-company-logo">
                 </div>
@@ -282,18 +280,18 @@
              </div>
             <div class="project-details">
                  <div class="slideshow-container">
-                    <div class="slide active"><img src="images/rtx-automation.png" alt="Process automation flowchart for SAP data extraction"></div>
-                     <div class="slide"><img src="images/vba-macro-example.png" alt="Example VBA code snippet"></div>
-                     <div class="slide"><img src="images/sap-screenshot.png" alt="Example SAP Interface"></div>
+                     <div class="slide active"><img src="images/powerbi.png" alt="Data flow: Python to VBA to Power BI"></div>
+                    <div class="slide"><img src="images/rtx-automation.png" alt="Process automation flowchart for SAP data extraction"></div>
+                    <div class="slide"><img src="images/vba-macro-example.png" alt="Example VBA code snippet"></div>
                     <a class="prev" onclick="manualSlideChange('rtx-auto', -1)">&#10094;</a>
                     <a class="next" onclick="manualSlideChange('rtx-auto', 1)">&#10095;</a>
                 </div>
                  <div class="caption-container"></div>
                  <div class="project-description">
-                    <p><strong>Problem:</strong> Strategic decisions for optimizing the PW800 production line were dependent on a highly inefficient, manual data-pulling process from SAP. This process was slow, prone to human error, and consumed significant engineering time.</p>
-                    <p><strong>My Solution:</strong> I took the initiative to single-handedly engineer a permanent automated solution. I developed 13 complex Visual Basic macros from scratch that interfaced directly with SAP, looped through hundreds of processes, and automatically transformed the raw data. The script features robust error handling and outputs a concise, executive-ready spreadsheet for immediate analysis.</p>
-                    <p><strong>Results:</strong> My script completely eliminated the manual process, cutting company data refresh time by <b>8 hours per week</b> and significantly increasing data accuracy. The solution was resiliency-tested and implemented as the new company standard, with clear documentation for maintenance and future use.</p>
-                </div>
+                    <p><strong>Problem:</strong> Strategic decisions for the PW800 production line were hindered by outdated Python scripts with a non-technical (Jupyter Notebook) UI. This made vital manufacturing metrics from SAP inaccessible to robotics technicians and leadership, forcing a slow, manual data-pulling process that took <b>8 hours every week</b> and was prone to errors.</p>
+                    <p><strong>My Solution:</strong> I took the initiative to re-engineer the entire process. I <b>translated the core logic from the legacy Python scripts into robust VBA macros</b>, embedding them directly into Excel. This allowed technicians to run complex data queries from SAP by simply clicking a button. I then connected these automated Excel files to a <b>Power BI frontend</b>, creating an intuitive, user-friendly dashboard that updated automatically.</p>
+                    <p><strong>Results:</strong> The new system completely eliminated the manual data refresh process and provided live, accurate metrics to all stakeholders. The tool was adopted <b>company-wide by 5 cross-functional teams</b> (Engineering, Quality, Logistics, Technicians, and Leadership), making critical production data accessible for the first time and serving as the new baseline for strategic optimization.</p>
+                 </div>
             </div>
         </li>
     </ul>
