@@ -36,19 +36,17 @@
             background-color: var(--card-background); border: 1px solid var(--border-light);
             border-radius: 18px; margin-bottom: 30px; overflow: hidden;
             box-shadow: 0 4px 15px rgba(0,0,0,0.06);
-            transition: box-shadow 0.3s ease, margin-bottom 0.4s ease, border-color 0.4s ease, background-color 0.4s ease; /* Added more transitions */
+            transition: box-shadow 0.3s ease, margin-bottom 0.4s ease, border-color 0.4s ease, background-color 0.4s ease;
         }
 
         /* --- Project Preview (Clickable Header) --- */
         .project-preview {
             padding: 20px; cursor: pointer; display: flex; align-items: center; gap: 20px;
-            transition: background-color 0.2s ease, opacity 0.4s ease, max-height 0.4s ease, padding 0.4s ease; /* Added opacity/height/padding */
+            transition: background-color 0.2s ease, opacity 0.4s ease, max-height 0.4s ease, padding 0.4s ease;
             position: relative;
             max-height: 200px; opacity: 1;
         }
         .project-preview:hover { background-color: #fcfcfc; }
-
-        /* Style to hide preview when another item is active */
         .project-list.item-active .project-item:not(.active) .project-preview {
             opacity: 0; max-height: 0; padding-top: 0; padding-bottom: 0;
             pointer-events: none; border-width: 0; margin-bottom: 0;
@@ -56,27 +54,14 @@
         .project-list.item-active .project-item:not(.active) {
              margin-bottom: 0; box-shadow: none; border-color: transparent; background-color: transparent;
          }
-
-        .preview-image-container {
-            width: 100px; height: 100px; border-radius: 12px; overflow: hidden;
-            flex-shrink: 0; position: relative; background-color: #eee;
-        }
-        .preview-image-container img {
-            display: block; width: 100%; height: 100%; object-fit: cover;
-            position: absolute; top: 0; left: 0; opacity: 0;
-            transition: opacity 0.8s ease-in-out;
-        }
+        .preview-image-container { width: 100px; height: 100px; border-radius: 12px; overflow: hidden; flex-shrink: 0; position: relative; background-color: #eee; }
+        .preview-image-container img { display: block; width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 0.8s ease-in-out; }
         .preview-image-container img.active { opacity: 1; }
-
         .preview-text { flex-grow: 1; position: relative; }
         .project-preview h3 { font-size: 1.25rem; font-weight: 500; margin-bottom: 5px; color: var(--text-primary); padding-right: 40px; }
         .project-preview .meta { font-size: 0.9rem; color: var(--text-secondary); font-style: italic; font-weight: 300; }
         .preview-company-logo { position: absolute; top: 0; right: 0; height: 20px; max-width: 80px; opacity: 0.4; filter: grayscale(100%); }
-        .preview-icon {
-             display: inline-block; font-size: 1.5rem; color: var(--text-secondary);
-             transition: transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
-             margin-left: 15px; flex-shrink: 0; line-height: 1; transform: rotate(0deg);
-        }
+        .preview-icon { display: inline-block; font-size: 1.5rem; color: var(--text-secondary); transition: transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1); margin-left: 15px; flex-shrink: 0; line-height: 1; transform: rotate(0deg); }
         .project-item.active .preview-icon { transform: rotate(-180deg); }
 
         /* --- Project Details (Hidden Content) --- */
@@ -85,60 +70,33 @@
             transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1), padding-top 0.6s cubic-bezier(0.4, 0, 0.2, 1), padding-bottom 0.6s cubic-bezier(0.4, 0, 0.2, 1);
             border-top: 1px solid transparent; padding: 0 30px;
         }
-        .project-item.active .project-details {
-            max-height: 2500px; padding-top: 30px; padding-bottom: 30px;
-            border-top-color: var(--border-light);
-        }
+        .project-item.active .project-details { max-height: 2500px; padding-top: 30px; padding-bottom: 30px; border-top-color: var(--border-light); }
         .project-description { margin-top: 30px; }
         .project-description p { margin-bottom: 15px; color: #495057; font-weight: 300; }
         .project-description strong { font-weight: 600; color: var(--primary-blue); display: block; margin-bottom: 5px; }
         .project-description p b { font-weight: 500; color: var(--text-primary); }
 
         /* --- Slideshow Styles --- */
-        .slideshow-container {
-             position: relative; max-width: 100%; margin: 0 auto; overflow: hidden;
-             border-radius: 12px; background-color: #eee;
-        }
+        .slideshow-container { position: relative; max-width: 100%; margin: 0 auto; overflow: hidden; border-radius: 12px; background-color: #eee; }
         .slide { display: none; width: 100%; animation: fadeEffect 0.8s ease; }
-        .slide img {
-            display: block; width: 100%; height: auto; /* Allow natural height */
-            max-height: 550px; /* Increased max-height */
-            object-fit: cover; /* Still crops if too tall */
-        }
+        .slide img { display: block; width: 100%; height: auto; max-height: 550px; object-fit: cover; }
         .slide.active { display: block; }
         @keyframes fadeEffect { from { opacity: 0.4; } to { opacity: 1; } }
-        .prev, .next {
-             cursor: pointer; position: absolute; top: 50%; transform: translateY(-50%); width: auto;
-             padding: 16px; color: white; font-weight: bold; font-size: 20px;
-             background-color: rgba(0, 0, 0, 0.3); border-radius: 0 3px 3px 0; user-select: none;
-             transition: background-color 0.3s ease;
-         }
+        .prev, .next { cursor: pointer; position: absolute; top: 50%; transform: translateY(-50%); width: auto; padding: 16px; color: white; font-weight: bold; font-size: 20px; background-color: rgba(0, 0, 0, 0.3); border-radius: 0 3px 3px 0; user-select: none; transition: background-color 0.3s ease; }
         .next { right: 0; border-radius: 3px 0 0 3px; }
         .prev:hover, .next:hover { background-color: rgba(0, 0, 0, 0.6); }
 
         /* --- Caption Styles --- */
-        .caption-container {
-             text-align: center; /* Centered text */
-             padding: 10px 0 5px 0; color: var(--text-secondary);
-             font-size: 0.9rem; min-height: 1.5em; font-style: italic;
-             transition: opacity 0.15s ease-in-out;
-        }
+        .caption-container { text-align: center; padding: 10px 0 5px 0; color: var(--text-secondary); font-size: 0.9rem; min-height: 1.5em; font-style: italic; transition: opacity 0.15s ease-in-out; }
 
         /* --- Responsive Adjustments --- */
         @media (max-width: 768px) {
-             body { padding: 30px 15px; }
-             header { margin-top: 60px; }
-            .project-preview { padding: 15px; gap: 15px; }
-            .project-item.active .project-details { padding: 20px; }
-             .preview-image-container { width: 70px; height: 70px; border-radius: 8px;}
-            .project-preview h3 { font-size: 1.1rem; padding-right: 30px; }
-            .project-preview .meta { font-size: 0.85rem;}
-             .preview-company-logo { height: 16px; }
-             .preview-icon { margin-left: 10px; font-size: 1.2rem; }
-            .prev, .next { font-size: 16px; padding: 12px; }
-            .slide img { max-height: 400px; } /* Adjust max height for mobile */
+             body { padding: 30px 15px; } header { margin-top: 60px; } .project-preview { padding: 15px; gap: 15px; }
+             .project-item.active .project-details { padding: 20px; } .preview-image-container { width: 70px; height: 70px; border-radius: 8px;}
+             .project-preview h3 { font-size: 1.1rem; padding-right: 30px; } .project-preview .meta { font-size: 0.85rem;}
+             .preview-company-logo { height: 16px; } .preview-icon { margin-left: 10px; font-size: 1.2rem; }
+             .prev, .next { font-size: 16px; padding: 12px; } .slide img { max-height: 400px; }
         }
-
     </style>
 </head>
 <body>
@@ -159,7 +117,8 @@
                 <div class="preview-text">
                     <h3>Cybertruck Robotic Cell Re-Design</h3>
                     <p class="meta">Role: Equipment Engineering Intern @ Tesla</p>
-                     <img src="images/logo-tesla.png" alt="" class="preview-company-logo"> </div>
+                     <img src="images/logo-tesla.png" alt="" class="preview-company-logo">
+                </div>
                 <span class="preview-icon">›</span>
             </div>
             <div class="project-details">
@@ -170,8 +129,7 @@
                     <a class="prev" onclick="manualSlideChange('tesla-cell', -1)">&#10094;</a>
                     <a class="next" onclick="manualSlideChange('tesla-cell', 1)">&#10095;</a>
                 </div>
-                <div class="caption-container">
-                    </div>
+                <div class="caption-container"></div>
                 <div class="project-description">
                     <p><strong>Problem:</strong> A key robotic cell on the Cybertruck production line was improperly disposing of rejected seat structures, dropping them on the floor. This resulted in hundreds of thousands of dollars in annual material scrap, frequent production downtime for manual retrieval, and created a safety hazard for associates entering the cell.</p>
                     <p><strong>My Solution:</strong> As the sole owner of this project, I engineered a complete mechanical and robotics solution. I designed a custom, non-intrusive rejection chute from the ground up using Solidworks and Siemens NX, ensuring it integrated seamlessly into the existing cell's tight footprint. I then single-handedly reprogrammed the entire Fanuc robotic logic, rewriting the pathing to flawlessly deposit rejected parts into the new assembly.</p>
@@ -202,9 +160,9 @@
                 </div>
                  <div class="caption-container"></div>
                  <div class="project-description">
-                    <p><strong>Problem:</strong> Tasked as the integration lead...</p>
-                    <p><strong>My Solution:</strong> I took extreme ownership...</p>
-                    <p><strong>Results:</strong> By proactively managing scope...</p>
+                     <p><strong>Problem:</strong> Tasked as the integration lead for a proprietary, mission-critical system on the CSC, I was responsible for navigating conflicting constraints from three external vendors and internal RF, electrical, and mechanical design teams. The challenge was to find a viable integration path that did not compromise system performance, ship layout, or classified design integrity.</p>
+                    <p><strong>My Solution:</strong> I took extreme ownership of the project, serving as the single point of contact for all 4 vendors and our internal cross-functional teams. I personally drove the technical design, using my mechanical background to model and propose design changes in SolidWorks to resolve physical, thermal, and RF constraints. My key responsibility was to distill highly technical, classified system requirements from a secure lab into actionable, unclassified design and manufacturing tasks for vendors, ensuring they could execute their scope without compromising project security.</p>
+                    <p><strong>Results:</strong> By proactively managing scope, schedule, and complex technical trades, I successfully aligned all stakeholders on a final, approved integration path. This cleared a major bottleneck for a critical program milestone, and my role as the bridge between technical engineering, vendor management, and program leadership ensured the project remained on schedule and met all system requirements.</p>
                 </div>
             </div>
         </li>
@@ -231,9 +189,9 @@
                 </div>
                 <div class="caption-container"></div>
                 <div class="project-description">
-                    <p><strong>Problem:</strong> Relocating critical topside equipment...</p>
-                    <p><strong>My Solution:</strong> I led the mechanical design effort...</p>
-                    <p><strong>Results:</strong> My mechanical design analyses...</p>
+                    <p><strong>Problem:</strong> Relocating critical topside equipment on the CSC required complex mechanical integration solutions to satisfy competing constraints from RF performance, thermal loads, structural integrity, aerodynamic factors, and vendor specifications. Failure to find mechanically sound placements would impact system functionality and project timelines.</p>
+                    <p><strong>My Solution:</strong> I led the mechanical design effort for several key equipment placements. This involved creating detailed feasibility studies and 3D models in SolidWorks to evaluate various integration options against all constraints. I collaborated closely with internal RF, Thermal, and Aero analysis teams to incorporate their findings into the mechanical designs, and worked directly with equipment vendors to ensure mechanical compatibility and address integration challenges. I then presented the technical trade-offs and proposed mechanically viable design solutions to management.</p>
+                    <p><strong>Results:</strong> My mechanical design analyses and cross-functional leadership resulted in the successful approval and implementation path for <b>9 critical equipment placements</b> within 4 months. This work ensured the mechanical integrity and functional performance of the topside systems while balancing complex interdisciplinary requirements.</p>
                 </div>
             </div>
         </li>
@@ -262,9 +220,9 @@
                 </div>
                 <div class="caption-container"></div>
                 <div class="project-description">
-                    <p><strong>Problem:</strong> The Canadian Surface Combatant (CSC) program...</p>
-                    <p><strong>My Solution:</strong> I developed the foundational thermodynamic model...</p>
-                    <p><strong>Results:</strong> My simulations generated thermal contour maps...</p>
+                    <p><strong>Problem:</strong> The Canadian Surface Combatant (CSC) program needed to validate safe helicopter landing conditions, but it was unknown how hot turbine exhaust would affect the flight deck under dozens of different headwind angles, engine throttles, and outtake arrangements. The team lacked the critical thermal data required for RANS/LES simulations.</p>
+                    <p><strong>My Solution:</strong> I developed the foundational thermodynamic model to solve this problem. I first calculated the previously unknown engine exhaust mass flow rates and temperatures for all required scenarios, working with vendors to establish proper power distribution. Using this data, I developed, meshed, and analyzed over 20 CSC ship model iterations in ANSYS Fluent to model all combinations of headwind angles and engine uptake conditions. I also collaborated with the RF team on antenna coupling analyses.</p>
+                    <p><strong>Results:</strong> My simulations generated thermal contour maps showing the maximum temperature over the flight deck for every possible condition. I consolidated this complex data into a single, concise 'logic board' that was delivered to vendors, enabling them to validate safe helicopter landing envelopes for the multi-billion dollar program.</p>
                 </div>
             </div>
         </li>
@@ -291,9 +249,9 @@
                  </div>
                  <div class="caption-container"></div>
                  <div class="project-description">
-                     <p><strong>Problem:</strong> The existing company procedure...</p>
-                     <p><strong>My Solution:</strong> After identifying the root cause...</p>
-                     <p><strong>Results:</strong> The new procedure I developed...</p>
+                     <p><strong>Problem:</strong> The existing company procedure for conducting line-of-sight (LOS) analysis for critical topside equipment on the Canadian Surface Combatant (CSC) program contained significant discrepancies, leading to inaccurate results and potential rework.</p>
+                     <p><strong>My Solution:</strong> After identifying the root cause of the errors, I led the complete redevelopment of a new, more accurate LOS analysis procedure using SolidWorks. I created all documentation for the new standard and personally trained other engineers on its proper implementation to ensure company-wide adoption.</p>
+                     <p><strong>Results:</strong> The new procedure I developed was formally adopted and improved process accuracy by <b>over 8%</b>. This enhancement reduced the risk of costly design flaws and is now the standard method used for the multi-billion dollar CSC program.</p>
                 </div>
             </div>
         </li>
@@ -322,9 +280,9 @@
                 </div>
                  <div class="caption-container"></div>
                  <div class="project-description">
-                    <p><strong>Problem:</strong> Strategic decisions for optimizing...</p>
-                    <p><strong>My Solution:</strong> I took the initiative...</p>
-                    <p><strong>Results:</strong> My script completely eliminated...</p>
+                    <p><strong>Problem:</strong> Strategic decisions for optimizing the PW800 production line were dependent on a highly inefficient, manual data-pulling process from SAP. This process was slow, prone to human error, and consumed significant engineering time.</p>
+                    <p><strong>My Solution:</strong> I took the initiative to single-handedly engineer a permanent automated solution. I developed 13 complex Visual Basic macros from scratch that interfaced directly with SAP, looped through hundreds of processes, and automatically transformed the raw data. The script features robust error handling and outputs a concise, executive-ready spreadsheet for immediate analysis.</p>
+                    <p><strong>Results:</strong> My script completely eliminated the manual process, cutting company data refresh time by <b>8 hours per week</b> and significantly increasing data accuracy. The solution was resiliency-tested and implemented as the new company standard, with clear documentation for maintenance and future use.</p>
                 </div>
             </div>
         </li>
@@ -350,7 +308,7 @@
             if (!slideshowData[projectId]) {
                  const projectItem = document.querySelector(`.project-item[data-project-id="${projectId}"]`);
                  const slides = projectItem.querySelectorAll('.project-details .slide');
-                 const captions = Array.from(slides).map(slide => slide.querySelector('img').alt || ''); // Use alt text
+                 const captions = Array.from(slides).map(slide => slide.querySelector('img').alt || '');
                 slideshowData[projectId] = {
                     slideIndex: 0, slides: slides, captions: captions, timer: null,
                     captionElement: projectItem.querySelector('.project-details .caption-container')
@@ -369,7 +327,7 @@
         }
 
         // --- Show Specific Preview Image ---
-        function showPreviewImage(projectId, index) { /* ... (Same as before) ... */
+        function showPreviewImage(projectId, index) {
              initializePreviewSlideshow(projectId);
              const data = previewSlideshowData[projectId];
              if (!data || !data.previewImages || data.previewImages.length === 0) return;
@@ -381,35 +339,63 @@
         }
 
         // --- Start/Stop Preview Auto Slide ---
-        function startPreviewAutoSlide(projectId) { /* ... (Same as before) ... */
+        function startPreviewAutoSlide(projectId) {
              initializePreviewSlideshow(projectId);
              const data = previewSlideshowData[projectId];
              if (!data || data.previewImages.length <= 1) return;
              stopPreviewAutoSlide(projectId);
-             showPreviewImage(projectId, 0); // Start immediately
+             showPreviewImage(projectId, 0);
              data.previewTimer = setInterval(() => { showPreviewImage(projectId, data.previewIndex + 1); }, 3000);
         }
-        function stopPreviewAutoSlide(projectId) { /* ... (Same as before) ... */
+        function stopPreviewAutoSlide(projectId) {
              if (previewSlideshowData[projectId] && previewSlideshowData[projectId].previewTimer) {
                  clearInterval(previewSlideshowData[projectId].previewTimer);
                  previewSlideshowData[projectId].previewTimer = null;
              }
         }
 
+
         // --- Full Slideshow Logic ---
-        function showSlide(projectId, index) { /* ... (Same as before) ... */ }
-        function manualSlideChange(projectId, n) { /* ... (Same as before) ... */ }
-        function startAutoSlide(projectId) { /* ... (Now Corrected) ... */
-             initializeSlideshow(projectId); // Ensure initialized
+        function showSlide(projectId, index) {
+            initializeSlideshow(projectId);
             const data = slideshowData[projectId];
-            if (!data || data.slides.length <= 1) return; // Only slide if multiple images
-            stopAutoSlide(projectId); // Clear existing timer first
-            // Start the interval
+            if (!data || !data.slides || data.slides.length === 0) return;
+            if (index >= data.slides.length) { index = 0; }
+            if (index < 0) { index = data.slides.length - 1; }
+            data.slides.forEach(slide => slide.classList.remove('active'));
+            data.slides[index].classList.add('active');
+            data.slideIndex = index;
+             if (data.captionElement) {
+                data.captionElement.style.opacity = 0;
+                setTimeout(() => {
+                    data.captionElement.textContent = data.captions[index] || '';
+                    data.captionElement.style.opacity = 1;
+                }, 150);
+            }
+         }
+        function manualSlideChange(projectId, n) {
+             initializeSlideshow(projectId);
+            const data = slideshowData[projectId];
+             stopAutoSlide(projectId);
+             stopPreviewAutoSlide(projectId);
+            showSlide(projectId, data.slideIndex + n);
+             setTimeout(() => startAutoSlide(projectId), 8000);
+         }
+        function startAutoSlide(projectId) {
+             initializeSlideshow(projectId);
+            const data = slideshowData[projectId];
+            if (!data || data.slides.length <= 1) return;
+            stopAutoSlide(projectId);
              data.timer = setInterval(() => {
-                showSlide(projectId, data.slideIndex + 1); // Increment index here
-            }, 5000); // Change every 5 seconds
+                showSlide(projectId, data.slideIndex + 1);
+            }, 5000);
         }
-        function stopAutoSlide(projectId) { /* ... (Same as before) ... */ }
+        function stopAutoSlide(projectId) {
+            if (slideshowData[projectId] && slideshowData[projectId].timer) {
+                clearInterval(slideshowData[projectId].timer);
+                slideshowData[projectId].timer = null;
+            }
+        }
 
         // --- Accordion Click Handler ---
         projectItems.forEach(item => {
@@ -427,8 +413,8 @@
                     if (otherItem !== item && otherItem.classList.contains('active')) {
                         otherItem.classList.remove('active');
                         const otherProjectId = otherItem.getAttribute('data-project-id');
-                        stopAutoSlide(otherProjectId); // Stop main slideshow
-                        startPreviewAutoSlide(otherProjectId); // Restart preview
+                        stopAutoSlide(otherProjectId);
+                        startPreviewAutoSlide(otherProjectId);
                     }
                 });
 
@@ -437,14 +423,14 @@
 
                 if (!wasActive) { // Item is NOW active/open
                     list.classList.add('item-active');
-                    stopPreviewAutoSlide(projectId); // Stop THIS preview slide
-                    initializeSlideshow(projectId);
+                    stopPreviewAutoSlide(projectId);
+                    initializeSlideshow(projectId); // Ensure initialized before showing
                     showSlide(projectId, 0); // Show first slide immediately
                     startAutoSlide(projectId); // Start main slide timer
                 } else { // Item is NOW inactive/closed
                     list.classList.remove('item-active');
-                    stopAutoSlide(projectId); // Stop main slide timer
-                    startPreviewAutoSlide(projectId); // Restart preview slide timer
+                    stopAutoSlide(projectId);
+                    startPreviewAutoSlide(projectId);
                 }
             });
         });
