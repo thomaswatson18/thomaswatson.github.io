@@ -70,12 +70,11 @@
         .project-item.active .project-details { max-height: 2500px; padding-top: 30px; padding-bottom: 30px; border-top-color: var(--border-light); }
         .project-description { margin-top: 30px; }
         .project-description p { margin-bottom: 15px; color: #495057; font-weight: 300; }
+        /* Style for blue labels */
         .project-description strong { font-weight: 600; color: var(--primary-blue); display: block; margin-bottom: 5px; }
+        /* Style for bold text within paragraphs (not blue) */
         .project-description p b { font-weight: 500; color: var(--text-primary); }
-         /* NEW: Style for PDF link */
-         .details-links {
-             margin-top: 25px; /* Space above the link */
-         }
+         .details-links { margin-top: 25px; }
 
         /* --- Slideshow Styles --- */
         .slideshow-container { position: relative; max-width: 100%; margin: 0 auto; overflow: hidden; border-radius: 12px; background-color: #eee; }
@@ -110,7 +109,7 @@
     <ul class="project-list">
         <li class="project-item" data-project-id="tesla-cell">
             <div class="project-preview">
-                <div class="preview-image-container">
+                 <div class="preview-image-container">
                     <img src="images/tesla-cybertruck-seats.png" alt="Custom rejection chute CAD model" class="active">
                     <img src="images/tesla-robot-arm.jpg" alt="Fanuc robot arm in assembly cell">
                     <img src="images/tesla-cell-layout.png" alt="Assembly cell layout diagram">
@@ -136,14 +135,14 @@
                     <p><strong>My Solution:</strong> As the sole owner of this project, I engineered a complete mechanical and robotics solution. I designed a custom, non-intrusive rejection chute from the ground up using Solidworks and Siemens NX, ensuring it integrated seamlessly into the existing cell's tight footprint. I then single-handedly reprogrammed the entire Fanuc robotic logic, rewriting the pathing to flawlessly deposit rejected parts into the new assembly.</p>
                     <p><strong>Results:</strong> I drove the project through the full lifecycle, leading a cross-functional team of stakeholders from manufacturing, compliance, and testing to successfully implement my design. The solution completely eliminated the scrap issue and associated downtime, delivering an annual savings of <b>over $175,000</b> while improving cell safety and maintaining the original workflow for production associates.</p>
                 </div>
-                </div>
+            </div>
         </li>
 
         <li class="project-item" data-project-id="lm-integration">
             <div class="project-preview">
-                 <div class="preview-image-container">
-                    <img src="images/lockheed-system-integration.png" alt="Rendering of unclassified CSC model derived from my Topside Mechanical Design team's work" class="active">
-                    <img src="images/csc-ship-model.jpg" alt="CAD Model of CSC Ship">
+                 <div class="preview-image-container"> <img src="images/lockheed-system-integration.png" alt="CSC Ship Rendering by Mechanical Design Team" class="active">
+                    <img src="images/laser_photo.png" alt="Unclassified Example: Similar Laser Warning System">
+                    <img src="images/laser_3.png" alt="Unclassified Example: Similar System Integration">
                  </div>
                 <div class="preview-text">
                     <h3>Advanced Classified System Design TPM</h3>
@@ -153,24 +152,25 @@
                 <span class="preview-icon">›</span>
             </div>
             <div class="project-details">
-                 <div class="slideshow-container">
-                    <div class="slide active"><img src="images/lockheed-system-integration.png" alt="Cross-functional system integration diagram"></div>
-                    <div class="slide"><img src="images/csc-ship-model.jpg" alt="CAD Model of CSC Ship"></div>
+                 <div class="slideshow-container"> <div class="slide active"><img src="images/lockheed-system-integration.png" alt="CSC Ship Rendering by Mechanical Design Team"></div>
+                    <div class="slide"><img src="images/laser_photo.png" alt="Unclassified Example: Similar Laser Warning System"></div>
+                    <div class="slide"><img src="images/laser_3.png" alt="Unclassified Example: Similar System Integration"></div>
                     <a class="prev" onclick="manualSlideChange('lm-integration', -1)">&#10094;</a>
                     <a class="next" onclick="manualSlideChange('lm-integration', 1)">&#10095;</a>
                 </div>
                  <div class="caption-container"></div>
                  <div class="project-description">
-                    <p><strong>Problem:</strong> Tasked as the integration lead for a proprietary, mission-critical system on the CSC, I was responsible for navigating conflicting constraints from three external vendors and internal RF, electrical, and mechanical design teams. The challenge was to find a viable integration path that did not compromise system performance, ship layout, or classified design integrity.</p>
-                    <p><strong>My Solution:</strong> I took extreme ownership of the project, serving as the single point of contact for all 4 vendors and our internal cross-functional teams. I personally drove the technical design, using my mechanical background to model and propose design changes in SolidWorks to resolve physical, thermal, and RF constraints. My key responsibility was to distill highly technical, classified system requirements from a secure lab into actionable, unclassified design and manufacturing tasks for vendors, ensuring they could execute their scope without compromising project security.</p>
-                    <p><strong>Results:</strong> By proactively managing scope, schedule, and complex technical trades, I successfully aligned all stakeholders on a final, approved integration path. This cleared a major bottleneck for a critical program milestone, and my role as the bridge between technical engineering, vendor management, and program leadership ensured the project remained on schedule and met all system requirements.</p>
-                </div>
+                    <p><strong>Problem:</strong> Tasked as the integration lead for a proprietary, mission-critical system on the CSC, I was responsible for navigating conflicting constraints from external vendors and internal RF, electrical, structural, and mechanical design teams. The challenge was to find a viable integration path that did not compromise system performance, ship layout, or classified design integrity, including necessitating <b>redesign of sections of the ship's hull</b>.</p>
+                    <p><strong>My Solution:</strong> I took extreme ownership, serving as the single point of contact between <b>4 key vendors and internal cross-functional teams</b>. Leveraging my security clearance which vendors lacked, I <b>personally took the initiative</b> to drive the technical design iterations within the classified environment. Using SolidWorks, I modeled and proposed design changes to resolve complex physical, thermal, and RF constraints, and <b>led the hull redesign effort</b> collaborating with the internal mechanical team and the primary structural vendor. My key responsibility was distilling highly technical, classified requirements into actionable, unclassified tasks for vendors.</p>
+                    <p><strong>Results:</strong> By <b>leading the integration and design iterations with vendors and presenting solutions to upper management</b>, I successfully aligned all stakeholders on a final, approved integration path, including the necessary hull modifications. This cleared a major bottleneck for a critical program milestone, ensuring the project remained on schedule while meeting all system requirements within a secure framework.</p>
+                 </div>
             </div>
         </li>
 
          <li class="project-item" data-project-id="lm-topside">
             <div class="project-preview">
-                 <div class="preview-image-container"> <img src="images/lockheed-topside-design.png" alt="CAD rendering of naval ship topside equipment layout" class="active">
+                 <div class="preview-image-container">
+                     <img src="images/lockheed-topside-design.png" alt="CAD rendering of naval ship topside equipment layout" class="active">
                      <img src="images/los.png" alt="SolidWorks Line-of-Sight (LOS) dome analysis tool">
                      <img src="images/rf_pattern.png" alt="Example RF antenna pattern analysis consideration">
                  </div>
@@ -182,8 +182,9 @@
                  <span class="preview-icon">›</span>
             </div>
             <div class="project-details">
-                <div class="slideshow-container"> <div class="slide active"><img src="images/lockheed-topside-design.png" alt="CAD rendering of naval ship topside equipment layout"></div>
-                    <div class="slide"><img src="images/LOS.png" alt="SolidWorks Line-of-Sight (LOS) dome analysis tool"></div>
+                <div class="slideshow-container">
+                    <div class="slide active"><img src="images/lockheed-topside-design.png" alt="CAD rendering of naval ship topside equipment layout"></div>
+                    <div class="slide"><img src="images/los.png" alt="SolidWorks Line-of-Sight (LOS) dome analysis tool"></div>
                      <div class="slide"><img src="images/rf_pattern.png" alt="Example RF antenna pattern analysis consideration"></div>
                     <a class="prev" onclick="manualSlideChange('lm-topside', -1)">&#10094;</a>
                     <a class="next" onclick="manualSlideChange('lm-topside', 1)">&#10095;</a>
@@ -224,9 +225,9 @@
                 </div>
                 <div class="caption-container"></div>
                 <div class="project-description">
-                    <p><strong>Problem:</strong> The Canadian Surface Combatant (CSC) program...</p>
-                    <p><strong>My Solution:</strong> I developed the foundational thermodynamic model...</p>
-                    <p><strong>Results:</strong> My simulations generated thermal contour maps...</p>
+                     <p><strong>Problem:</strong> The Canadian Surface Combatant (CSC) program...</p>
+                     <p><strong>My Solution:</strong> I developed the foundational thermodynamic model...</p>
+                     <p><strong>Results:</strong> My simulations generated thermal contour maps...</p>
                 </div>
             </div>
         </li>
@@ -245,7 +246,7 @@
                  <span class="preview-icon">›</span>
              </div>
              <div class="project-details">
-                <div class="slideshow-container">
+                 <div class="slideshow-container">
                     <div class="slide active"><img src="images/lockheed-los-analysis.png" alt="Line-of-sight analysis diagram for naval ship"></div>
                      <div class="slide"><img src="images/los-discrepancy-example.png" alt="Diagram showing LOS analysis discrepancy"></div>
                      <a class="prev" onclick="manualSlideChange('lm-los', -1)">&#10094;</a>
@@ -380,7 +381,6 @@
              initializeSlideshow(projectId);
             const data = slideshowData[projectId];
              stopAutoSlide(projectId); // Stop main timer
-             // No need to stop preview timer here as it's already stopped on open
             showSlide(projectId, data.slideIndex + n);
              setTimeout(() => startAutoSlide(projectId), 8000); // Restart main timer after delay
          }
