@@ -140,7 +140,8 @@
 
         <li class="project-item" data-project-id="lm-integration">
             <div class="project-preview">
-                 <div class="preview-image-container"> <img src="images/lockheed-system-integration.png" alt="CSC Ship Rendering by Mechanical Design Team" class="active">
+                 <div class="preview-image-container">
+                    <img src="images/lockheed-system-integration.png" alt="CSC Ship Rendering by Mechanical Design Team" class="active">
                     <img src="images/laser_photo.png" alt="Unclassified Example: Similar Laser Warning System">
                     <img src="images/laser_3.png" alt="Unclassified Example: Similar System Integration">
                  </div>
@@ -152,7 +153,8 @@
                 <span class="preview-icon">›</span>
             </div>
             <div class="project-details">
-                 <div class="slideshow-container"> <div class="slide active"><img src="images/lockheed-system-integration.png" alt="CSC Ship Rendering by Mechanical Design Team"></div>
+                 <div class="slideshow-container">
+                    <div class="slide active"><img src="images/lockheed-system-integration.png" alt="CSC Ship Rendering by Mechanical Design Team"></div>
                     <div class="slide"><img src="images/laser_photo.png" alt="Unclassified Example: Similar Laser Warning System"></div>
                     <div class="slide"><img src="images/laser_3.png" alt="Unclassified Example: Similar System Integration"></div>
                     <a class="prev" onclick="manualSlideChange('lm-integration', -1)">&#10094;</a>
@@ -171,7 +173,7 @@
             <div class="project-preview">
                  <div class="preview-image-container">
                      <img src="images/lockheed-topside-design.png" alt="CAD rendering of naval ship topside equipment layout" class="active">
-                     <img src="images/LOS.png" alt="SolidWorks Line-of-Sight (LOS) dome analysis tool">
+                     <img src="images/los.png" alt="SolidWorks Line-of-Sight (LOS) dome analysis tool">
                      <img src="images/rf_pattern.png" alt="Example RF antenna pattern analysis consideration">
                  </div>
                 <div class="preview-text">
@@ -184,7 +186,7 @@
             <div class="project-details">
                 <div class="slideshow-container">
                     <div class="slide active"><img src="images/lockheed-topside-design.png" alt="CAD rendering of naval ship topside equipment layout"></div>
-                    <div class="slide"><img src="images/LOS.png" alt="SolidWorks Line-of-Sight (LOS) dome analysis tool"></div>
+                    <div class="slide"><img src="images/los.png" alt="SolidWorks Line-of-Sight (LOS) dome analysis tool"></div>
                      <div class="slide"><img src="images/rf_pattern.png" alt="Example RF antenna pattern analysis consideration"></div>
                     <a class="prev" onclick="manualSlideChange('lm-topside', -1)">&#10094;</a>
                     <a class="next" onclick="manualSlideChange('lm-topside', 1)">&#10095;</a>
@@ -205,8 +207,8 @@
             <div class="project-preview">
                   <div class="preview-image-container">
                      <img src="images/lockheed-cfd.png" alt="CFD thermal analysis of helicopter landing deck" class="active">
-                     <img src="images/cfd-mesh-example.png" alt="Example CFD Mesh">
-                     <img src="images/thermal-logic-board.jpg" alt="Thermal Logic Board Diagram">
+                     <img src="images/cfd_calc.png" alt="Thermodynamic calculation method for mass flow rate">
+                     <img src="images/cfd_ship.png" alt="Unclassified example of aerodynamic headwind simulation">
                   </div>
                  <div class="preview-text">
                     <h3>Helicopter Landing Thermal Analysis (CFD)</h3>
@@ -218,17 +220,20 @@
             <div class="project-details">
                 <div class="slideshow-container">
                     <div class="slide active"><img src="images/lockheed-cfd.png" alt="CFD thermal analysis of helicopter landing deck"></div>
-                    <div class="slide"><img src="images/cfd-mesh-example.png" alt="Example CFD Mesh"></div>
-                    <div class="slide"><img src="images/thermal-logic-board.jpg" alt="Thermal Logic Board Diagram"></div>
+                    <div class="slide"><img src="images/cfd_calc.png" alt="Thermodynamic calculation method for mass flow rate"></div>
+                    <div class="slide"><img src="images/cfd_ship.png" alt="Unclassified example of aerodynamic headwind simulation"></div>
                     <a class="prev" onclick="manualSlideChange('lm-cfd', -1)">&#10094;</a>
                     <a class="next" onclick="manualSlideChange('lm-cfd', 1)">&#10095;</a>
                 </div>
                 <div class="caption-container"></div>
                 <div class="project-description">
-                     <p><strong>Problem:</strong> The Canadian Surface Combatant (CSC) program...</p>
-                     <p><strong>My Solution:</strong> I developed the foundational thermodynamic model...</p>
-                     <p><strong>Results:</strong> My simulations generated thermal contour maps...</p>
+                     <p><strong>Problem:</strong> The Canadian Surface Combatant (CSC) program needed to validate safe helicopter landing conditions, but it was unknown how hot turbine exhaust would affect the flight deck under dozens of different headwind angles, engine throttles, and outtake arrangements. The team lacked the critical thermal data required for RANS/LES simulations.</p>
+                    <p><strong>My Solution:</strong> I <b>developed the foundational thermodynamic model</b> to solve this problem. I first <b>calculated the previously unknown engine exhaust mass flow rates and temperatures</b> for all required scenarios, working with vendors to establish proper power distribution. Using this data, I <b>developed, meshed, and analyzed over 20 CSC ship model iterations</b> in ANSYS Fluent to model all combinations of headwind angles and engine uptake conditions. I also collaborated with the RF team on antenna coupling analyses.</p>
+                    <p><strong>Results:</strong> My simulations generated thermal contour maps showing the maximum temperature over the flight deck for every possible condition. I <b>consolidated this complex data into a single, concise 'logic board'</b> that was delivered to vendors, enabling them to validate safe helicopter landing envelopes for the multi-billion dollar program.</p>
                 </div>
+                 <div class="details-links">
+                     <a href="images/lockheed_project.pdf" target="_blank">View Project Context PDF</a>
+                 </div>
             </div>
         </li>
 
@@ -240,7 +245,7 @@
                  </div>
                 <div class="preview-text">
                      <h3>Company-Wide Line-of-Sight (LOS) Process Overhaul</h3>
-                     <p class="meta">Role: Naval Architecture Engineering Intern @ Lockheed Martin</p>
+                     <p class="meta">Role: Mechanical Design TPM Intern @ Lockheed Martin</p>
                      <img src="images/logo-lockheed.png" alt="" class="preview-company-logo">
                 </div>
                  <span class="preview-icon">›</span>
@@ -254,9 +259,9 @@
                  </div>
                  <div class="caption-container"></div>
                  <div class="project-description">
-                     <p><strong>Problem:</strong> The existing company procedure...</p>
-                     <p><strong>My Solution:</strong> After identifying the root cause...</p>
-                     <p><strong>Results:</strong> The new procedure I developed...</p>
+                     <p><strong>Problem:</strong> The existing company procedure for conducting line-of-sight (LOS) analysis for critical topside equipment on the Canadian Surface Combatant (CSC) program contained significant discrepancies, leading to inaccurate results and potential rework.</p>
+                     <p><strong>My Solution:</strong> After identifying the root cause of the errors, I led the complete redevelopment of a new, more accurate LOS analysis procedure using SolidWorks. I created all documentation for the new standard and personally trained other engineers on its proper implementation to ensure company-wide adoption.</p>
+                     <p><strong>Results:</strong> The new procedure I developed was formally adopted and improved process accuracy by <b>over 8%</b>. This enhancement reduced the risk of costly design flaws and is now the standard method used for the multi-billion dollar CSC program.</p>
                 </div>
             </div>
         </li>
@@ -285,9 +290,9 @@
                 </div>
                  <div class="caption-container"></div>
                  <div class="project-description">
-                    <p><strong>Problem:</strong> Strategic decisions for optimizing...</p>
-                    <p><strong>My Solution:</strong> I took the initiative...</p>
-                    <p><strong>Results:</strong> My script completely eliminated...</p>
+                    <p><strong>Problem:</strong> Strategic decisions for optimizing the PW800 production line were dependent on a highly inefficient, manual data-pulling process from SAP. This process was slow, prone to human error, and consumed significant engineering time.</p>
+                    <p><strong>My Solution:</strong> I took the initiative to single-handedly engineer a permanent automated solution. I developed 13 complex Visual Basic macros from scratch that interfaced directly with SAP, looped through hundreds of processes, and automatically transformed the raw data. The script features robust error handling and outputs a concise, executive-ready spreadsheet for immediate analysis.</p>
+                    <p><strong>Results:</strong> My script completely eliminated the manual process, cutting company data refresh time by <b>8 hours per week</b> and significantly increasing data accuracy. The solution was resiliency-tested and implemented as the new company standard, with clear documentation for maintenance and future use.</p>
                 </div>
             </div>
         </li>
