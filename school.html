@@ -4,28 +4,36 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Academic Projects — Thomas Watson</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
   
   <style>
     /* --- Global Styles --- */
     * { box-sizing: border-box; margin: 0; padding: 0; }
+    /* Added CSS Variables */
+    :root {
+        --primary-blue: #0000FF; --text-primary: #212529; --text-secondary: #6c757d;
+        --background: #f8f9fa; --card-background: #ffffff; --border-color: #dee2e6;
+        --border-light: #e9ecef;
+    }
     body {
       font-family: 'Montserrat', sans-serif;
-      background-color: #f8f9fa;
-      color: #212529;
+      background-color: var(--background);
+      color: var(--text-primary);
       line-height: 1.6;
       padding: 40px 20px;
+      font-weight: 300; /* Added font-weight */
     }
 
     /* --- Links & Headers --- */
     a {
-      color: #0000FF; /* BRIGHT BLUE */
+      color: var(--primary-blue);
       text-decoration: none;
-      font-weight: 600;
+      font-weight: 500; /* Changed from 600 */
+      transition: opacity 0.2s ease; /* Added transition */
     }
     a:hover {
-      text-decoration: underline;
-      opacity: 0.8;
+      text-decoration: none; /* Removed underline */
+      opacity: 0.7; /* Changed from 0.8 */
     }
     header, footer {
       text-align: center;
@@ -39,44 +47,55 @@
     /* --- Project Pages: Project Cards --- */
     .back-link {
       font-size: 1rem;
-      color: #6c757d;
+      color: var(--text-secondary);
       text-decoration: none;
       display: inline-block;
       margin-top: 15px;
+      transition: color 0.2s ease; /* Added transition */
     }
-    .back-link:hover { color: #0000FF; }
+    .back-link:hover { color: var(--primary-blue); opacity: 1; } /* Standardized hover */
     .projects {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 25px;
-      max-width: 1200px;
+      max-width: 850px; /* <-- REDUCED FROM 1200px TO FIT 2 CARDS */
       margin: 0 auto;
     }
     .card {
-      background: #ffffff;
-      border: 1px solid #dee2e6;
+      background: var(--card-background);
+      border: 1px solid var(--border-color);
       padding: 20px;
       border-radius: 14px;
       display: flex;
       flex-direction: column;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.06); /* Added shadow */
     }
     .card:hover {
       transform: translateY(-6px);
       box-shadow: 0 6px 20px rgba(0, 0, 255, 0.15);
     }
     .card img { width: 100%; border-radius: 10px; margin-bottom: 15px; }
-    .meta { font-size: 0.9rem; color: #6c757d; margin-bottom: 15px; font-style: italic; }
+    .meta { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 15px; font-style: italic; }
     .card p { margin-bottom: 10px; color: #495057; }
-    .card strong { color: #0000FF; }
+    /* Updated strong style */
+    .card strong { 
+        color: var(--primary-blue); 
+        font-weight: 600; 
+        display: block; 
+        margin-bottom: 5px; 
+    }
     .links { margin-top: auto; /* Pushes links to the bottom */ }
 
     /* --- Footer --- */
     footer {
       margin-top: 80px;
-      color: #6c757d;
+      padding-top: 40px; /* Added padding */
+      border-top: 1px solid var(--border-color); /* Added border */
+      color: var(--text-secondary);
       font-size: 0.9rem;
     }
+    footer p:first-child a { margin: 0 10px; } /* Added spacing */
   </style>
 </head>
 <body>
@@ -122,7 +141,7 @@
         <strong>My Solution:</strong> I designed and simulated a custom liquid cold plate using CFD/thermal analysis software. The design features a copper manifold to maximize thermal conductivity from the chips to a microchannel heat sink containing 26 optimized aluminum fins. I engineered a streamlined internal fluid domain to ensure even flow distribution and maximize the convective heat transfer coefficient across the entire surface area.
       </p>
       <p>
-        <strong>Results:</strong> The final simulated design successfully dissipated over 707W of heat, a <b>353.9% improvement<b> in thermal efficiency compared to the original 200W design goal. This was achieved while keeping the maximum chip temperature stable below 85°C, allowing for significantly higher and more sustained performance from the electronics.
+        <strong>Results:</strong> The final simulated design successfully dissipated over 707W of heat, a <b>353.9% improvement</b> in thermal efficiency compared to the original 200W design goal. This was achieved while keeping the maximum chip temperature stable below 85°C, allowing for significantly higher and more sustained performance from the electronics.
       </p>
 
     </article>
