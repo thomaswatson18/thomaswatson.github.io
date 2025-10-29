@@ -56,9 +56,11 @@
     .back-link:hover { color: var(--primary-blue); opacity: 1; } /* Standardized hover */
     .projects {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      /* --- MODIFIED: Set to 2 columns --- */
+      grid-template-columns: repeat(2, 1fr); 
       gap: 25px;
-      max-width: 850px; /* <-- REDUCED FROM 1200px TO FIT 2 CARDS */
+      /* --- MODIFIED: Set back to 1200px --- */
+      max-width: 1200px; 
       margin: 0 auto;
     }
     .card {
@@ -96,6 +98,14 @@
       font-size: 0.9rem;
     }
     footer p:first-child a { margin: 0 10px; } /* Added spacing */
+
+    /* --- NEW: Responsive Adjustments --- */
+    @media (max-width: 768px) {
+        .projects {
+            /* Stacks to 1 column on mobile */
+            grid-template-columns: 1fr;
+        }
+    }
   </style>
 </head>
 <body>
@@ -139,7 +149,7 @@
       </p>
       <p>
         <strong>My Solution:</strong> I designed and simulated a custom liquid cold plate using CFD/thermal analysis software. The design features a copper manifold to maximize thermal conductivity from the chips to a microchannel heat sink containing 26 optimized aluminum fins. I engineered a streamlined internal fluid domain to ensure even flow distribution and maximize the convective heat transfer coefficient across the entire surface area.
-      </p>
+      </s<p>
       <p>
         <strong>Results:</strong> The final simulated design successfully dissipated over 707W of heat, a <b>353.9% improvement</b> in thermal efficiency compared to the original 200W design goal. This was achieved while keeping the maximum chip temperature stable below 85°C, allowing for significantly higher and more sustained performance from the electronics.
       </p>
