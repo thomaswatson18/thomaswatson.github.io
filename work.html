@@ -367,17 +367,42 @@
             if (!data || !data.slides || data.slides.length === 0) return;
             if (index >= data.slides.length) { index = 0; }
             if (index < 0) { index = data.slides.length - 1; }
-            data.slides.forEach(slide => slide.classList.remove('active'));
-            data.slides[index].classList.add('active');
-            data.slideIndex = index;
-             if (data.captionElement) {
-                 data.captionElement.style.opacity = 0;
-                 setTimeout(() => {
-                     data.captionElement.textContent = data.captions[index] || '';
-                     data.captionElement.style.opacity = 1;
-                 }, 150);
+        
+            // If same slide requested, do nothing (but still update caption)
+            if (data.slideIndex === index) {
+                if (data.captionElement) {
+                    data.captionElement.style.opacity = 0;
+                    setTimeout(() => {
+                        data.captionElement.textContent = data.captions[index] || '';
+                        data.captionElement.style.opacity = 1;
+                    }, 150);
+                }
+                return;
             }
-         }
+        
+            // Ensure any preview timer for this project is stopped before changing detail slides
+            stopPreviewAutoSlide(projectId);
+        
+            // Remove active on all slides, then add 'active' on the target on next animation frame(s)
+            data.slides.forEach(slide => slide.classList.remove('active'));
+        
+            // Two rAFs gives the browser a clean paint between removing and adding — helps the animation run.
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    data.slides[index].classList.add('active');
+                    data.slideIndex = index;
+        
+                    if (data.captionElement) {
+                        data.captionElement.style.opacity = 0;
+                        setTimeout(() => {
+                            data.captionElement.textContent = data.captions[index] || '';
+                            data.captionElement.style.opacity = 1;
+                        }, 150);
+                    }
+                });
+            });
+        }
+
         function manualSlideChange(projectId, n) {
              initializeSlideshow(projectId);
             const data = slideshowData[projectId];
