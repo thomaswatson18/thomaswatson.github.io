@@ -74,7 +74,7 @@
         .project-description p b { font-weight: 500; color: var(--text-primary); }
         .details-links { margin-top: 25px; }
 
-        /* --- Slideshow Styles (updated for smooth behavior and variable heights) --- */
+        /* --- Slideshow Styles (keeps images uncropped; container animates) --- */
         .slideshow-container {
             position: relative;
             max-width: 100%;
@@ -82,10 +82,8 @@
             overflow: hidden;
             border-radius: 12px;
             background-color: #eee;
-            /* we animate height via JS for smoothness */
             transition: height 0.45s cubic-bezier(0.2,0,0.2,1);
         }
-        /* stack slides, but keep images uncropped (height:auto) */
         .slide {
             position: absolute;
             left: 0;
@@ -95,7 +93,8 @@
             transition: opacity 0.55s ease;
             pointer-events: none;
         }
-        .slide img { display: block; width: 100%; height: auto; object-fit: contain; }
+        /* preserve image aspect ratio (no cropping) */
+        .slide img { display: block; width: 100%; height: auto; }
         .slide.active { opacity: 1; pointer-events: auto; }
         .prev, .next { cursor: pointer; position: absolute; top: 50%; transform: translateY(-50%); width: auto; padding: 16px; color: white; font-weight: bold; font-size: 20px; background-color: rgba(0, 0, 0, 0.3); border-radius: 0 3px 3px 0; user-select: none; transition: background-color 0.3s ease; z-index: 5; }
         .next { right: 0; border-radius: 3px 0 0 3px; }
@@ -110,16 +109,11 @@
              .project-item.active .project-details { padding: 20px; } .preview-image-container { width: 70px; height: 70px; border-radius: 8px;}
              .project-preview h3 { font-size: 1.1rem; padding-right: 30px; } .project-preview .meta { font-size: 0.85rem;}
              .preview-company-logo { height: 16px; } .preview-icon { margin-left: 10px; font-size: 1.2rem; }
-             .prev, .next { font-size: 16px; padding: 12px; } .slide img { max-height: 400px; object-fit: contain; }
+             .prev, .next { font-size: 16px; padding: 12px; } .slide img { max-height: 400px; }
         }
 
-        /* small helper class used while closing so the details max-height isn't in the way */
-        .project-item.closing .project-details {
-            max-height: 0 !important;
-            padding-top: 0 !important;
-            padding-bottom: 0 !important;
-            overflow: hidden;
-        }
+        /* helper while we animate collapse so details don't peek */
+        .project-item.closing .project-details { overflow: hidden; }
 
     </style>
 </head>
@@ -331,74 +325,74 @@
 
     <script>
         // --- Accordion Logic & Slideshow Data ---
-        const projectItems = document.querySelectorAll('.project-item');
+        const projectItems = Array.from(document.querySelectorAll('.project-item'));
         const slideshowData = {};
         const previewSlideshowData = {};
 
         // --- Utilities: wait for image to be ready ---
-        function waitForImageLoad(img, timeout = 3500) {
+        function waitForImageLoad(img, timeout = 4000) {
             return new Promise(resolve => {
                 if (!img) return resolve();
+                // If already loaded
                 if (img.complete && img.naturalWidth) return resolve();
-                const onLoad = () => {
-                    img.removeEventListener('load', onLoad);
-                    img.removeEventListener('error', onLoad);
+                const onDone = () => {
+                    img.removeEventListener('load', onDone);
+                    img.removeEventListener('error', onDone);
                     resolve();
                 };
-                img.addEventListener('load', onLoad);
-                img.addEventListener('error', onLoad);
-                // fallback timeout
+                img.addEventListener('load', onDone);
+                img.addEventListener('error', onDone);
+                // fallback
                 setTimeout(() => {
-                    img.removeEventListener('load', onLoad);
-                    img.removeEventListener('error', onLoad);
+                    img.removeEventListener('load', onDone);
+                    img.removeEventListener('error', onDone);
                     resolve();
                 }, timeout);
             });
         }
 
-        // --- Compute and set slideshow container height (no cropping) ---
-        function setSlideshowHeight(projectId) {
-            return new Promise(async (resolve) => {
-                const projectItem = document.querySelector(`.project-item[data-project-id="${projectId}"]`);
-                if (!projectItem) return resolve();
-                const container = projectItem.querySelector('.slideshow-container');
-                if (!container) return resolve();
+        // --- compute pixel height for container to preserve natural aspect ratio (no crop) ---
+        function computeHeightForImage(container, img) {
+            if (!container || !img) return 300;
+            const naturalW = img.naturalWidth || img.width || 1;
+            const naturalH = img.naturalHeight || img.height || 1;
+            const width = container.clientWidth || container.offsetWidth || 600;
+            if (naturalW && naturalH) {
+                return Math.max(120, Math.round(width * naturalH / naturalW));
+            }
+            // fallback to current rendered height
+            try {
+                const rect = img.getBoundingClientRect();
+                if (rect && rect.height > 0) return rect.height;
+            } catch (e) {}
+            return Math.max(120, Math.round(width * 0.6));
+        }
 
-                // choose the currently active slide's image as reference if present, otherwise first img
-                const activeSlide = container.querySelector('.slide.active');
-                let refImg = activeSlide ? activeSlide.querySelector('img') : container.querySelector('.slide img');
-                if (!refImg) return resolve();
-
-                await waitForImageLoad(refImg, 4000);
-
-                const naturalW = refImg.naturalWidth || refImg.width || 1;
-                const naturalH = refImg.naturalHeight || refImg.height || 1;
-                if (naturalW && naturalH) {
-                    const width = container.clientWidth || container.offsetWidth || 600;
-                    const height = Math.max(120, Math.round(width * naturalH / naturalW));
-                    container.style.height = height + 'px';
-                } else {
-                    // fallback to current rendered height
-                    try {
-                        const rect = refImg.getBoundingClientRect();
-                        if (rect && rect.height > 0) container.style.height = rect.height + 'px';
-                    } catch (e) { /* ignore */ }
-                }
-
-                // attach resize handler once per container to keep responsive
-                if (!container._resizeHandlerAttached) {
-                    const resizeHandler = () => {
-                        const w = container.clientWidth || container.offsetWidth || 600;
-                        const nw = refImg.naturalWidth || refImg.width || 1;
-                        const nh = refImg.naturalHeight || refImg.height || 1;
-                        if (nw && nh) container.style.height = Math.max(120, Math.round(w * nh / nw)) + 'px';
-                    };
-                    window.addEventListener('resize', resizeHandler);
-                    container._resizeHandlerAttached = true;
-                }
-
-                resolve();
+        // --- keep per-container ResizeObserver to update height responsively while open ---
+        const resizeObservers = new Map();
+        function attachResizeObserver(container, activeImg, projectId) {
+            if (!container) return;
+            // already attached?
+            if (resizeObservers.has(container)) return;
+            const ro = new ResizeObserver(() => {
+                // only adjust if open / has active slide
+                const data = slideshowData[projectId];
+                if (!data) return;
+                // pick active slide img
+                const active = container.querySelector('.slide.active img') || activeImg;
+                if (!active) return;
+                const h = computeHeightForImage(container, active);
+                container.style.height = h + 'px';
             });
+            ro.observe(container);
+            resizeObservers.set(container, ro);
+        }
+        function detachResizeObserver(container) {
+            const ro = resizeObservers.get(container);
+            if (ro) {
+                try { ro.disconnect(); } catch(e){}
+                resizeObservers.delete(container);
+            }
         }
 
         // --- Initialize Data ---
@@ -411,9 +405,13 @@
                     return img ? (img.alt || '') : '';
                 });
                 slideshowData[projectId] = {
-                    slideIndex: 0, slides: slides, captions: captions, timer: null,
+                    slideIndex: 0,
+                    slides: slides,
+                    captions: captions,
+                    timer: null,
                     captionElement: projectItem.querySelector('.project-details .caption-container'),
-                    containerElement: projectItem.querySelector('.slideshow-container')
+                    containerElement: projectItem.querySelector('.slideshow-container'),
+                    projectItem: projectItem
                 };
             }
         }
@@ -428,7 +426,7 @@
             }
         }
 
-        // --- Show Specific Preview Image ---
+        // --- Preview small image slideshow ---
         function showPreviewImage(projectId, index) {
              initializePreviewSlideshow(projectId);
              const data = previewSlideshowData[projectId];
@@ -439,8 +437,6 @@
              data.previewImages[index].classList.add('active');
              data.previewIndex = index;
         }
-
-        // --- Start/Stop Preview Auto Slide ---
         function startPreviewAutoSlide(projectId) {
              initializePreviewSlideshow(projectId);
              const data = previewSlideshowData[projectId];
@@ -456,15 +452,15 @@
              }
         }
 
-        // --- Full Slideshow Logic (improved) ---
-        async function showSlide(projectId, index) {
+        // --- Show a main slideshow slide (smooth, waits for image) ---
+        function showSlide(projectId, index) {
             initializeSlideshow(projectId);
             const data = slideshowData[projectId];
             if (!data || !data.slides || data.slides.length === 0) return;
-            if (index >= data.slides.length) { index = 0; }
-            if (index < 0) { index = data.slides.length - 1; }
+            if (index >= data.slides.length) index = 0;
+            if (index < 0) index = data.slides.length - 1;
 
-            // If same slide requested, only update caption gracefully
+            // if same slide requested, update caption only
             if (data.slideIndex === index) {
                 if (data.captionElement) {
                     data.captionElement.style.opacity = 0;
@@ -476,58 +472,63 @@
                 return;
             }
 
-            // Prepare container height to avoid jumps
-            await setSlideshowHeight(projectId);
+            const targetSlide = data.slides[index];
+            const targetImg = targetSlide.querySelector('img');
 
-            // Stop the small preview slideshow while showing big slides
+            // Stop preview animation for safety
             stopPreviewAutoSlide(projectId);
 
-            // Wait for the target image to be loaded so there's no blank
-            const targetSlide = data.slides[index];
-            const targetImg = targetSlide ? targetSlide.querySelector('img') : null;
-            if (targetImg) await waitForImageLoad(targetImg, 3500);
+            // ensure target image loaded (avoid blank)
+            return waitForImageLoad(targetImg, 4000).then(() => {
+                // compute the height we will animate to
+                const container = data.containerElement;
+                const targetHeight = computeHeightForImage(container, targetImg);
 
-            // Remove active from others then add with rAF to force transition
-            data.slides.forEach(slide => slide.classList.remove('active'));
+                // set explicit pixel height to animate to; do not set to '' yet
+                // (we'll keep explicit height while open so layout is stable)
+                container.style.height = targetHeight + 'px';
 
-            requestAnimationFrame(() => {
+                // force a reflow so height change registers
+                container.getBoundingClientRect();
+
+                // remove active from others and add to target with rAF so opacity transition triggers
+                data.slides.forEach(s => s.classList.remove('active'));
                 requestAnimationFrame(() => {
-                    targetSlide.classList.add('active');
-                    data.slideIndex = index;
-                    if (data.captionElement) {
-                        data.captionElement.style.opacity = 0;
-                        setTimeout(() => {
-                            data.captionElement.textContent = data.captions[index] || '';
-                            data.captionElement.style.opacity = 1;
-                        }, 150);
-                    }
+                    requestAnimationFrame(() => {
+                        targetSlide.classList.add('active');
+                        data.slideIndex = index;
+                        if (data.captionElement) {
+                            data.captionElement.style.opacity = 0;
+                            setTimeout(() => {
+                                data.captionElement.textContent = data.captions[index] || '';
+                                data.captionElement.style.opacity = 1;
+                            }, 150);
+                        }
+                    });
                 });
-            });
 
-            // After a short time, let the slideshow container be responsive (auto height)
-            // but keep a small delay so transition finishes; we set to 'auto' so subsequent resizes work
-            // (do not do this immediately to avoid jump)
-            setTimeout(() => {
-                // only set to auto if the project is still open and container exists
-                if (data && data.containerElement) {
-                    // clear explicit height so responsive resizes work (but leave a small min-height)
-                    data.containerElement.style.height = '';
-                }
-            }, 700);
+                // attach ResizeObserver to keep height responsive while open
+                attachResizeObserver(container, targetImg, projectId);
+
+                // return resolved promise for calling code
+                return Promise.resolve();
+            });
         }
 
-        async function manualSlideChange(projectId, n) {
+        function manualSlideChange(projectId, n) {
              initializeSlideshow(projectId);
-            const data = slideshowData[projectId];
+             const data = slideshowData[projectId];
              stopAutoSlide(projectId); // Stop main timer
-             await showSlide(projectId, data.slideIndex + n);
-             setTimeout(() => startAutoSlide(projectId), 8000); // Restart main timer after delay
+             // call showSlide and when it finishes, restart auto after delay
+             Promise.resolve(showSlide(projectId, data.slideIndex + n)).then(() => {
+                 setTimeout(() => startAutoSlide(projectId), 8000);
+             });
          }
         function startAutoSlide(projectId) {
              initializeSlideshow(projectId);
             const data = slideshowData[projectId];
             if (!data || data.slides.length <= 1) return;
-            stopAutoSlide(projectId); // Clear existing timer first
+            stopAutoSlide(projectId);
              data.timer = setInterval(() => {
                  showSlide(projectId, data.slideIndex + 1);
             }, 5000);
@@ -539,96 +540,109 @@
             }
         }
 
-        // helper to animate collapse of container cleanly
-        function collapseContainer(container) {
+        // animate container collapse (promise-based)
+        function animateHeightTo(container, fromPx, toPx, timeout = 650) {
             return new Promise(resolve => {
                 if (!container) return resolve();
-                // ensure explicit current height
-                const cur = container.getBoundingClientRect().height;
-                container.style.height = cur + 'px';
-                // force reflow
-                container.getBoundingClientRect();
-                // then animate to 0
+                let done = false;
                 const onEnd = (e) => {
                     if (e && e.target !== container) return;
+                    if (done) return;
+                    done = true;
                     container.removeEventListener('transitionend', onEnd);
                     resolve();
                 };
                 container.addEventListener('transitionend', onEnd);
-                requestAnimationFrame(() => container.style.height = '0px');
-                // fallback if transitionend doesn't fire
-                setTimeout(() => {
-                    container.removeEventListener('transitionend', onEnd);
-                    resolve();
-                }, 600);
+                // set start
+                container.style.height = fromPx + 'px';
+                // force reflow
+                container.getBoundingClientRect();
+                // animate to
+                requestAnimationFrame(() => {
+                    container.style.height = toPx + 'px';
+                });
+                // fallback
+                setTimeout(() => { if (!done) { done = true; container.removeEventListener('transitionend', onEnd); resolve(); } }, timeout + 100);
             });
         }
 
-        // --- Accordion Click Handler (open/close sequences modified for smoothness) ---
+        // --- Accordion Click Handler: open/close sequence robustly ---
         projectItems.forEach(item => {
             const summary = item.querySelector('.project-preview');
             const projectId = item.getAttribute('data-project-id');
 
-            startPreviewAutoSlide(projectId); // Start all previews initially
+            // start small preview auto-slideshow
+            startPreviewAutoSlide(projectId);
 
             summary.addEventListener('click', async () => {
                 const wasActive = item.classList.contains('active');
                 const list = item.closest('.project-list');
 
-                // Close others first (existing logic) - ensure their containers are cleared
+                // Close others first (animate their collapse)
                 for (const otherItem of projectItems) {
                     if (otherItem !== item && otherItem.classList.contains('active')) {
+                        const otherId = otherItem.getAttribute('data-project-id');
                         otherItem.classList.remove('active');
-                        const otherProjectId = otherItem.getAttribute('data-project-id');
-                        stopAutoSlide(otherProjectId); // Stop main slideshow
-                        // clear explicit height so closed projects collapse
+                        const otherData = slideshowData[otherId];
+                        // stop large slideshow
+                        if (otherData) stopAutoSlide(otherId);
+                        // animate collapse of its container if present
                         const otherContainer = otherItem.querySelector('.slideshow-container');
                         if (otherContainer) {
-                            // animate collapse to avoid flicker
                             otherItem.classList.add('closing');
-                            await collapseContainer(otherContainer);
+                            // ensure explicit height exists
+                            const curH = otherContainer.getBoundingClientRect().height || otherContainer.clientHeight || 0;
+                            // animate to 0
+                            await animateHeightTo(otherContainer, curH, 0);
+                            // cleanup
                             otherContainer.style.height = '';
                             otherItem.classList.remove('closing');
+                            detachResizeObserver(otherContainer);
                         }
-                        startPreviewAutoSlide(otherProjectId); // Restart preview
+                        startPreviewAutoSlide(otherId);
                     }
                 }
 
-                // Toggle clicked item
-                if (!wasActive) { // Opening path
+                // toggle current item
+                if (!wasActive) { // opening sequence
                     item.classList.add('active');
                     list.classList.add('item-active');
-                    stopPreviewAutoSlide(projectId); // Stop THIS preview slide
                     initializeSlideshow(projectId);
+                    stopPreviewAutoSlide(projectId);
 
-                    // ensure container has proper height before revealing slides
-                    const container = item.querySelector('.slideshow-container');
-                    await setSlideshowHeight(projectId);
+                    const data = slideshowData[projectId];
+                    const container = data.containerElement;
 
-                    // reveal the slide area smoothly: we already set height in setSlideshowHeight
-                    // ensure details are visible by letting CSS continue (we used item.classList.add above)
-                    await showSlide(projectId, 0); // Show first slide immediately (wait until loaded)
-                    startAutoSlide(projectId); // Start main slide timer
-                } else { // Closing path
-                    // We will animate the slideshow container down to zero while keeping current slide visible,
-                    // then remove the active state and restart preview timers.
-                    const container = item.querySelector('.slideshow-container');
+                    // compute initial height for current (or first) slide
+                    const initialSlide = container.querySelector('.slide') || data.slides[0];
+                    const initialImg = initialSlide ? initialSlide.querySelector('img') : null;
+
+                    // wait for image load and then set/animate height to that image's height
+                    if (initialImg) await waitForImageLoad(initialImg, 4000);
+                    const targetH = computeHeightForImage(container, initialImg || container.querySelector('img'));
+                    // animate from 0 to target
+                    await animateHeightTo(container, 0, targetH);
+
+                    // show first slide (ensures caption updated and opacity fade)
+                    await showSlide(projectId, 0);
+                    // start auto rotating large slides
+                    startAutoSlide(projectId);
+                } else { // closing sequence
+                    // ensure we keep the slide visible until collapse ends to prevent description peeking
+                    const data = slideshowData[projectId];
+                    const container = data ? data.containerElement : (item.querySelector('.slideshow-container'));
                     if (container) {
-                        // mark as closing so CSS doesn't fight with our manual collapse
                         item.classList.add('closing');
                         stopAutoSlide(projectId);
-                        // ensure container has explicit height to animate from
-                        const h = container.getBoundingClientRect().height;
-                        container.style.height = (h > 0 ? h : container.clientHeight) + 'px';
-                        // wait a frame then animate collapse
-                        await collapseContainer(container);
-                        // after collapse complete, clean up
+                        // compute current pixel height to animate from
+                        const curH = container.getBoundingClientRect().height || container.clientHeight || 0;
+                        await animateHeightTo(container, curH, 0);
                         container.style.height = '';
                         item.classList.remove('closing');
+                        detachResizeObserver(container);
                     }
                     item.classList.remove('active');
                     list.classList.remove('item-active');
-                    // restart preview
                     startPreviewAutoSlide(projectId);
                 }
             });
@@ -639,7 +653,7 @@
          try {
              styleSheet.insertRule('.caption-container { transition: opacity 0.15s ease-in-out; }', styleSheet.cssRules.length);
              styleSheet.insertRule('.project-list.item-active .project-item:not(.active) { transition: opacity 0.4s ease, max-height 0.4s ease, margin-bottom 0.4s ease, border-color 0.4s ease, background-color 0.4s ease, box-shadow 0.4s ease; }', styleSheet.cssRules.length);
-         } catch (e) { console.error("Could not insert CSS rule: ", e); }
+         } catch (e) { /* ignore insertion errors */ }
 
         // --- NEW: Open specific project on page load if hash or ?project= is present ---
         (function openProjectFromURL() {
@@ -650,22 +664,21 @@
                 const targetId = hashId || projParam;
                 if (!targetId) return;
 
-                // Find the preview element for the project id
                 const targetPreview = document.querySelector(`.project-item[data-project-id="${targetId}"] .project-preview`);
                 if (targetPreview) {
-                    // small delay to ensure initial preview timers/handlers are set up
                     setTimeout(() => {
-                        // emulate a user click to open the accordion (reuses existing logic)
                         targetPreview.click();
-                        // scroll the opened project into view, centered if possible
-                        try { targetPreview.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (e) { /* ignore on unsupported browsers */ }
-                    }, 120);
+                        try { targetPreview.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (e) {}
+                    }, 180);
                 }
-            } catch (e) {
-                // Fail silently if anything goes wrong — don't break the rest of the page
-                console.error('openProjectFromURL error:', e);
-            }
+            } catch (e) { console.error('openProjectFromURL error:', e); }
         })();
+
+        // small defensive: start preview timers for items that may not have been initialized above
+        projectItems.forEach(p => {
+            const id = p.getAttribute('data-project-id');
+            if (!previewSlideshowData[id] || !previewSlideshowData[id].previewTimer) startPreviewAutoSlide(id);
+        });
 
     </script>
 
