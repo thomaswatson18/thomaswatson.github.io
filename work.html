@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -72,15 +73,25 @@
         .project-description p { margin-bottom: 15px; color: #495057; font-weight: 300; }
         .project-description strong { font-weight: 600; color: var(--primary-blue); display: block; margin-bottom: 5px; }
         .project-description p b { font-weight: 500; color: var(--text-primary); }
-         .details-links { margin-top: 25px; }
+        .details-links { margin-top: 25px; }
 
-        /* --- Slideshow Styles --- */
-        .slideshow-container { position: relative; max-width: 100%; margin: 0 auto; overflow: hidden; border-radius: 12px; background-color: #eee; }
-        .slide { display: none; width: 100%; animation: fadeEffect 0.8s ease; }
-        .slide img { display: block; width: 100%; height: auto; max-height: 550px; object-fit: cover; }
-        .slide.active { display: block; }
+        /* --- Slideshow Styles (updated for smooth crossfade) --- */
+        .slideshow-container { position: relative; max-width: 100%; margin: 0 auto; overflow: hidden; border-radius: 12px; background-color: #eee; /* height set dynamically via JS for smoothness */ }
+        .slide {
+            /* stack slides on top of each other and fade via opacity */
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+            pointer-events: none;
+        }
+        .slide img { display: block; width: 100%; height: 100%; object-fit: cover; }
+        .slide.active { opacity: 1; pointer-events: auto; }
         @keyframes fadeEffect { from { opacity: 0.4; } to { opacity: 1; } }
-        .prev, .next { cursor: pointer; position: absolute; top: 50%; transform: translateY(-50%); width: auto; padding: 16px; color: white; font-weight: bold; font-size: 20px; background-color: rgba(0, 0, 0, 0.3); border-radius: 0 3px 3px 0; user-select: none; transition: background-color 0.3s ease; }
+        .prev, .next { cursor: pointer; position: absolute; top: 50%; transform: translateY(-50%); width: auto; padding: 16px; color: white; font-weight: bold; font-size: 20px; background-color: rgba(0, 0, 0, 0.3); border-radius: 0 3px 3px 0; user-select: none; transition: background-color 0.3s ease; z-index: 5; }
         .next { right: 0; border-radius: 3px 0 0 3px; }
         .prev:hover, .next:hover { background-color: rgba(0, 0, 0, 0.6); }
 
@@ -93,7 +104,7 @@
              .project-item.active .project-details { padding: 20px; } .preview-image-container { width: 70px; height: 70px; border-radius: 8px;}
              .project-preview h3 { font-size: 1.1rem; padding-right: 30px; } .project-preview .meta { font-size: 0.85rem;}
              .preview-company-logo { height: 16px; } .preview-icon { margin-left: 10px; font-size: 1.2rem; }
-             .prev, .next { font-size: 16px; padding: 12px; } .slide img { max-height: 400px; }
+             .prev, .next { font-size: 16px; padding: 12px; } .slide img { max-height: 400px; object-fit: cover; }
         }
     </style>
 </head>
@@ -309,15 +320,87 @@
         const slideshowData = {};
         const previewSlideshowData = {};
 
+        // --- Utilities: wait for image to be ready ---
+        function waitForImageLoad(img, timeout = 3000) {
+            return new Promise(resolve => {
+                if (!img) return resolve();
+                if (img.complete && img.naturalWidth) return resolve();
+                const onLoad = () => {
+                    img.removeEventListener('load', onLoad);
+                    img.removeEventListener('error', onLoad);
+                    resolve();
+                };
+                img.addEventListener('load', onLoad);
+                img.addEventListener('error', onLoad);
+                // fallback timeout
+                setTimeout(() => {
+                    img.removeEventListener('load', onLoad);
+                    img.removeEventListener('error', onLoad);
+                    resolve();
+                }, timeout);
+            });
+        }
+
+        // --- Ensure slideshow container has stable height to avoid layout jumps ---
+        function setSlideshowHeight(projectId) {
+            return new Promise(async (resolve) => {
+                const projectItem = document.querySelector(`.project-item[data-project-id="${projectId}"]`);
+                if (!projectItem) return resolve();
+                const container = projectItem.querySelector('.slideshow-container');
+                if (!container) return resolve();
+
+                // pick the first slide img as a reference
+                const firstImg = container.querySelector('.slide img');
+                if (!firstImg) return resolve();
+
+                await waitForImageLoad(firstImg, 4000);
+
+                // if natural size available, compute height proportional to container width
+                const naturalW = firstImg.naturalWidth || firstImg.width || 1;
+                const naturalH = firstImg.naturalHeight || firstImg.height || 1;
+                if (naturalW && naturalH) {
+                    const width = container.clientWidth || container.offsetWidth || 600;
+                    const height = Math.max(120, Math.round(width * naturalH / naturalW)); // ensure min height
+                    container.style.height = height + 'px';
+                } else {
+                    // as fallback, use current image rendered height if available
+                    try {
+                        const rect = firstImg.getBoundingClientRect();
+                        if (rect && rect.height > 0) container.style.height = rect.height + 'px';
+                    } catch (e) { /* ignore */ }
+                }
+
+                // Recompute on window resize for responsiveness
+                const resizeHandler = () => {
+                    const w = container.clientWidth || container.offsetWidth || 600;
+                    const nh = firstImg.naturalHeight || firstImg.height || 1;
+                    const nw = firstImg.naturalWidth || firstImg.width || 1;
+                    if (nw && nh) {
+                        container.style.height = Math.max(120, Math.round(w * nh / nw)) + 'px';
+                    }
+                };
+                // attach once (only if not attached already)
+                if (!container._resizeHandlerAttached) {
+                    window.addEventListener('resize', resizeHandler);
+                    container._resizeHandlerAttached = true;
+                }
+                resolve();
+            });
+        }
+
         // --- Initialize Data ---
         function initializeSlideshow(projectId) {
             if (!slideshowData[projectId]) {
                 const projectItem = document.querySelector(`.project-item[data-project-id="${projectId}"]`);
-                const slides = projectItem.querySelectorAll('.project-details .slide');
-                const captions = Array.from(slides).map(slide => slide.querySelector('img').alt || '');
+                const slides = Array.from(projectItem.querySelectorAll('.project-details .slide'));
+                const captions = slides.map(slide => {
+                    const img = slide.querySelector('img');
+                    return img ? (img.alt || '') : '';
+                });
                 slideshowData[projectId] = {
                     slideIndex: 0, slides: slides, captions: captions, timer: null,
-                    captionElement: projectItem.querySelector('.project-details .caption-container')
+                    captionElement: projectItem.querySelector('.project-details .caption-container'),
+                    containerElement: projectItem.querySelector('.slideshow-container')
                 };
             }
         }
@@ -325,7 +408,7 @@
             if (!previewSlideshowData[projectId]) {
                 const projectItem = document.querySelector(`.project-item[data-project-id="${projectId}"]`);
                 const previewContainer = projectItem.querySelector('.preview-image-container');
-                const previewImages = previewContainer.querySelectorAll('img');
+                const previewImages = Array.from(previewContainer.querySelectorAll('img'));
                 previewSlideshowData[projectId] = {
                     previewIndex: 0, previewImages: previewImages, previewTimer: null
                 };
@@ -360,15 +443,15 @@
              }
         }
 
-        // --- Full Slideshow Logic ---
-        function showSlide(projectId, index) {
+        // --- Full Slideshow Logic (improved: waits for image + stable container height + rAF) ---
+        async function showSlide(projectId, index) {
             initializeSlideshow(projectId);
             const data = slideshowData[projectId];
             if (!data || !data.slides || data.slides.length === 0) return;
             if (index >= data.slides.length) { index = 0; }
             if (index < 0) { index = data.slides.length - 1; }
-        
-            // If same slide requested, do nothing (but still update caption)
+
+            // If same slide requested, only update caption gracefully
             if (data.slideIndex === index) {
                 if (data.captionElement) {
                     data.captionElement.style.opacity = 0;
@@ -379,19 +462,27 @@
                 }
                 return;
             }
-        
+
+            // Ensure slideshow container has stable height first (prevents layout jumps)
+            await setSlideshowHeight(projectId);
+
             // Ensure any preview timer for this project is stopped before changing detail slides
             stopPreviewAutoSlide(projectId);
-        
-            // Remove active on all slides, then add 'active' on the target on next animation frame(s)
+
+            // Wait for target slide's image to load to avoid showing a blank image during the fade
+            const targetSlide = data.slides[index];
+            const targetImg = targetSlide ? targetSlide.querySelector('img') : null;
+            if (targetImg) await waitForImageLoad(targetImg, 3000);
+
+            // Remove 'active' from current slides then add it to target with rAF to ensure transition runs
             data.slides.forEach(slide => slide.classList.remove('active'));
-        
-            // Two rAFs gives the browser a clean paint between removing and adding — helps the animation run.
+
+            // Two rAFs give the browser a frame to paint the "removed" state, ensuring opacity transition triggers
             requestAnimationFrame(() => {
                 requestAnimationFrame(() => {
-                    data.slides[index].classList.add('active');
+                    targetSlide.classList.add('active');
                     data.slideIndex = index;
-        
+
                     if (data.captionElement) {
                         data.captionElement.style.opacity = 0;
                         setTimeout(() => {
@@ -403,11 +494,11 @@
             });
         }
 
-        function manualSlideChange(projectId, n) {
+        async function manualSlideChange(projectId, n) {
              initializeSlideshow(projectId);
             const data = slideshowData[projectId];
              stopAutoSlide(projectId); // Stop main timer
-             showSlide(projectId, data.slideIndex + n);
+             await showSlide(projectId, data.slideIndex + n);
              setTimeout(() => startAutoSlide(projectId), 8000); // Restart main timer after delay
          }
         function startAutoSlide(projectId) {
@@ -433,7 +524,7 @@
 
             startPreviewAutoSlide(projectId); // Start all previews initially
 
-            summary.addEventListener('click', () => {
+            summary.addEventListener('click', async () => {
                 const wasActive = item.classList.contains('active');
                 const list = item.closest('.project-list');
 
@@ -443,6 +534,9 @@
                         otherItem.classList.remove('active');
                         const otherProjectId = otherItem.getAttribute('data-project-id');
                         stopAutoSlide(otherProjectId); // Stop main slideshow
+                        // remove container height so closed projects can collapse cleanly
+                        const otherContainer = otherItem.querySelector('.slideshow-container');
+                        if (otherContainer) otherContainer.style.height = '';
                         startPreviewAutoSlide(otherProjectId); // Restart preview
                     }
                 });
@@ -454,11 +548,16 @@
                     list.classList.add('item-active');
                     stopPreviewAutoSlide(projectId); // Stop THIS preview slide
                     initializeSlideshow(projectId);
-                    showSlide(projectId, 0); // Show first slide immediately
+                    // ensure container height set before showing slide for smoothness
+                    await setSlideshowHeight(projectId);
+                    await showSlide(projectId, 0); // Show first slide immediately (wait until loaded)
                     startAutoSlide(projectId); // Start main slide timer
                 } else { // Item is NOW inactive/closed
                     list.classList.remove('item-active');
                     stopAutoSlide(projectId); // Stop main slide timer
+                    // clear explicit height so it can collapse naturally
+                    const container = item.querySelector('.slideshow-container');
+                    if (container) container.style.height = '';
                     startPreviewAutoSlide(projectId); // Restart preview slide timer
                 }
             });
@@ -501,3 +600,4 @@
 
 </body>
 </html>
+```
