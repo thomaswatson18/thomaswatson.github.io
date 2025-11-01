@@ -57,7 +57,19 @@
         .preview-text { flex-grow: 1; position: relative; }
         .project-preview h3 { font-size: 1.25rem; font-weight: 500; margin-bottom: 5px; color: var(--text-primary); padding-right: 40px; }
         .project-preview .meta { font-size: 0.9rem; color: var(--text-secondary); font-style: italic; font-weight: 300; }
-        .preview-company-logo { position: absolute; top: 0; right: 0; height: 20px; max-width: 80px; opacity: 0.4; filter: grayscale(100%); }
+
+        /* --- Logo: vertically center within header preview --- */
+        .preview-company-logo {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 20px;
+            max-width: 80px;
+            opacity: 0.4;
+            filter: grayscale(100%);
+        }
+
         .preview-icon { display: inline-block; font-size: 1.5rem; color: var(--text-secondary); transition: transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1); margin-left: 15px; flex-shrink: 0; line-height: 1; transform: rotate(0deg); }
         .project-item.active .preview-icon { transform: rotate(-180deg); }
 
@@ -72,9 +84,9 @@
         .project-description p { margin-bottom: 15px; color: #495057; font-weight: 300; }
         .project-description strong { font-weight: 600; color: var(--primary-blue); display: block; margin-bottom: 5px; }
         .project-description p b { font-weight: 500; color: var(--text-primary); }
-        .details-links { margin-top: 25px; }
+         .details-links { margin-top: 25px; }
 
-        /* --- Slideshow Styles (keeps images uncropped; container animates) --- */
+        /* --- Slideshow Styles --- */
         .slideshow-container {
             position: relative;
             max-width: 100%;
@@ -82,6 +94,7 @@
             overflow: hidden;
             border-radius: 12px;
             background-color: #eee;
+            /* we animate height via JS for smoothness */
             transition: height 0.45s cubic-bezier(0.2,0,0.2,1);
         }
         .slide {
@@ -93,10 +106,9 @@
             transition: opacity 0.55s ease;
             pointer-events: none;
         }
-        /* preserve image aspect ratio (no cropping) */
-        .slide img { display: block; width: 100%; height: auto; }
+        .slide img { display: block; width: 100%; height: auto; object-fit: contain; }
         .slide.active { opacity: 1; pointer-events: auto; }
-        .prev, .next { cursor: pointer; position: absolute; top: 50%; transform: translateY(-50%); width: auto; padding: 16px; color: white; font-weight: bold; font-size: 20px; background-color: rgba(0, 0, 0, 0.3); border-radius: 0 3px 3px 0; user-select: none; transition: background-color 0.3s ease; z-index: 5; }
+        .prev, .next { cursor: pointer; position: absolute; top: 50%; transform: translateY(-50%); width: auto; padding: 16px; color: white; font-weight: bold; font-size: 20px; background-color: rgba(0, 0, 0, 0.3); border-radius: 0 3px 3px 0; user-select: none; transition: background-color 0.3s ease; }
         .next { right: 0; border-radius: 3px 0 0 3px; }
         .prev:hover, .next:hover { background-color: rgba(0, 0, 0, 0.6); }
 
@@ -109,12 +121,8 @@
              .project-item.active .project-details { padding: 20px; } .preview-image-container { width: 70px; height: 70px; border-radius: 8px;}
              .project-preview h3 { font-size: 1.1rem; padding-right: 30px; } .project-preview .meta { font-size: 0.85rem;}
              .preview-company-logo { height: 16px; } .preview-icon { margin-left: 10px; font-size: 1.2rem; }
-             .prev, .next { font-size: 16px; padding: 12px; } .slide img { max-height: 400px; }
+             .prev, .next { font-size: 16px; padding: 12px; } .slide img { max-height: 400px; object-fit: contain; }
         }
-
-        /* helper while we animate collapse so details don't peek */
-        .project-item.closing .project-details { overflow: hidden; }
-
     </style>
 </head>
 <body>
@@ -300,7 +308,6 @@
                  <div class="slideshow-container">
                       <div class="slide active"><img src="images/powerbi.png" alt="Data flow: Python to VBA to Power BI"></div>
                      <div class="slide"><img src="images/rtx-automation.png" alt="Process automation flowchart for SAP data extraction"></div>
-                     <div class="slide"><img src="images/sap-screenshot.png" alt="Example SAP Interface"></div>
                      <a class="prev" onclick="manualSlideChange('rtx-auto', -1)">&#10094;</a>
                      <a class="next" onclick="manualSlideChange('rtx-auto', 1)">&#10095;</a>
                  </div>
