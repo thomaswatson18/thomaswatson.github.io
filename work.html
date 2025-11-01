@@ -429,7 +429,7 @@
                     list.classList.add('item-active');
                     stopPreviewAutoSlide(projectId); // Stop THIS preview slide
                     initializeSlideshow(projectId);
-ShowSlide(projectId, 0); // Show first slide immediately
+                    showSlide(projectId, 0); // Show first slide immediately
                     startAutoSlide(projectId); // Start main slide timer
                 } else { // Item is NOW inactive/closed
                     list.classList.remove('item-active');
@@ -452,4 +452,27 @@ ShowSlide(projectId, 0); // Show first slide immediately
                 const hashId = window.location.hash ? decodeURIComponent(window.location.hash.substring(1)) : '';
                 const params = new URLSearchParams(window.location.search);
                 const projParam = params.get('project') ? decodeURIComponent(params.get('project')) : '';
-                const targetId = hashId || projPa
+                const targetId = hashId || projParam;
+                if (!targetId) return;
+
+                // Find the preview element for the project id
+                const targetPreview = document.querySelector(`.project-item[data-project-id="${targetId}"] .project-preview`);
+                if (targetPreview) {
+                    // small delay to ensure initial preview timers/handlers are set up
+                    setTimeout(() => {
+                        // emulate a user click to open the accordion (reuses existing logic)
+                        targetPreview.click();
+                        // scroll the opened project into view, centered if possible
+                        try { targetPreview.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (e) { /* ignore on unsupported browsers */ }
+                    }, 120);
+                }
+            } catch (e) {
+                // Fail silently if anything goes wrong — don't break the rest of the page
+                console.error('openProjectFromURL error:', e);
+            }
+        })();
+
+    </script>
+
+</body>
+</html>
