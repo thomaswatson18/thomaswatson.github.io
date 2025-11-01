@@ -446,7 +446,10 @@ ShowSlide(projectId, 0); // Show first slide immediately
              styleSheet.insertRule('.project-list.item-active .project-item:not(.active) { transition: opacity 0.4s ease, max-height 0.4s ease, margin-bottom 0.4s ease, border-color 0.4s ease, background-color 0.4s ease, box-shadow 0.4s ease; }', styleSheet.cssRules.length);
          } catch (e) { console.error("Could not insert CSS rule: ", e); }
 
-    </script>
-
-</body>
-</html>
+        // --- NEW: Open specific project on page load if hash or ?project= is present ---
+        (function openProjectFromURL() {
+            try {
+                const hashId = window.location.hash ? decodeURIComponent(window.location.hash.substring(1)) : '';
+                const params = new URLSearchParams(window.location.search);
+                const projParam = params.get('project') ? decodeURIComponent(params.get('project')) : '';
+                const targetId = hashId || projPa
