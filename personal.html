@@ -55,7 +55,8 @@
     .back-link:hover { color: var(--primary-blue); opacity: 1; }
     .projects {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      /* --- MODIFIED: Set to 2 columns to match academic.html --- */
+      grid-template-columns: repeat(2, 1fr);
       gap: 25px;
       max-width: 1200px; /* Increased max-width */
       margin: 0 auto;
@@ -74,7 +75,6 @@
       transform: translateY(-6px);
       box-shadow: 0 6px 20px rgba(0, 0, 255, 0.15);
     }
-    /* OLD .card img { width: 100%; border-radius: 10px; margin-bottom: 15px; } */
     .meta { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 15px; font-style: italic; }
     .card p { margin-bottom: 10px; color: #495057; }
     .card strong { color: var(--primary-blue); font-weight: 600; display: block; margin-bottom: 5px; } /* Updated strong */
@@ -140,6 +140,10 @@
 
     /* --- Responsive Adjustments --- */
     @media (max-width: 768px) {
+        /* --- MODIFIED: Added stacking for 2-column layout --- */
+        .projects {
+            grid-template-columns: 1fr;
+        }
         .prev, .next { font-size: 16px; padding: 12px; }
         .slide img { max-height: 400px; }
     }
@@ -154,6 +158,28 @@
 
   <section class="projects">
 
+    <article class="card" data-project-id="robot-hand-project"> 
+      <div class="slideshow-container">
+        <div class="slide"><img src="images/cover.jpg" alt="Overview of the hand-tracking AI and the corresponding 3D-modeled robotic hand"></div>
+        <div class="slide"><img src="images/robot_hand_draft.png" alt="SolidWorks CAD draft of the 10-DOF robotic hand with dual-servo actuation"></div>
+        <div class="slide"><img src="images/handtracking2.jpg" alt="The live project setup: computer vision, Raspberry Pi, and servo testbed"></div>
+        <a class="prev" onclick="manualSlideChange('robot-hand-project', -1)">&#10094;</a>
+        <a class="next" onclick="manualSlideChange('robot-hand-project', 1)">&#10095;</a>
+      </div>
+      <div class="caption-container"></div> 
+      <h3>AI-Powered Robotic Hand</h3>
+      <p class="meta">Skills: Computer Vision, Mechanical Design, SolidWorks, Python, Raspberry Pi</p>
+      
+      <p>
+        <strong>Challenge:</strong> To build a complex, 10-DOF animatronic hand from scratch, controlled in real-time by my own hand gestures via a computer vision system.
+      </p>
+      <p>
+        <strong>My Solution:</strong> I am building a full-stack solution. The control system, written in Python, uses a Raspberry Pi and MediaPipe to perform real-time hand landmark detection from a camera feed. This data is processed and mapped to 10 servo motors on a PCA9685 driver. The mechanical design is a custom 5-finger, 10-DOF hand with an active push-pull tendon design derived from <a href="https://github.com/pollen-robotics/AmazingHand/tree/main" target="_blank">this Github repository, developed by Pollen Robotics</a>.
+      </p>
+      <p>
+        <strong>Results (In Progress):</strong> The computer vision and 10-servo control systems are fully functional, and the core mechanical design has been drafted and customized in SolidWorks. The next phase is 3D printing, assembly, and final integration.
+      </p>
+    </article>
     <article class="card" data-project-id="controller-project"> 
       <div class="slideshow-container">
         <div class="slide active"><img src="images/controller-project.png" alt="CAD rendering of the initial controller design"></div>
@@ -190,7 +216,7 @@
     <p>
       <a href="images/resume.pdf" target="_blank"> Download Resume</a> ·
       <a href="mailto:thomaswatson1188@gmail.com">Email Me</a> ·
-      <a href="httpsTo://linkedin.com/in/thomaswatsonn" target="_blank">LinkedIn</a>
+      <a href="https://linkedin.com/in/thomaswatsonn" target="_blank">LinkedIn</a>
     </p>
     <p>© 2025 Thomas Watson</p>
   </footer>
@@ -261,12 +287,15 @@
         }
     }
 
-    // --- Auto-initialize and start the slideshow on page load ---
+    // --- MODIFIED: Auto-initialize ALL slideshows on page load ---
     document.addEventListener('DOMContentLoaded', () => {
-        const projectId = 'controller-project';
-        initializeSlideshow(projectId);
-        showSlide(projectId, 0); // Show first slide immediately
-        startAutoSlide(projectId); // Start auto-slide
+        const projectCards = document.querySelectorAll('.card[data-project-id]');
+        projectCards.forEach(card => {
+            const projectId = card.dataset.projectId;
+            initializeSlideshow(projectId);
+            showSlide(projectId, 0); // Show first slide immediately
+            startAutoSlide(projectId); // Start auto-slide for each
+        });
     });
   </script>
 
