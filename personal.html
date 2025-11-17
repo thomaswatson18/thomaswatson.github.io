@@ -80,6 +80,21 @@
     .card strong { color: var(--primary-blue); font-weight: 600; display: block; margin-bottom: 5px; } /* Updated strong */
     .links { margin-top: auto; /* Pushes links to the bottom */ }
 
+    /* --- NEW CSS RULE FOR IN-PARAGRAPH LINKS --- */
+    .card p a {
+      color: var(--text-primary); /* Use primary text color, not blue */
+      font-weight: 400; /* Slightly bolder than text, but not a full link */
+      text-decoration: underline; /* Add underline */
+      transition: color 0.2s ease, opacity 0.2s ease;
+    }
+    .card p a:hover {
+      color: var(--primary-blue); /* On hover, make it blue */
+      opacity: 1; /* Override the default link hover opacity */
+      text-decoration: underline; /* Keep underline on hover */
+    }
+    /* --- END NEW RULE --- */
+
+
     /* --- NEW: Slideshow Styles --- */
     .slideshow-container { 
         position: relative; 
@@ -158,8 +173,10 @@
 
   <section class="projects">
 
+    <!-- === NEW PROJECT: ROBOT HAND === -->
     <article class="card" data-project-id="robot-hand-project"> 
       <div class="slideshow-container">
+        <!-- --- IMAGE PATHS UPDATED TO .png --- -->
         <div class="slide"><img src="images/cover.png" alt="Overview of the hand-tracking AI and the corresponding 3D-modeled robotic hand"></div>
         <div class="slide"><img src="images/robot_hand_draft.png" alt="SolidWorks CAD draft of the 10-DOF robotic hand with dual-servo actuation"></div>
         <div class="slide"><img src="images/handtracking2.png" alt="The live project setup: computer vision, Raspberry Pi, and servo testbed"></div>
@@ -180,6 +197,8 @@
         <strong>Results (In Progress):</strong> The computer vision and 10-servo control systems are fully functional, and the core mechanical design has been drafted and customized in SolidWorks. The next phase is 3D printing, assembly, and final integration.
       </p>
     </article>
+    <!-- === END NEW PROJECT === -->
+
     <article class="card" data-project-id="controller-project"> 
       <div class="slideshow-container">
         <div class="slide active"><img src="images/controller-project.png" alt="CAD rendering of the initial controller design"></div>
