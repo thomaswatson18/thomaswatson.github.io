@@ -80,7 +80,8 @@
     .card strong { color: var(--primary-blue); font-weight: 600; display: block; margin-bottom: 5px; } /* Updated strong */
     .links { margin-top: auto; /* Pushes links to the bottom */ }
 
-    /* --- NEW CSS RULE FOR IN-PARAGRAPH LINKS --- */
+    /* --- CSS RULE FOR IN-PARAGRAPH LINKS --- */
+    /* (This rule is no longer needed but kept for potential future use) */
     .card p a {
       color: var(--text-primary); /* Use primary text color, not blue */
       font-weight: 400; /* Slightly bolder than text, but not a full link */
@@ -187,15 +188,21 @@
       <h3>AI-Powered Robotic Hand</h3>
       <p class="meta">Skills: Computer Vision, Mechanical Design, SolidWorks, Python, Raspberry Pi</p>
       
+      <!-- === UPDATED TEXT BLOCK === -->
       <p>
-        <strong>Challenge:</strong> To build a complex, 10-DOF animatronic hand from scratch, controlled in real-time by my own hand gestures via a computer vision system.
+        <strong>Challenge:</strong> To engineer a 7-DOF biomimetic robotic hand from first principles, integrating a real-time computer vision control system to achieve high-fidelity, one-to-one motion mimicry.
       </p>
       <p>
-        <strong>My Solution:</strong> I am building a full-stack solution. The control system, written in Python, uses a Raspberry Pi and MediaPipe to perform real-time hand landmark detection from a camera feed. This data is processed and mapped to 10 servo motors on a PCA9685 driver. The mechanical design is a custom 5-finger, 10-DOF hand with an active push-pull tendon design derived from <a href="https://github.com/pollen-robotics/AmazingHand/tree/main" target="_blank">this Github repository, developed by Pollen Robotics</a>.
+        <strong>My Solution:</strong> I am developing a full-stack solution, from mechanical design to AI implementation. The control system, built in Python, runs on a Raspberry Pi and utilizes the MediaPipe framework to perform real-time, scale-invariant 3D landmark detection of my hand via a webcam. This high-dimensional pose data is processed through a custom tuning and ratio-based logic layer, which I developed to map complex hand gestures to 7 discrete servo motors on a PCA9685 driver.
       </p>
       <p>
-        <strong>Results (In Progress):</strong> The computer vision and 10-servo control systems are fully functional, and the core mechanical design has been drafted and customized in SolidWorks. The next phase is 3D printing, assembly, and final integration.
+        <strong>Mechanical Design:</strong> The 7-DOF hand is a fully custom design I am engineering in SolidWorks. It features a robust, antagonistic tendon system: servo-driven fishing line provides high-torque flexion (closing), while an elastic cord return system provides passive extension (opening).
       </p>
+      <p>
+        <strong>Results (In Progress):</strong> The core computer vision, 7-servo control logic, and live-streaming video feedback systems are fully functional and tuned. The custom mechanical design is drafted, and the project is moving into the fabrication and assembly phase.
+      </p>
+      <!-- === END UPDATED TEXT BLOCK === -->
+
     </article>
     <!-- === END NEW PROJECT === -->
 
