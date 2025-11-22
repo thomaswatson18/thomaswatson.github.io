@@ -141,7 +141,7 @@
         header {
             text-align: center;
             max-width: 800px;
-            margin: 20px auto 40px auto; /* Reduced from 70px top / 60px bottom */
+            margin: 20px auto 40px auto;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -213,7 +213,7 @@
 
         .project-highlights {
             max-width: 1100px;
-            margin: 0 auto 80px auto; /* Adjusted margin slightly */
+            margin: 0 auto 80px auto;
             text-align: center;
         }
         .project-highlights h2 {
@@ -290,13 +290,12 @@
             margin: 0 auto;
         }
 
-        /* --- MODIFIED: Personal Projects Vertical Stack --- */
         #view-personal .projects {
-            grid-template-columns: 1fr; /* Stack vertically */
-            max-width: 900px; /* Constrain width */
+            grid-template-columns: 1fr; 
+            max-width: 900px; 
         }
 
-        /* Card Styles for Personal/School */
+        /* Card Styles */
         .card {
             background: var(--card-background);
             border: 1px solid var(--border-color);
@@ -307,10 +306,7 @@
             transition: transform 0.2s ease, box-shadow 0.2s ease;
             box-shadow: 0 4px 15px rgba(0,0,0,0.06);
         }
-        /* Disabled hover transform for personal cards to avoid jumpiness when toggling */
-        #view-personal .card:hover {
-            transform: none;
-        }
+        #view-personal .card:hover { transform: none; }
         #view-school .card:hover {
             transform: translateY(-6px);
             box-shadow: 0 6px 20px rgba(0, 0, 255, 0.15);
@@ -342,7 +338,7 @@
             opacity: 0;
         }
         .card.expanded .personal-description-wrapper {
-            max-height: 4000px; /* Arbitrary large height to allow full expansion */
+            max-height: 4000px;
             opacity: 1;
         }
         
@@ -360,40 +356,20 @@
             font-weight: 500;
             transition: background-color 0.2s ease;
         }
-        .personal-toggle-bar:hover {
-            background-color: #e9ecef;
-        }
-        .personal-toggle-icon {
-            margin-left: 8px;
-            transition: transform 0.3s ease;
-        }
-        .card.expanded .personal-toggle-icon {
-            transform: rotate(180deg);
-        }
+        .personal-toggle-bar:hover { background-color: #e9ecef; }
+        .personal-toggle-icon { margin-left: 8px; transition: transform 0.3s ease; }
+        .card.expanded .personal-toggle-icon { transform: rotate(180deg); }
 
         /* Data Table */
         .data-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 15px 0;
-            font-size: 0.85rem;
-            color: #495057;
+            width: 100%; border-collapse: collapse; margin: 15px 0;
+            font-size: 0.85rem; color: #495057;
         }
         .data-table th, .data-table td {
-            border: 1px solid var(--border-light);
-            padding: 8px;
-            text-align: center;
+            border: 1px solid var(--border-light); padding: 8px; text-align: center;
         }
-        .data-table th {
-            background-color: #f1f3f5;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-        .data-table td:first-child {
-            font-weight: 500;
-            text-align: left;
-            padding-left: 12px;
-        }
+        .data-table th { background-color: #f1f3f5; font-weight: 600; color: var(--text-primary); }
+        .data-table td:first-child { font-weight: 500; text-align: left; padding-left: 12px; }
 
         /* --- WORK.HTML SPECIFIC STYLES (Accordion) --- */
         .project-list { max-width: 900px; margin: 0 auto; list-style: none; }
@@ -427,13 +403,8 @@
 
         .preview-company-logo {
             position: absolute;
-            right: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            height: 20px;
-            max-width: 80px;
-            opacity: 0.4;
-            filter: grayscale(100%);
+            right: 0; top: 50%; transform: translateY(-50%);
+            height: 20px; max-width: 80px; opacity: 0.4; filter: grayscale(100%);
         }
         .preview-icon { display: inline-block; font-size: 1.5rem; color: var(--text-secondary); transition: transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1); margin-left: 15px; flex-shrink: 0; line-height: 1; transform: rotate(0deg); }
         .project-item.active .preview-icon { transform: rotate(-180deg); }
@@ -450,7 +421,7 @@
         .project-description p b { font-weight: 500; color: var(--text-primary); }
         .details-links { margin-top: 25px; }
 
-        /* --- SLIDESHOW STYLES (Shared but logic is split) --- */
+        /* --- SLIDESHOW STYLES --- */
         .slideshow-container { 
             position: relative; 
             max-width: 100%; 
@@ -458,22 +429,15 @@
             overflow: hidden; 
             border-radius: 12px;
             background-color: #eee; 
-            /* For Work page smooth animation */
             transition: height 0.45s cubic-bezier(0.2,0,0.2,1);
         }
-        /* Personal Page Slideshow specific */
         .personal-slide { display: none; width: 100%; animation: fadeEffect 0.8s ease; }
         .personal-slide img { display: block; width: 100%; height: auto; max-height: 550px; object-fit: cover; }
         .personal-slide.active { display: block; }
 
-        /* Work Page Slideshow specific */
         .work-slide {
-            position: absolute;
-            left: 0; top: 0;
-            width: 100%;
-            opacity: 0;
-            transition: opacity 0.55s ease;
-            pointer-events: none;
+            position: absolute; left: 0; top: 0; width: 100%;
+            opacity: 0; transition: opacity 0.55s ease; pointer-events: none;
         }
         .work-slide img { display: block; width: 100%; height: auto; object-fit: contain; }
         .work-slide.active { opacity: 1; pointer-events: auto; }
@@ -481,42 +445,19 @@
         @keyframes fadeEffect { from { opacity: 0.4; } to { opacity: 1; } }
         
         .prev, .next { 
-            cursor: pointer; 
-            position: absolute; 
-            top: 50%; 
-            transform: translateY(-50%); 
-            width: auto; 
-            padding: 16px; 
-            color: white; 
-            font-weight: bold; 
-            font-size: 20px; 
-            background-color: rgba(0, 0, 0, 0.3); 
-            border-radius: 0 3px 3px 0; 
-            user-select: none; 
-            transition: background-color 0.3s ease; 
-            z-index: 10;
+            cursor: pointer; position: absolute; top: 50%; transform: translateY(-50%); width: auto; padding: 16px; color: white; font-weight: bold; font-size: 20px; background-color: rgba(0, 0, 0, 0.3); border-radius: 0 3px 3px 0; user-select: none; transition: background-color 0.3s ease; z-index: 10;
         }
         .next { right: 0; border-radius: 3px 0 0 3px; }
         .prev:hover, .next:hover { background-color: rgba(0, 0, 0, 0.6); }
 
         .caption-container { 
-            text-align: center; 
-            padding: 10px 0 5px 0; 
-            color: var(--text-secondary); 
-            font-size: 0.9rem; 
-            min-height: 1.5em; 
-            font-style: italic; 
-            transition: opacity 0.15s ease-in-out; 
+            text-align: center; padding: 10px 0 5px 0; color: var(--text-secondary); font-size: 0.9rem; min-height: 1.5em; font-style: italic; transition: opacity 0.15s ease-in-out; 
         }
 
         /* --- Footer --- */
         footer {
-            margin-top: 80px;
-            padding-top: 30px;
-            border-top: 1px solid #e0e0e0;
-            color: #6c757d;
-            font-size: 0.9rem;
-            text-align: center;
+            margin-top: 80px; padding-top: 30px; border-top: 1px solid #e0e0e0;
+            color: #6c757d; font-size: 0.9rem; text-align: center;
         }
         footer p { margin-bottom: 10px; }
         
@@ -529,7 +470,6 @@
             .projects { grid-template-columns: 1fr; }
             #view-personal .projects { max-width: 100%; }
             
-            /* Work specific mobile */
             .project-preview { padding: 15px; gap: 15px; }
             .project-item.active .project-details { padding: 20px; } 
             .preview-image-container { width: 70px; height: 70px; }
@@ -559,7 +499,6 @@
                     <a href="#" title="RTX"><img src="images/logo-rtx.png" alt="RTX logo" onerror="this.src='https://placehold.co/140x35?text=RTX'"></a>
                     <a href="#" title="Dalhousie"><img src="images/logo-dalhousie.png" alt="Dalhousie logo" onerror="this.src='https://placehold.co/140x35?text=Dalhousie'"></a>
                     <a href="#" title="DALIS"><img src="images/logo-dalis.png" alt="DALIS logo" onerror="this.src='https://placehold.co/140x35?text=DALIS'"></a>
-                    <!-- Duplicates for loop -->
                     <a href="#" title="Tesla"><img src="images/logo-tesla.png" alt="Tesla logo" onerror="this.src='https://placehold.co/140x35?text=Tesla'"></a>
                     <a href="#" title="Lockheed Martin"><img src="images/logo-lockheed.png" alt="Lockheed logo" onerror="this.src='https://placehold.co/140x35?text=Lockheed'"></a>
                     <a href="#" title="RTX"><img src="images/logo-rtx.png" alt="RTX logo" onerror="this.src='https://placehold.co/140x35?text=RTX'"></a>
@@ -588,7 +527,8 @@
             <section class="project-highlights">
                 <h2>Project Highlights</h2>
                 <div class="highlights-grid">
-                    <a href="personal.html" class="highlight-item">
+                    <!-- MODIFIED LINKS FOR DEEP LINKING -->
+                    <a href="personal.html#robot-hand-project" class="highlight-item">
                         <img src="images/cover_final.png" alt="AI Powered Robot Hand" onerror="this.src='https://placehold.co/300x200?text=Robot+Hand'">
                          <div class="highlight-overlay"><span>From-Scratch AI Vision Robot Hand</span></div>
                     </a>
@@ -596,7 +536,7 @@
                         <img src="images/tesla-cybertruck-seats.png" alt="Tesla Cybertruck Seat Assembly Cell" onerror="this.src='https://placehold.co/300x200?text=Tesla+Seats'">
                         <div class="highlight-overlay"><span>Cybertruck Robotic Cell Re-Design @ Tesla</span></div>
                     </a>
-                    <a href="personal.html" class="highlight-item">
+                    <a href="personal.html#controller-project" class="highlight-item">
                         <img src="images/controller-project.png" alt="Custom Arduino/Matlab Controller" onerror="this.src='https://placehold.co/300x200?text=Controller'">
                          <div class="highlight-overlay"><span>Custom Arduino/MATLAB Video Game System</span></div>
                     </a>
@@ -1058,15 +998,35 @@
             const link = e.target.closest('a');
             if (link) {
                 const href = link.getAttribute('href');
-                if (href === 'index.html') {
+                if (!href) return;
+
+                // Handle Personal Page with potential Hash
+                if (href.startsWith('personal.html')) {
+                    e.preventDefault();
+                    showView('view-personal');
+                    
+                    // Check for hash in the href (e.g. "personal.html#robot-hand-project")
+                    if (href.includes('#')) {
+                        const hash = href.split('#')[1];
+                        const targetCard = document.querySelector(`.card[data-personal-id="${hash}"]`);
+                        if (targetCard) {
+                            if (!targetCard.classList.contains('expanded')) {
+                                const toggleBtn = targetCard.querySelector('.personal-toggle-bar');
+                                if (toggleBtn) togglePersonalDescription(toggleBtn);
+                            }
+                            setTimeout(() => {
+                                targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            }, 100);
+                        }
+                    }
+                } 
+                // Handle other links
+                else if (href === 'index.html') {
                     e.preventDefault();
                     showView('view-index');
                 } else if (href === 'work.html') {
                     e.preventDefault();
                     showView('view-work');
-                } else if (href === 'personal.html') {
-                    e.preventDefault();
-                    showView('view-personal');
                 } else if (href === 'school.html') {
                     e.preventDefault();
                     showView('view-school');
