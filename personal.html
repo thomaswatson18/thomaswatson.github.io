@@ -196,7 +196,7 @@
     <!-- === NEW PROJECT: ROBOT HAND === -->
     <article class="card" data-project-id="robot-hand-project"> 
       <div class="slideshow-container">
-        <div class="slide"><img src="images/cover_final.png" alt="Project Overview: CAD model, hand-tracking AI interface, and the finalized robotic hand"></div>
+        <div class="slide"><img src="images/cover final.png" alt="Project Overview: CAD model, hand-tracking AI interface, and the finalized robotic hand"></div>
         <div class="slide"><img src="images/peace.png" alt="Real-time Demo: V1.1 hand successfully mimicking a 'peace' gesture via the Pi's AI interface"></div>
         <div class="slide"><img src="images/handfrontback.png" alt="Mechanical Detail: Front and back views showcasing the custom 10-DOF antagonistic tendon design"></div>
         <div class="slide"><img src="images/iterations.png" alt="Design Evolution: A timeline of 3D-printed prototypes from initial drafts to the current V1.1 model"></div>
@@ -211,13 +211,15 @@
         <strong>Challenge:</strong> To engineer a biomimetic, 10-Degree-of-Freedom (DOF) robotic hand from first principles, capable of high-fidelity, real-time motion mimicry controlled solely by a human hand and a camera.
       </p>
       <p>
-        <strong>My Solution:</strong> I developed a full-stack robotic system. The control architecture, running on a Raspberry Pi, uses MediaPipe for real-time 3D hand tracking. I invested significant effort into the control logic, engineering a custom ratio-based tuning algorithm to filter high-dimensional pose data into smooth, jitter-free servo commands. This allows for scale-invariant control, meaning the hand mimics gestures accurately regardless of my hand's distance from the camera.
+        <strong>My Solution:</strong> I developed a complete, full-stack robotic system. The control architecture, running on a Raspberry Pi, uses MediaPipe for real-time 3D hand tracking. I invested significant effort into the control logic, engineering a custom ratio-based tuning algorithm to filter high-dimensional pose data into smooth, jitter-free servo commands. This allows for scale-invariant control, meaning the hand mimics gestures accurately regardless of my hand's distance from the camera.
+      </p>
+      
+      <!-- === REWRITTEN MECHANICAL DESIGN SECTION === -->
+      <p>
+        <strong>Mechanical Design (Version 2.0):</strong> My design process was highly iterative. I initially experimented with a "tendonless" printed-linkage design, but I found that the friction inherent in FDM 3D prints made the motion jerky and unreliable. I pivoted to an antagonistic tendon system using high-strength fishing line (flexion) and elastic cord (extension), which proved far more robust.
       </p>
       <p>
-        <strong>Mechanical Design (Version 2.0):</strong> The current design represents the culmination of four major iterations. While the initial concept was derived from <a href="https://github.com/pollen-robotics/AmazingHand/tree/main" target="_blank">this Github repository by Pollen Robotics</a>, I found the proportions lacking for my specific needs. I conducted rigorous research into human anthropometry, specifically focusing on the 1 : 1.3 : 2.3 phalanx ratio common in adult hands.
-      </p>
-      <p>
-        Using the middle finger's proximal phalanx as a fixed anchor, I calculated precise length adjustments (Deltas) for every segment to optimize the kinematic chain for realism. I also accounted for the specific 20x25mm girth constraints of my printed parts. The final dimensional adjustments I implemented are:
+        I started by perfecting the geometry of a single finger. Through rapid prototyping and testing, I converged on a proximal/distal joint design that naturally sits at a slight resting angle, mimicking human anatomy. Once the mechanics were solid, I researched anthropometric data on human finger ratios (1 : 1.3 : 2.3) to scale this single finger design into a full hand. I adjusted the extruded lengths of each proximal phalanx to match real-life proportions and designed the palm layout based on measurements of my own hand to ensure natural spacing.
       </p>
       
       <!-- Dimensional Table -->
@@ -240,12 +242,9 @@
       </table>
 
       <p>
-        This optimized geometry features an antagonistic tendon system: high-strength fishing line acts as the flexor tendons driven by the servos, while a calibrated elastic cord system provides passive extension.
-      </p>
-
-      <p>
         <strong>Results (In Progress):</strong> The V1.1 prototype is fully functional. The computer vision pipeline, adaptive control logic, and live-streaming video feedback systems are complete and tuned. The mechanical assembly has successfully demonstrated real-time gesture mimicry, and I am currently engineering <strong>Version 3</strong> to integrate a 2-DOF thumb for opposition and a 2-DOF wrist for complex manipulation.
       </p>
+
     </article>
     <!-- === END NEW PROJECT === -->
 
