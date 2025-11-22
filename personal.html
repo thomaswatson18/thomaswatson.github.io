@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Personal Projects — Thomas Watson</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <!-- Added Font Awesome for Toggle Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <style>
     /* --- Global Styles --- */
@@ -53,13 +55,17 @@
       transition: color 0.2s ease;
     }
     .back-link:hover { color: var(--primary-blue); opacity: 1; }
+    
     .projects {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 25px;
-      max-width: 1200px;
+      /* CHANGED: Stack vertically in 1 column */
+      grid-template-columns: 1fr; 
+      gap: 35px;
+      /* CHANGED: Reduced max-width for better vertical reading */
+      max-width: 900px; 
       margin: 0 auto;
     }
+    
     .card {
       background: var(--card-background);
       border: 1px solid var(--border-color);
@@ -70,16 +76,16 @@
       transition: transform 0.2s ease, box-shadow 0.2s ease;
       box-shadow: 0 4px 15px rgba(0,0,0,0.06);
     }
+    /* Disabled hover lift since these are now expandable interactables */
     .card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 6px 20px rgba(0, 0, 255, 0.15);
+      box-shadow: 0 6px 20px rgba(0, 0, 255, 0.1);
     }
+    
     .meta { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 15px; font-style: italic; }
     .card p { margin-bottom: 10px; color: #495057; }
     .card strong { color: var(--primary-blue); font-weight: 600; display: block; margin-bottom: 5px; }
     .links { margin-top: auto; }
 
-    /* --- NEW CSS RULE FOR IN-PARAGRAPH LINKS --- */
     .card p a {
       color: var(--text-primary);
       font-weight: 400;
@@ -92,7 +98,46 @@
       text-decoration: underline;
     }
 
-    /* --- NEW CSS FOR DATA TABLES --- */
+    /* --- NEW: DESCRIPTION TOGGLE STYLES --- */
+    .description-wrapper {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.6s ease-in-out, opacity 0.4s ease-in-out;
+        opacity: 0;
+    }
+    /* When expanded class is added via JS */
+    .card.expanded .description-wrapper {
+        max-height: 4000px; /* Large enough to fit content */
+        opacity: 1;
+    }
+    
+    .toggle-bar {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: 12px;
+        margin-top: 15px;
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        cursor: pointer;
+        color: var(--primary-blue);
+        font-weight: 500;
+        transition: background-color 0.2s ease;
+        user-select: none;
+    }
+    .toggle-bar:hover {
+        background-color: #e9ecef;
+    }
+    .toggle-icon {
+        margin-left: 8px;
+        transition: transform 0.3s ease;
+    }
+    .card.expanded .toggle-icon {
+        transform: rotate(180deg);
+    }
+
+    /* --- DATA TABLES --- */
     .data-table {
       width: 100%;
       border-collapse: collapse;
@@ -176,9 +221,6 @@
 
     /* --- Responsive Adjustments --- */
     @media (max-width: 768px) {
-        .projects {
-            grid-template-columns: 1fr;
-        }
         .prev, .next { font-size: 16px; padding: 12px; }
         .slide img { max-height: 400px; }
     }
@@ -193,7 +235,7 @@
 
   <section class="projects">
 
-    <!-- === NEW PROJECT: ROBOT HAND === -->
+    <!-- === PROJECT: ROBOT HAND === -->
     <article class="card" data-project-id="robot-hand-project"> 
       <div class="slideshow-container">
         <div class="slide"><img src="images/cover_final.png" alt="Project Overview: CAD model, hand-tracking AI interface, and the finalized robotic hand"></div>
@@ -204,50 +246,59 @@
         <a class="next" onclick="manualSlideChange('robot-hand-project', 1)">&#10095;</a>
       </div>
       <div class="caption-container"></div> 
+      
       <h3>AI-Powered Robotic Hand</h3>
       <p class="meta">Skills: Computer Vision, Mechanical Design, SolidWorks, Python, Raspberry Pi</p>
       
-      <p>
-        <strong>Challenge:</strong> To engineer a biomimetic, 10-Degree-of-Freedom (DOF) robotic hand from first principles, capable of high-fidelity, real-time motion mimicry controlled solely by a human hand and a camera.
-      </p>
-      <p>
-        <strong>My Solution:</strong> I developed a complete, full-stack robotic system. The control architecture, running on a Raspberry Pi, uses MediaPipe for real-time 3D hand tracking. I invested significant effort into the control logic, engineering a custom ratio-based tuning algorithm to filter high-dimensional pose data into smooth, jitter-free servo commands. This allows for scale-invariant control, meaning the hand mimics gestures accurately regardless of my hand's distance from the camera.
-      </p>
-      
-      <!-- === REWRITTEN MECHANICAL DESIGN SECTION === -->
-      <p>
-        <strong>Mechanical Design (Version 2.0):</strong> My design process was highly iterative. I initially experimented with a "tendonless" printed-linkage design, but I found that the friction inherent in FDM 3D prints made the motion jerky and unreliable. I pivoted to an antagonistic tendon system using high-strength fishing line (flexion) and elastic cord (extension), which proved far more robust.
-      </p>
-      <p>
-        I started by perfecting the geometry of a single finger. Through rapid prototyping and testing, I converged on a proximal/distal joint design that naturally sits at a slight resting angle, mimicking human anatomy. Once the mechanics were solid, I researched anthropometric data on human finger ratios (1 : 1.3 : 2.3) to scale this single finger design into a full hand. I adjusted the extruded lengths of each proximal phalanx to match real-life proportions and designed the palm layout based on measurements of my own hand to ensure natural spacing.
-      </p>
-      
-      <!-- Dimensional Table -->
-      <table class="data-table">
-        <thead>
-          <tr>
-            <th>Finger</th>
-            <th>Proximal Δ</th>
-            <th>Middle Δ</th>
-            <th>Distal Δ</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>Thumb</td><td>−5.60 mm</td><td>N/A</td><td>−10.43 mm</td></tr>
-          <tr><td>Index</td><td>−3.89 mm</td><td>−12.32 mm</td><td>−10.43 mm</td></tr>
-          <tr><td>Middle</td><td>0.00 mm</td><td>−12.32 mm</td><td>−10.43 mm</td></tr>
-          <tr><td>Ring</td><td>−2.97 mm</td><td>−12.32 mm</td><td>−10.43 mm</td></tr>
-          <tr><td>Little</td><td>−9.96 mm</td><td>−12.32 mm</td><td>−10.43 mm</td></tr>
-        </tbody>
-      </table>
+      <!-- TOGGLE BAR -->
+      <div class="toggle-bar" onclick="toggleDescription(this)">
+          <span>View Details</span>
+          <i class="fas fa-chevron-down toggle-icon"></i>
+      </div>
 
-      <p>
-        <strong>Results (In Progress):</strong> The V1.1 prototype is fully functional. The computer vision pipeline, adaptive control logic, and live-streaming video feedback systems are complete and tuned. The mechanical assembly has successfully demonstrated real-time gesture mimicry, and I am currently engineering <strong>Version 3</strong> to integrate a 2-DOF thumb for opposition and a 2-DOF wrist for complex manipulation.
-      </p>
+      <!-- HIDDEN CONTENT -->
+      <div class="description-wrapper">
+          <div style="padding-top: 20px;">
+              <p>
+                <strong>Challenge:</strong> To engineer a biomimetic, 10-Degree-of-Freedom (DOF) robotic hand from first principles, capable of high-fidelity, real-time motion mimicry controlled solely by a human hand and a camera.
+              </p>
+              <p>
+                <strong>My Solution:</strong> I developed a complete, full-stack robotic system. The control architecture, running on a Raspberry Pi, uses MediaPipe for real-time 3D hand tracking. I invested significant effort into the control logic, engineering a custom ratio-based tuning algorithm to filter high-dimensional pose data into smooth, jitter-free servo commands. This allows for scale-invariant control, meaning the hand mimics gestures accurately regardless of my hand's distance from the camera.
+              </p>
+              
+              <p>
+                <strong>Mechanical Design (Version 2.0):</strong> My design process was highly iterative. I initially experimented with a "tendonless" printed-linkage design, but I found that the friction inherent in FDM 3D prints made the motion jerky and unreliable. I pivoted to an antagonistic tendon system using high-strength fishing line (flexion) and elastic cord (extension), which proved far more robust.
+              </p>
+              <p>
+                I started by perfecting the geometry of a single finger. Through rapid prototyping and testing, I converged on a proximal/distal joint design that naturally sits at a slight resting angle, mimicking human anatomy. Once the mechanics were solid, I researched anthropometric data on human finger ratios (1 : 1.3 : 2.3) to scale this single finger design into a full hand. I adjusted the extruded lengths of each proximal phalanx to match real-life proportions and designed the palm layout based on measurements of my own hand to ensure natural spacing.
+              </p>
+              
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Finger</th>
+                    <th>Proximal Δ</th>
+                    <th>Middle Δ</th>
+                    <th>Distal Δ</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>Thumb</td><td>−5.60 mm</td><td>N/A</td><td>−10.43 mm</td></tr>
+                  <tr><td>Index</td><td>−3.89 mm</td><td>−12.32 mm</td><td>−10.43 mm</td></tr>
+                  <tr><td>Middle</td><td>0.00 mm</td><td>−12.32 mm</td><td>−10.43 mm</td></tr>
+                  <tr><td>Ring</td><td>−2.97 mm</td><td>−12.32 mm</td><td>−10.43 mm</td></tr>
+                  <tr><td>Little</td><td>−9.96 mm</td><td>−12.32 mm</td><td>−10.43 mm</td></tr>
+                </tbody>
+              </table>
 
+              <p>
+                <strong>Results (In Progress):</strong> The V1.1 prototype is fully functional. The computer vision pipeline, adaptive control logic, and live-streaming video feedback systems are complete and tuned. The mechanical assembly has successfully demonstrated real-time gesture mimicry, and I am currently engineering <strong>Version 3</strong> to integrate a 2-DOF thumb for opposition and a 2-DOF wrist for complex manipulation.
+              </p>
+          </div>
+      </div>
     </article>
-    <!-- === END NEW PROJECT === -->
 
+    <!-- === PROJECT: CONTROLLER === -->
     <article class="card" data-project-id="controller-project"> 
       <div class="slideshow-container">
         <div class="slide active"><img src="images/controller-project.png" alt="CAD rendering of the initial controller design"></div>
@@ -260,21 +311,33 @@
         <a class="next" onclick="manualSlideChange('controller-project', 1)">&#10095;</a>
       </div>
       <div class="caption-container"></div> 
+      
       <h3>Arduino-Matlab Video Game System</h3>
       <p class="meta">Skills: Mechanical Design, 3D Printing, MATLAB, Arduino, ODEs</p>
       
-      <p>
-        <strong>Challenge:</strong> To design, manufacture, and program a complete 2D video game system from first principles. The goal was to create a custom-built, ergonomic controller and develop a game where the physics were not pre-canned, but governed by real-time mathematical models.
-      </p>
-      <p>
-        <strong>My Solution:</strong> I engineered a full-stack solution, starting with a 3D-printed, ergonomic controller designed in SolidWorks for an improved user experience over standard models. For the electronics, I used an Arduino to process analog and digital inputs from the joysticks. The core of the project is the software, written in MATLAB, which features a custom "handshaking" protocol to receive data from the Arduino. All in-game movement is governed by a Runge-Kutta (RK4) differential equation modeler I implemented to simulate Newtonian physics, creating a realistic mass-and-damper feel.
-      </p>
-      <p>
-        <strong>Results:</strong> The final product is a fully functional gaming system with a custom controller and a physics-driven game. This project demonstrates my ability to manage an end-to-end design lifecycle, combining ergonomic mechanical design, hardware integration (Arduino), and complex software development (MATLAB) with advanced mathematical modeling.
-      </p>
+      <!-- TOGGLE BAR -->
+      <div class="toggle-bar" onclick="toggleDescription(this)">
+          <span>View Details</span>
+          <i class="fas fa-chevron-down toggle-icon"></i>
+      </div>
 
-      <div class="links">
-        <a href="images/project-videogame-system.pdf" target="_blank">View Full Project PDF</a>
+      <!-- HIDDEN CONTENT -->
+      <div class="description-wrapper">
+          <div style="padding-top: 20px;">
+              <p>
+                <strong>Challenge:</strong> To design, manufacture, and program a complete 2D video game system from first principles. The goal was to create a custom-built, ergonomic controller and develop a game where the physics were not pre-canned, but governed by real-time mathematical models.
+              </p>
+              <p>
+                <strong>My Solution:</strong> I engineered a full-stack solution, starting with a 3D-printed, ergonomic controller designed in SolidWorks for an improved user experience over standard models. For the electronics, I used an Arduino to process analog and digital inputs from the joysticks. The core of the project is the software, written in MATLAB, which features a custom "handshaking" protocol to receive data from the Arduino. All in-game movement is governed by a Runge-Kutta (RK4) differential equation modeler I implemented to simulate Newtonian physics, creating a realistic mass-and-damper feel.
+              </p>
+              <p>
+                <strong>Results:</strong> The final product is a fully functional gaming system with a custom controller and a physics-driven game. This project demonstrates my ability to manage an end-to-end design lifecycle, combining ergonomic mechanical design, hardware integration (Arduino), and complex software development (MATLAB) with advanced mathematical modeling.
+              </p>
+
+              <div class="links">
+                <a href="images/project-videogame-system.pdf" target="_blank">View Full Project PDF</a>
+              </div>
+          </div>
       </div>
     </article>
     
@@ -290,12 +353,29 @@
   </footer>
 
   <script>
+    // --- TOGGLE LOGIC ---
+    function toggleDescription(btn) {
+        const card = btn.closest('.card');
+        const textSpan = btn.querySelector('span');
+        
+        // Toggle class
+        card.classList.toggle('expanded');
+        
+        // Update text
+        if (card.classList.contains('expanded')) {
+            textSpan.textContent = "Hide Details";
+        } else {
+            textSpan.textContent = "View Details";
+        }
+    }
+
+    // --- SLIDESHOW LOGIC ---
     const slideshowData = {};
 
     function initializeSlideshow(projectId) {
         if (!slideshowData[projectId]) {
             const projectItem = document.querySelector(`.card[data-project-id="${projectId}"]`);
-            if (!projectItem) return; // Guard against null
+            if (!projectItem) return; 
             const slides = projectItem.querySelectorAll('.slide');
             const captions = Array.from(slides).map(slide => slide.querySelector('img').alt || '');
             slideshowData[projectId] = {
@@ -333,16 +413,16 @@
         initializeSlideshow(projectId);
         const data = slideshowData[projectId];
         if (!data) return;
-        stopAutoSlide(projectId); // Stop main timer
+        stopAutoSlide(projectId);
         showSlide(projectId, data.slideIndex + n);
-        setTimeout(() => startAutoSlide(projectId), 8000); // Restart main timer after delay
+        setTimeout(() => startAutoSlide(projectId), 8000); 
     }
 
     function startAutoSlide(projectId) {
         initializeSlideshow(projectId);
         const data = slideshowData[projectId];
         if (!data || data.slides.length <= 1) return;
-        stopAutoSlide(projectId); // Clear existing timer first
+        stopAutoSlide(projectId); 
         data.timer = setInterval(() => {
             showSlide(projectId, data.slideIndex + 1);
         }, 5000);
@@ -355,15 +435,33 @@
         }
     }
 
-    // --- MODIFIED: Auto-initialize ALL slideshows on page load ---
+    // --- INITIALIZATION & DEEP LINKING ---
     document.addEventListener('DOMContentLoaded', () => {
+        // 1. Init all slideshows
         const projectCards = document.querySelectorAll('.card[data-project-id]');
         projectCards.forEach(card => {
             const projectId = card.dataset.projectId;
             initializeSlideshow(projectId);
-            showSlide(projectId, 0); // Show first slide immediately
-            startAutoSlide(projectId); // Start auto-slide for each
+            showSlide(projectId, 0); 
+            startAutoSlide(projectId);
         });
+
+        // 2. Check URL Hash for Deep Linking (e.g., #robot-hand-project)
+        const hash = window.location.hash.substring(1); // Get ID without '#'
+        if (hash) {
+            const targetCard = document.querySelector(`.card[data-project-id="${hash}"]`);
+            if (targetCard) {
+                // Expand the card
+                const toggleBtn = targetCard.querySelector('.toggle-bar');
+                if (toggleBtn) {
+                    toggleDescription(toggleBtn);
+                }
+                // Smooth scroll to it after a brief delay
+                setTimeout(() => {
+                    targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 500);
+            }
+        }
     });
   </script>
 
