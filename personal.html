@@ -58,10 +58,8 @@
     
     .projects {
       display: grid;
-      /* CHANGED: Stack vertically in 1 column */
       grid-template-columns: 1fr; 
       gap: 35px;
-      /* CHANGED: Reduced max-width for better vertical reading */
       max-width: 900px; 
       margin: 0 auto;
     }
@@ -76,7 +74,6 @@
       transition: transform 0.2s ease, box-shadow 0.2s ease;
       box-shadow: 0 4px 15px rgba(0,0,0,0.06);
     }
-    /* Disabled hover lift since these are now expandable interactables */
     .card:hover {
       box-shadow: 0 6px 20px rgba(0, 0, 255, 0.1);
     }
@@ -105,9 +102,8 @@
         transition: max-height 0.6s ease-in-out, opacity 0.4s ease-in-out;
         opacity: 0;
     }
-    /* When expanded class is added via JS */
     .card.expanded .description-wrapper {
-        max-height: 4000px; /* Large enough to fit content */
+        max-height: 4000px; 
         opacity: 1;
     }
     
@@ -168,16 +164,20 @@
         margin-bottom: 15px;
         overflow: hidden; 
         border-radius: 12px;
-        background-color: #eee; 
+        background-color: #f8f8f8; /* Lighter background for contained images */
     }
     .slide { display: none; width: 100%; animation: fadeEffect 0.8s ease; }
+    
+    /* --- FIXED IMAGE STYLING --- */
     .slide img { 
         display: block; 
         width: 100%; 
-        height: auto; 
-        max-height: 550px;
-        object-fit: cover; 
+        /* Set a fixed height so buttons don't jump */
+        height: 450px; 
+        /* Ensure entire image is visible (no cropping) */
+        object-fit: contain; 
     }
+    
     .slide.active { display: block; }
     @keyframes fadeEffect { from { opacity: 0.4; } to { opacity: 1; } }
     .prev, .next { 
@@ -187,16 +187,16 @@
         transform: translateY(-50%); 
         width: auto; 
         padding: 16px; 
-        color: white; 
+        color: #333; /* Darker arrows for better visibility on light bg */
         font-weight: bold; 
         font-size: 20px; 
-        background-color: rgba(0, 0, 0, 0.3); 
+        background-color: rgba(255, 255, 255, 0.5); 
         border-radius: 0 3px 3px 0; 
         user-select: none; 
         transition: background-color 0.3s ease; 
     }
     .next { right: 0; border-radius: 3px 0 0 3px; }
-    .prev:hover, .next:hover { background-color: rgba(0, 0, 0, 0.6); }
+    .prev:hover, .next:hover { background-color: rgba(255, 255, 255, 0.8); }
 
     /* --- Caption Styles --- */
     .caption-container { 
@@ -222,7 +222,7 @@
     /* --- Responsive Adjustments --- */
     @media (max-width: 768px) {
         .prev, .next { font-size: 16px; padding: 12px; }
-        .slide img { max-height: 400px; }
+        .slide img { height: 300px; /* Smaller fixed height for mobile */ }
     }
   </style>
 </head>
